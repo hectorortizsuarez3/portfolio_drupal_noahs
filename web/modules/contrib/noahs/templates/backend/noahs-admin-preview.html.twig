@@ -1,0 +1,50 @@
+<div id="loader">
+	<div class="img"><img src="{{logo}}"></div>
+	<span>{{'Loading' | t}}...</span>
+</div>
+
+<div id="noahs_overlay">
+	<div class="noahs_cv-spinner">
+		<span class="noahs_spinner"></span>
+	</div>
+</div>
+<div class="noahs_page_builder-wrapper" id="noahs_page_builder_wrapper">
+	<div id="noahs_page_builder" data-noahs-id="{{entity_id}}" data-langcode="{{langcode}}">
+		{% if type == 'header' %}
+      <header role="banner" class="noahs-theme--header noahs-theme--header--pro builder-wrapper noahs-theme-content-wrapper scrollme">
+        {{ generated_html | raw }}
+      </header>
+		{% elseif type == 'footer' %}
+      <footer role="banner" class="noash-pro-theme--footer builder-wrapper noahs-theme-content-wrapper scrollme">
+        {{ generated_html | raw }}
+      </footer>
+		{% else %}
+			<div class="builder-wrapper noahs-theme-content-wrapper scrollme">
+				{{ generated_html | raw }}
+			</div>
+		{% endif %}
+		<div class="add-section">
+			<div class="add-section_wrapper btn-group">
+				<div class="add-section_wrapper--actions d-flex">
+					<button type="button" class="btn btn-blue noahs_add_section btn-admin">
+						<i class="fa-solid fa-circle-plus"></i>
+						{{ 'Add section'| t }}
+          </button>
+					<button type="button"class="btn noahs_paste_in_page btn-admin">
+						<i class="fa-solid fa-paste"></i>
+						{{ 'Paste Section'| t }}
+          </button>
+          <button type="button" class="btn noahs_open_widget_gallery btn-admin">
+            <i class="fa-solid fa-folder-plus"></i>
+            {{ 'Widgets Gallery' | t }}
+          </button>
+          {% if noahs_pro %}
+            <button type="button" class="btn noahs_save_page_as_theme btn-admin">
+              <i class="fa-solid fa-file-export"></i>{{ 'Save page as template' | t }}
+            </button>
+          {% endif %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

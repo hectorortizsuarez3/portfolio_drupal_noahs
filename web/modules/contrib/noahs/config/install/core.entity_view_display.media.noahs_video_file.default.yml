@@ -1,0 +1,37 @@
+uuid: 3fea093d-bf2a-4b3e-bbd4-673b3a566700
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.media.noahs_video_file.field_media_video_file_1
+    - media.type.noahs_video_file
+  module:
+    - file
+id: media.noahs_video_file.default
+targetEntityType: media
+bundle: noahs_video_file
+mode: default
+content:
+  field_media_video_file_1:
+    type: file_video
+    label: visually_hidden
+    settings:
+      controls: true
+      autoplay: false
+      loop: false
+      multiple_file_display_type: tags
+      muted: false
+      width: 640
+      height: 480
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  created: true
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

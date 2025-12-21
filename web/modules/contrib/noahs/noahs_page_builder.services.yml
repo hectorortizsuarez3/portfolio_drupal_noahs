@@ -1,0 +1,32 @@
+services:
+  plugin.manager.widget:
+    class: Drupal\noahs_page_builder\WidgetManager
+    parent: default_plugin_manager
+  noahs_page_builder.widget_service:
+    class: Drupal\noahs_page_builder\Service\WidgetServices
+    arguments: ['@plugin.manager.widget', '@noahs_page_builder.control_service', '@entity_type.manager']
+  plugin.manager.control:
+    class: Drupal\noahs_page_builder\ControlManager
+    parent: default_plugin_manager
+  noahs_page_builder.control_service:
+    class: Drupal\noahs_page_builder\Service\ControlServices
+    arguments: ['@plugin.manager.control', '@module_handler']
+  noahs_page_builder.modal_form:
+    class: Drupal\noahs_page_builder\ModalForm
+    arguments: ['@noahs_page_builder.control_service', '@noahs_page_builder.controls_manager']
+  controller.noahs_save_styles:
+    class: Drupal\noahs_page_builder\Controller\NoahsSaveStylesController
+    arguments: ['@noahs_page_builder.control_service']
+  noahs_page_builder.controls_manager:
+    class: Drupal\noahs_page_builder\ControlsManager
+    arguments: ['@noahs_page_builder.control_service']
+  noahs_page_builder.response_subscriber:
+    class: Drupal\noahs_page_builder\EventSubscriber\NoahsResponseSubscriber
+    arguments:
+      - '@current_route_match'
+      - '@file_url_generator'
+      - '@logger.factory'
+      - '@path.current'
+      - '@request_stack'
+    tags:
+      - { name: event_subscriber }

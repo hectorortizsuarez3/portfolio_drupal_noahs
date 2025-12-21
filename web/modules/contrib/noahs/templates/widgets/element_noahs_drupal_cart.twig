@@ -1,0 +1,15 @@
+{#
+/**
+ * Available variables:
+ *
+ * settings
+ * content
+#}
+{% set column_class_inner = array_class_inner | join(' ') %}
+{% set class_inner_inner = array_class_inner_inner | join(' ') %}
+
+<div class="noahs_page_builder-column--inner {{ column_class_inner }}">
+   <div class="noahs_page_builder-column--content-inner {{ class_inner_inner }}">
+     {{ content | raw }}
+   </div>  
+</div>

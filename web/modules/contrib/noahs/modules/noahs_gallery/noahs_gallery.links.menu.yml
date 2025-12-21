@@ -1,0 +1,11 @@
+entity.noahs_gallery_type.collection:
+  title: 'Noahs Galleries'
+  description: 'List of noahs galleries.'
+  route_name: entity.noahs_gallery_type.collection
+  parent: noahs_page_builder.admin
+
+entity.noahs_gallery_type.settings:
+  title: 'Settings'
+  description: 'Configure a Noahs Gallery entity type.'
+  route_name:  entity.noahs_gallery_type.settings
+  parent: entity.noahs_gallery_type.collection

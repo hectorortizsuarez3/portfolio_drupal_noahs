@@ -1,0 +1,181 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's override to display a menu.
+ *
+ * Available variables:
+ * - menu_name: The machine name of the menu.
+ * - items: A nested list of menu items. Each menu item contains:
+ *   - attributes: HTML attributes for the menu item.
+ *   - below: The menu item child items.
+ *   - title: The menu link title.
+ *   - url: The menu link url, instance of \Drupal\Core\Url
+ *   - localized_options: Menu link localized options.
+ *   - is_expanded: TRUE if the link has visible children within the current
+ *     menu tree.
+ *   - is_collapsed: TRUE if the link has children within the current menu tree
+ *     that are not currently visible.
+ *   - in_active_trail: TRUE if the link is in the active trail.
+ */
+#}
+{% import _self as menus %}
+
+{% set classes = [
+  'noahs-menu',
+  noahs_menu_responsive,
+  noahs_menu_orientation,
+  noahs_menu_collapsible,
+  noahs_menu_vertical_expand
+] %}
+
+
+{% if noahs_normal_menu %}
+  {{ menus.normal_menu(items, attributes, 0) }}
+{% else %}
+  {{ menus.noahs_menu(items, attributes, 0, classes) }}
+{% endif %}
+
+
+
+{% macro noahs_menu(items, attributes, menu_level, classes) %}
+<div{{ attributes.addClass(classes) }}>
+
+{% set noahs_menu_responsive = attributes['data-responsive'] %}
+{% set noahs_menu_orientation = attributes['data-orientation'] %}
+{% set noahs_menu_collapsible = attributes['data-collapsible'] %}
+{% set noahs_menu_vertical_expand = attributes['data-vertical-expand'] %}
+
+  {% if noahs_menu_responsive == 'noahs-menu--responsive'%}
+      <span class="overlay"></span>
+      <div class="burger-wrapper">
+          <div class="burger">
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+            <span class="burger-line"></span>
+          </div>
+      </div>
+  {% endif %}
+
+  {% import _self as menus %}
+  {% if items %}
+      <div class="noahs-menu--wrapper">
+      {% if noahs_menu_responsive == 'noahs-menu--responsive' %}
+        <div class="menu__header">
+          <span class="menu__arrow"><i class="fa-solid fa-chevron-left"></i></span>
+          <span class="menu__title"></span>
+        </div>
+      {% endif %}
+      {% if menu_level == 0 %}
+        <ul{{ attributes.addClass('menu__inner')|without('id') }}>
+      {% else %}
+        <ul class="noahs-submenu">
+      {% endif %}
+
+      {% for item in items %}
+        {% set classes = [
+          'menu__item',
+          menu_level ? 'nav-dropdown-item' : 'menu__item',
+          item.is_expanded ? 'menu-item--expanded',
+          item.is_collapsed ? 'menu-item--collapsed',
+          item.in_active_trail ? 'active',
+          item.below ? 'menu__dropdown',
+          item.url.isRouted() and item.url.getRouteName is defined and item.url.getRouteName() == '<nolink>' ? 'no-link' : 'with-link',
+        ] %}
+
+        <li{{ item.attributes.addClass(classes) }}>
+          {% set link_classes = [
+            'menu__link',
+            item.in_active_trail ? 'active',
+            item.url.getOption('attributes').class ? item.url.getOption('attributes').class | join(' '),
+            'nav-link-' ~ item.url.toString() | clean_class,
+          ] %}
+
+          {% if item.below %}
+            {% if item.url.getRouteName() == '<nolink>' %}
+              <span class="{{ link_classes|join(' ') }}">
+                {{ item.title }}
+                <i class="fa-solid fa-chevron-right"></i>
+              </span>
+            {% else %}
+              <a href="{{ item.url }}" class="{{ link_classes|join(' ') }}">
+                {{ item.title }}
+                <i class="fa-solid fa-chevron-right"></i>
+              </a>
+            {% endif %}
+            {{ menus.submenu_links(item.below, attributes, menu_level + 1) }}
+          {% else %}
+            <a href="{{ item.url }}" class="{{ link_classes|join(' ') }}">
+              <span class="menu__label">{{ item.title }}</span>
+            </a>
+          {% endif %}
+        </li>
+      {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+</div>
+{% endmacro %}
+
+{% macro submenu_links(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    <div class="submenu megamenu__text">
+      <div class="submenu__inner">
+        <ul class="submenu__list">
+          {% for item in items %}
+            {% set classes = [
+              'menu__item',
+              menu_level ? 'nav-dropdown-item' : 'menu__item',
+              item.is_expanded ? 'menu-item--expanded',
+              item.is_collapsed ? 'menu-item--collapsed',
+              item.in_active_trail ? 'active',
+              item.below ? 'menu__dropdown',
+            ] %}
+            <li{{ item.attributes.addClass(classes) }}>
+              {% set link_classes = [
+                item.in_active_trail ? 'active',
+                'menu__link',
+                item.url.getOption('attributes').class ? item.url.getOption('attributes').class | join(' '),
+                'nav-link-' ~ item.url.toString() | clean_class,
+              ] %}
+
+              {% if item.below %}
+                {# Si tiene hijos -> icono #}
+                <a href="{{ item.url }}" {{ item.attributes.addClass(link_classes) }}>
+                  {{ item.title }}
+                  <i class="fa-solid fa-chevron-right"></i>
+                </a>
+                {{ menus.submenu_links(item.below, attributes, menu_level + 1) }}
+              {% else %}
+                <a href="{{ item.url }}" {{ item.attributes.addClass(link_classes) }}>
+                  {{ item.title }}
+                </a>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}
+
+
+{% macro normal_menu(items, attributes, menu_level) %}
+  {% import _self as menus %}
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('nav') }}>
+    {% else %}
+      <ul>
+    {% endif %}
+    {% for item in items %}
+      <li{{ item.attributes }}>
+        {{ link(item.title, item.url) }}
+        {% if item.below %}
+          {{ menus.normal_menu(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}

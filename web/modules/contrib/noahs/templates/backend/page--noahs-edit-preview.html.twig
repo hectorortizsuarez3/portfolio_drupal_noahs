@@ -1,0 +1,80 @@
+
+
+{% if noahs_header_html %}
+   <header role="banner" class="noahs-theme--header noahs-theme--header--pro">
+      <div class="nohas-pro-edit-theme"><a href="/noahs-admin/theme_builder/pro_theme/header" target="_blank">{{'Edit Header' | t}}</a></div>
+      {{noahs_header_html | raw}}
+   </header>
+   <div class="noahs-header-empty"></div>
+{% else %}
+    <header role="banner" class="noahs-theme--header noahs-pro-theme--disabled">
+      {% if page.header_top_left or page.header_top_right %}
+        <div class="noahs-top-header {% if hide_top_header_sticky %}noahs-top-header__hide-sticky{% endif %}">
+          {% if header_container %}<div class="container">{% endif %}
+            <div class="noahs-top-header__left">
+              {{ page.header_top_left }}
+            </div>
+            <div class="noahs-top-header__right">
+              {{ page.header_top_right }}
+            </div>
+          {% if header_container %}</div>{% endif %}
+        </div>
+      {% endif %}
+      <div class="noahs-bottom-header">
+        {% if header_container %}<div class="container">{% endif %}
+          {% if page.header_left %}
+            <div class="noahs-bottom-header__left">
+              {{page.header_left}}
+            </div>
+          {% endif %}
+          {% if page.header_center %}
+            <div class="noahs-bottom-header__center">
+              {{page.header_center}}
+            </div>
+          {% endif %}
+          {% if page.header_right %}
+            <div class="noahs-bottom-header__right">
+              {{page.header_right}}
+            </div>
+          {% endif %}
+        {% if header_container %}</div>{% endif %}
+      </div>
+    </header>
+    <div class="noahs-header-empty"></div>
+{% endif %}
+
+
+
+{{page.content}}
+
+
+{% if noahs_footer_html %}
+  <footer class="noash-pro-theme--footer">
+    <div class="nohas-pro-edit-theme"><a href="/noahs-admin/theme_builder/pro_theme/footer" target="_blank">{{'Edit Footer' | t}}</a></div>
+    {{noahs_footer_html | raw}}
+  </footer>
+{% else %}
+    <footer class="noahs-footer noahs-pro-theme--disabled">
+      {% if page.footer_top %}
+        <div class="noahs-footer-top">
+          {{page.footer_top}}
+        </div>
+      {% endif %}
+      {% if page.footer_1 or page.footer_2 or page.footer_3 or page.footer_4 or page.footer_5 or page.footer_6 %}
+        {% if noahs_footer_container %}<div class="container">{% endif %}
+          <div class="noahs-footer-content {% if footer_cols %} {{ footer_cols }} {% endif %}">
+            {% if page.footer_1 %}<div class="noahs-footer-content--col col">{{page.footer_1}}</div>{% endif %}
+            {% if page.footer_2 %}<div class="noahs-footer-content--col col">{{page.footer_2}}</div>{% endif %}
+            {% if page.footer_3 %}<div class="noahs-footer-content--col col">{{page.footer_3}}</div>{% endif %}
+            {% if page.footer_4 %}<div class="noahs-footer-content--col col">{{page.footer_4}}</div>{% endif %}
+            {% if page.footer_5 %}<div class="noahs-footer-content--col col">{{page.footer_5}}</div>{% endif %}
+            {% if page.footer_6 %}<div class="noahs-footer-content--col col">{{page.footer_6}}</div>{% endif %}
+          </div>
+        {% if noahs_footer_container %}</div>{% endif %}
+      {% endif %}
+    </footer>
+{% endif %}
+
+{% if page.noahs_cookies %}
+   {{page.noahs_cookies}}
+{% endif %}

@@ -1,0 +1,40 @@
+
+{% if noahs_header_html %}
+   <header role="banner" class="noahs-pro-theme--header">
+      {{noahs_header_html | raw}}
+   </header>
+{% else %}
+     <header role="banner" class="noahs-theme--header">
+      {{page.header}}
+    </header>
+{% endif %}
+
+<div class="noahs-theme-tabs">
+  <div class="container">
+    <nav>
+      {{page.tabs}}
+    </nav>
+  </div>
+</div>
+
+<div class="noahs-theme-content-wrapper scrollme">
+{% if noahs_node_html %}
+
+  {{noahs_node_html | raw}}
+{% else %}
+<div class="container">
+   {{page.content}}
+   </div>
+{% endif %}
+</div>
+
+
+{% if noahs_footer_html %}
+  <footer role="banner" class="noash-pro-theme--footer">
+   {{noahs_footer_html | raw}}
+</footer>
+{% else %}
+    <footer role="banner">
+      {{page.page}}
+    </footer>
+{% endif %}

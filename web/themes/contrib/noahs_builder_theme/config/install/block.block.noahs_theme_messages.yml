@@ -1,0 +1,22 @@
+uuid: a5d326c2-0e1d-4a70-b382-e5fd7167dd83
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - noahs_theme
+_core:
+  default_config_hash: '-Ac3ISpIT0PQ-whzD7_dw0SdKi6dAbRFNWdSjOiVDqg'
+id: noahs_theme_messages
+theme: noahs_theme
+region: tabs
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

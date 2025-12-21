@@ -1,0 +1,27 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display primary and secondary local tasks.
+ *
+ * Available variables:
+ * - primary: HTML list items representing primary tasks.
+ * - secondary: HTML list items representing secondary tasks.
+ *
+ * Each item in these variables (primary and secondary) can be individually
+ * themed in menu-local-task.html.twig.
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="noahs-theme--tabs-action"><a href="#" role="button" class="noahs-theme--open-tabs" title="{{'Open Tabs' | t}}"><i class="fa-solid fa-gear"></i></a></div>
+<div class="noahs-theme--tabs-wrapper hidden">
+{% if primary %}
+  <h2 class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
+  <ul class="noahs-theme--tabs primary nav nav-tabs flex-column nav-pills">{{ primary }}</ul>
+{% endif %}
+{% if secondary %}
+  <h2 class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
+  <ul class="noahs-theme--tabs secondary nav nav-tabs">{{ secondary }}</ul>
+{% endif %}
+</div>

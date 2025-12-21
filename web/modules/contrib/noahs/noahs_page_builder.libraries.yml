@@ -1,0 +1,141 @@
+noahs_page_builder.assets.admin:
+  version: 1.x
+  css:
+    theme:
+      assets/css/editor_iframe.css: {}
+      assets/css/noahs.css: {}
+  js:
+    assets/js/iframe.js: {scope: footer}
+
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.ajax
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax
+
+noahs_page_builder.assets.preview:
+  version: 1.x
+  css:
+    theme:
+    
+      assets/css/bootstrap.min.css: {}
+      assets/css/codemirror.css: {}
+      assets/css/material-darker.css: {}
+      assets/line-awesome/css/line-awesome.min.css: {}
+      https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css: {type: external}
+      https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css: {type: external}
+      assets/css/editor.css: {}
+  js:
+    assets/js/builder/libs/serializejson.js: {}
+    assets/js/builder/libs/bootstrap.bundle.min.js: {scope: footer}
+    assets/js/builder/libs/codemirror.js: {scope: footer}
+    assets/js/builder/libs/css.js: {scope: footer}
+    assets/js/builder/libs/htmlmixed.min.js: {scope: footer}
+    https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js: {type: external, scope: footer}
+    https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js: {type: external, scope: footer}
+    assets/js/editor.js: {scope: footer}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - noahs_page_builder/noahs_page_builder.fontawesome
+  
+noahs_page_builder.assets.init_front:
+  version: 1.x
+  js:
+    assets/js/init_front.js: {scope: footer, weight: -10}
+  dependencies: []
+
+noahs_page_builder.assets.frontend:
+  version: 1.x
+  css: 
+    theme:
+      assets/font-awesome/css/fontawesome.min.css: {}
+      assets/font-awesome/css/brands.min.css: {}
+      assets/font-awesome/css/regular.min.css: {}
+      assets/font-awesome/css/solid.min.css: {}
+      assets/css/jquery.fancybox.min.css: {}
+      assets/css/flipdown.min.css: {}
+      assets/css/bootstrap.min.css: {}
+      assets/css/aos.css: {}
+      assets/css/noahs.css: {}
+  js:
+    assets/js/builder/libs/bootstrap.bundle.min.js: {scope: footer}
+    assets/js/frontend/libs/jquery.vide.min.js: {scope: footer}
+    assets/js/frontend/libs/jquery.fancybox.min.js: {scope: footer}
+    assets/js/frontend/libs/flipdown.min.js: {scope: footer}
+    assets/js/frontend/libs/aos.js: {scope: footer}
+    assets/js/app.js: {scope: footer}
+  dependencies:
+    - core/jquery
+    - core/once
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.ajax
+    - core/drupal.dialog
+    - core/drupal.dialog.ajax
+    
+noahs_page_builder.assets.settings:
+  version: 1.x
+  css: 
+    theme:
+      https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.css: {type: external}
+      https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css: {type: external}
+      assets/css/codemirror.css: {}
+      assets/css/material-darker.css: {}
+      assets/css/custom_css.css: {}
+  js:
+    https://cdn.jsdelivr.net/npm/spectrum-colorpicker2/dist/spectrum.min.js: {type: external, scope: footer}
+    https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js: {type: external, scope: footer}
+    assets/js/builder/libs/codemirror.js: {scope: footer}
+    assets/js/builder/libs/css.js: {scope: footer}
+    assets/js/builder/libs/codemirror_javascript.js: {scope: footer}
+    assets/js/builder/libs/htmlmixed.min.js: {scope: footer}
+    assets/js/settings.js: {scope: footer}
+
+noahs_page_builder.fontawesome:
+  version: 1.x
+  css: 
+    theme:
+      assets/font-awesome/css/fontawesome.min.css: {}
+      assets/font-awesome/css/brands.min.css: {}
+      assets/font-awesome/css/regular.min.css: {}
+      assets/font-awesome/css/solid.min.css: {}
+
+noahs_page_builder.bootstrap:
+  version: 1.x
+  css: 
+    theme:
+      assets/css/bootstrap.min.css: {}
+  js:
+    assets/js/builder/libs/bootstrap.bundle.min.js: {scope: footer}
+    
+    
+noahs_page_builder.noahs_admin:
+  version: 1.x
+  css: 
+    theme:
+      assets/css/noahs-admin.css: {}
+    
+
+noahs_page_builder.banners:
+  version: 1.x
+  css: 
+    theme:
+      assets/css/swiper-bundle.min.css: {}
+      assets/css/banners.css: {}
+  js:
+    assets/js/frontend/libs/swiper-bundle.min.js: {scope: footer}
+    assets/js/builder/banners.js: {scope: footer}
+    
+noahs_page_builder.jquery_ui:
+  version: 1.x
+  js:
+    https://code.jquery.com/ui/1.14.1/jquery-ui.min.js: { type: external, scope: footer }
+  css:
+    theme:
+      https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css: { type: external }
+  dependencies:
+    - core/jquery

@@ -1,0 +1,159 @@
+<?php
+
+use Drupal\Core\Entity\EntityTypeManagerInterface;
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Database\SchemaObjectExistsException;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Core\Render\Markup;
+
+function noahs_page_builder_schema() {
+  
+  $schema['noahs_page_builder_page'] = [
+    'description' => 'Store data from Noahs',
+    'fields' => [
+      'page_id' => [
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique noahs_page_builder ID.',
+      ],
+      'noahs_id' => [
+        'type' => 'varchar',
+        'length' => 56,
+        'not null' => TRUE,
+      ],
+      'uid' => [
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator user's {users}.uid",
+      ],
+      'entity_id' => [
+        'type' => 'varchar',
+        'length' => 56,
+        'not null' => TRUE,
+        'default' => 0,
+        'description' => "Creator from {entity}.entity_id",
+      ],
+      'langcode' => [
+        'type' => 'varchar',
+        'length' => 12,
+        'not null' => TRUE,
+        'description' => 'Language',
+      ],
+      'settings' => [
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Save the json-html',
+      ],
+      'page_settings' => [
+        'type' => 'text',
+        'size' => 'big',
+        'description' => 'Save the json-html',
+      ],
+      'modified_date' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Modified Date',
+      ],
+      'entity_type' => [
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'Entity type',
+      ],
+    ],
+    'primary key' => ['page_id'],
+  ];
+
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function noahs_page_builder_install() {
+  $messenger = \Drupal::messenger();
+
+  $howto_url = Url::fromUri('https://noahs-creator.com/how-to-use', [
+    'attributes' => ['target' => '_blank', 'rel' => 'noopener'],
+  ]);
+  $howto_link = Link::fromTextAndUrl('How to use Noahs Creator', $howto_url)->toString();
+
+  // Intentar generar enlace a la página de configuración.
+  $settings_link = 'settings page';
+  try {
+    $settings_url = Url::fromRoute('noahs_page_builder.settings');
+    if ($settings_url->isRouted()) {
+      $settings_link = Link::fromTextAndUrl('Open settings', $settings_url)->toString();
+    }
+  }
+  catch (\Exception $e) {
+    // Silencio: si no existe la ruta, dejamos texto genérico.
+  }
+
+  $message = Markup::create(
+    'If this is your first time using Noahs, please read ' . $howto_link . '. Otherwise, visit ' . $settings_link . ' to configure the module.'
+  );
+  $messenger->addStatus($message);
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function noahs_page_builder_uninstall() {
+  // Eliminar toda la configuración creada por el módulo.
+  $configs = [
+    'noahs_page_builder.settings',
+    'block_content.type.noahs_block_html',
+    'core.entity_form_display.block_content.noahs_block_html.default',
+    'core.entity_form_display.media.noahs_image.default',
+    'core.entity_form_display.media.noahs_image.media_library',
+    'core.entity_form_display.media.noahs_video_file.default',
+    'core.entity_form_display.media.noahs_video_file.media_library',
+    'core.entity_view_display.block_content.noahs_block_html.default',
+    'core.entity_view_display.media.noahs_image.default',
+    'core.entity_view_display.media.noahs_image.media_library',
+    'core.entity_view_display.media.noahs_video_file.default',
+    'core.entity_view_display.media.noahs_video_file.media_library',
+    'field.field.block_content.noahs_block_html.body',
+    'field.field.media.noahs_image.field_media_image',
+    'field.field.media.noahs_video_file.field_media_video_file_1',
+    'field.storage.media.field_media_video_file_1',
+    'filter.format.noahs_html',
+    'image.style.noahs_1024_768',
+    'image.style.noahs_1920_1080',
+    'image.style.noahs_800_600',
+    'media.type.noahs_image',
+    'media.type.noahs_video_file',
+    'views.view.noahs_media_modal',
+  ];
+
+  foreach ($configs as $name) {
+    try {
+      \Drupal::configFactory()->getEditable($name)->delete();
+    }
+    catch (\Exception $e) {
+      // Ignorar errores si algún config ya no existe.
+    }
+  }
+}
+
+/**
+ * Instala el esquema de la entidad 'noahs_gallery' si no existe.
+ */
+function noahs_page_builder_update_9011() {
+
+  $schema = \Drupal::database()->schema();
+   if($schema->tableExists('noahs_gallery_type')) {
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::entityDefinitionUpdateManager()
+      ->installEntityType(\Drupal::entityTypeManager()->getDefinition('noahs_gallery_type'));
+  }
+}

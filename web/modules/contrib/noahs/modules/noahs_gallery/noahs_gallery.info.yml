@@ -1,0 +1,10 @@
+name: 'Noahs Gallery'
+type: module
+description: 'Create Galleries and use it in Noahs'
+package: Noahs Page Builder
+core_version_requirement: ^10 || ^11
+
+# Information added by Drupal.org packaging script on 2025-12-18
+version: '2.8.8'
+project: 'noahs'
+datestamp: 1766061090

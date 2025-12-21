@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * @file
+ */
+
+declare(strict_types=1);
+
+/**
+ * @file
+ * Provides a noahs gallery entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function noahs_gallery_theme(): array {
+  return [
+    'noahs_gallery_type' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for noahs gallery templates.
+ *
+ * Default template: noahs-gallery-type.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing the noahs gallery information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_noahs_gallery_type(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function noahs_gallery_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish noahs galleries.
+      $storage = \Drupal::entityTypeManager()->getStorage('noahs_gallery_type');
+      $noahs_gallery_type_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($noahs_gallery_type_ids) as $noahs_gallery_type) {
+        $noahs_gallery_type->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize noahs galleries.
+      $storage = \Drupal::entityTypeManager()->getStorage('noahs_gallery_type');
+      $noahs_gallery_type_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($noahs_gallery_type_ids) as $noahs_gallery_type) {
+        $noahs_gallery_type->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function noahs_gallery_user_predelete(UserInterface $account): void {
+  // Delete noahs galleries that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('noahs_gallery_type');
+  $noahs_gallery_type_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($noahs_gallery_type_ids)
+  );
+}
+
+/**
+ * Implements hook_noahs_page_builder_widget_info_alter().
+ */
+function noahs_gallery_noahs_page_builder_widget_info_alter(array &$info) {
+
+  if (isset($info['noahs_gallery'])) {
+
+    $info['noahs_gallery'] = [
+      'id' => 'noahs_gallery',
+      'class' => 'Drupal\noahs_gallery\Plugin\Widget\WidgetNoahsGalleryMedia',
+      'provider' => 'noahs_gallery',
+      'label' => t('Noahs Gallery'),
+    ];
+
+  }
+}

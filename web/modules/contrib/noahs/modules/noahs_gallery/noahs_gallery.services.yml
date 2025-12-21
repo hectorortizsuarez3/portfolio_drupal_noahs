@@ -1,0 +1,6 @@
+services:
+  noahs_gallery.widget_noahs_gallery_override:
+    class: Drupal\noahs_gallery\Plugin\Widget\WidgetNoahsGalleryOverride
+    arguments: ['@plugin.manager.widget']
+    tags:
+      - { name: 'plugin', type: 'widget', id: 'noahs_gallery' }

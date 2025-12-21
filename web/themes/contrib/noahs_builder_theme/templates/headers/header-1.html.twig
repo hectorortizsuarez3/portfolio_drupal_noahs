@@ -1,0 +1,42 @@
+<header id="header" class="header-type-1">
+  
+   <div class="header-main {{ header_sticky }}">
+    <div class="branding">
+      {% if page.branding %}
+        {{ page.branding }}
+      {% endif %}
+    </div>
+       <div class="header-right">
+            <div class="main-menu">
+              <div class="main-menu-inner">
+                {% if page.main_menu %}
+                  {{ page.main_menu }}
+                {% endif %}
+              </div>
+                {% if page.quick_side %}
+              <div class="quick-side-icon hidden-xs hidden-sm">
+                <div class="icon"><a href="#"><span class="qicon fa fa-bars"></span></a></div>
+              </div>
+            {% endif %}
+            </div>                     
+      </div>  
+   </div>
+    <div id="menu-bar" class="menu-bar">
+        <i>MENU</i>
+        <div class="bars">
+            <span class="one"></span>
+            <span class="two"></span>
+            <span class="three"></span>
+        </div>
+    </div>
+</header>
+
+<div class="menu-mobile">
+  <div class="close-offcanvas"><i class="fa fa-times"></i></div>
+  <div class="main-menu-inner">
+      {{ page.main_menu }}
+    {% if page.mobile_menu %}
+      {{ page.mobile_menu }}
+    {% endif %}
+  </div>
+</div>

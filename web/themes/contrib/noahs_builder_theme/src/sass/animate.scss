@@ -1,0 +1,93 @@
+// Variables
+$fade-duration: 0.6s;
+$fade-ease: ease-out;
+$stagger-delay: 0.15s;
+
+// Animaciones
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUpSlow {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.noahs-theme-animate-on-load{
+  .noahs-theme-content-wrapper:not(.builder-wrapper),
+  .noahs-theme-content-wrapper:not(.noahs-popups-builder-wrapper) {
+    .element-widget {
+      opacity: 0; // oculto por defecto
+      &.noahs-theme-animated {
+        opacity: 1;
+        animation-fill-mode: both;
+        animation-duration: $fade-duration;
+        animation-timing-function: $fade-ease;
+        animation-name: fadeInUp; // default
+      }
+    }
+
+    // Tipos específicos
+    .widget-noahs-text.element-widget.noahs-theme-animated { animation-name: fadeInLeft; }
+    .widget-noahs-image.element-widget.noahs-theme-animated { animation-name: fadeInDown; }
+    .widget-noahs-button.element-widget.noahs-theme-animated { animation-name: fadeInUp; }
+    .widget-noahs-heading.element-widget.noahs-theme-animated { animation-name: fadeInLeft; }
+
+    // Animaciones escalonadas para grids
+    .widget-noahs-card-grid.noahs-theme-animated {
+      .grid {
+        opacity: 0;
+        animation-name: fadeInUp;
+        animation-fill-mode: both;
+        animation-duration: $fade-duration;
+        animation-timing-function: $fade-ease;
+
+        @for $i from 1 through 20 {
+          &:nth-child(#{$i}) {
+            animation-delay: $stagger-delay * $i;
+          }
+        }
+      }
+    }
+
+    // Transición suave
+    .element-widget.noahs-theme-animated {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+  }
+}

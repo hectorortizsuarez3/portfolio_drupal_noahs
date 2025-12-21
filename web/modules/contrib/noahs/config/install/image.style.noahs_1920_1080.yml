@@ -1,0 +1,17 @@
+uuid: fa4266ec-5ace-4f93-a733-8268b6873464
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_page_builder
+name: 'noahs_1920_1080'
+label: 'Noahs 1920x1080'
+effects:
+  6d0fb84b-b98f-49a5-8274-78197a21d8d5:
+    uuid: 6d0fb84b-b98f-49a5-8274-78197a21d8d5
+    id: image_scale
+    weight: 0
+    data:
+      width: 1920
+      height: 1080
+      upscale: false

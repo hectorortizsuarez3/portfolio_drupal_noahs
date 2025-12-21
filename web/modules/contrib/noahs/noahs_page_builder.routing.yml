@@ -1,0 +1,249 @@
+noahs_page_builder.admin:
+  path: '/admin/structure/noahs'
+  defaults:
+    _title: 'Noahs Page builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsPageController::adminPage'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.settings:
+  path: '/admin/structure/noahs/settings'
+  defaults:
+    _title: 'Noahs Settings'
+    _form: '\Drupal\noahs_page_builder\Form\NoahsSettingsForm'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.noahs_settings_styles:
+  path: '/admin/structure/noahs/settings_styles'
+  defaults:
+    _title: 'Noahs settings configuration'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsSettingsController::editor'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.noahs_settings_iframe:
+  path: '/admin/structure/noahs/settings_iframe'
+  defaults:
+    _title: 'Noahs settings configuration'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsSettingsController::iframe'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.editor:
+  path: '/noahs_edit/{entity_type}/{entity}'
+  defaults:
+    _title: 'Edit with Noahs'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::editor'
+    _format: 'html'
+  options:
+    no_cache: TRUE
+    parameters:
+      entity_type:
+        type: 'string'
+      entity:
+        type: 'entity:{entity_type}'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.preview:
+  path: '/noahs_edit/preview/{entity_type}/{entity}'
+  defaults:
+    _title: 'Edit Noahs Preview'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::preview'
+  options:
+    no_cache: TRUE
+    parameters:
+      entity_type:
+        type: 'string'
+      entity:
+        type: 'entity:{entity_type}'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.product_preview:
+  path: '/{entity_type}/preview/{node}/noahs_page_builder'
+  defaults:
+    _title: 'Edit noahs_page_builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::preview'
+  options:
+    no_cache: TRUE
+    parameters:
+      node:
+        type: 'entity:commerce_product'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.widget:
+  path: '/noahs-admin/noahs_page_builder/widget/{widget_id}'
+  defaults:
+    _title: 'Edit noahs_page_builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::renderWidget'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.get_widget_form:
+  path: '/noahs-admin/widget-form/{widget_id}'
+  defaults:
+    _title: 'Edit noahs_page_builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::getWidgetForm'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.regenerate_widget:
+  path: '/noahs-admin/noahs_page_builder/regenerate_widget'
+  defaults:
+    _title: 'Edit noahs_page_builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::regenerateWidget'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.default_widget_template:
+  path: '/noahs-admin/noahs_page_builder/default_widget_template/{type}'
+  defaults:
+    _title: 'Edit noahs_page_builder'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::renderDefaultTemplateWidget'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.modal:
+  path: '/noahs-admin/modal-form/{nid}/{widget}/{widget_id}'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsModalController::modal'
+    _title: 'Modal Form'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.edit_widget:
+  path: '/noahs-admin/edit-widget/{nid}/{widget}/{widget_id}'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsEditWidgetController::edit'
+    _title: 'Edit Widget Form'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.widget_clone:
+  path: '/noahs-admin/widget-clone/{old_id}/{new_id}'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsCloneWidgetController::clone'
+    _title: 'Save Styles Controller'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+
+noahs_page_builder.final_widget:
+  path: '/noahs-admin/final-widget/{nid}/{widget}/{widget_id}'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsFinalWidgetController::load'
+    _title: 'Edit Widget Form'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.media_modal:
+  path: '/noahs-admin/noahs_page_builder/media-modal'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsModalMediaController::mediaModal'
+    _title: 'noahs_page_builder Media Modal'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.upload_media_modal:
+  path: '/noahs-admin/noahs_page_builder/upload_file'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsModalMediaController::uploadMediaModal'
+    _title: 'noahs_page_builder Media Modal'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+# noahs_page_builder.upload_ck_media_modal:
+#   path: '/noahs-admin/noahs_page_builder/ck_upload_file'
+#   defaults:
+#     _controller: '\Drupal\noahs_page_builder\Controller\NoahsModalMediaController::uploadCkMediaModal'
+#     _title: 'noahs_page_builder Media Modal'
+#   requirements:
+#     _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.save_page:
+  path: '/noahs_page_builder/save_page'
+  defaults:
+    _title: 'Save Configuration'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsController::savePage'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.get_icons_list:
+  path: '/admin/structure/noahs_page_builder/icons'
+  defaults:
+    _title: 'Available Icons'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsIconsController::listOfIcons'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.get_icons_list_modal:
+  path: '/noahs-admin/structure/noahs_page_builder/icons/modal'
+  defaults:
+    _title: 'Available Icons'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsIconsController::modal'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.get_tokens:
+  path: '/noahs-admin/get_token'
+  defaults:
+    _title: 'Get Tokens'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsModalTokensController::outputTree'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.url_autocomplete:
+  path: '/noahs-admin/nohas-url-autocomplete'
+  defaults:
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsUrlAutocompleteController::autocomplete'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.functions.get_media_image:
+  path: '/noahs-admin/get-media-image/{media_type}/{fid}/{image_style}'
+  defaults:
+    _title: 'Get Media Image'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsFunctionsController::getMediaImage'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.functions.get_media_token:
+  path: '/noahs-admin/get-image-token/{token}'
+  defaults:
+    _title: 'Get Media Token'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsFunctionsController::getMediaImageToken'
+  options:
+    no_cache: TRUE
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.themes_list_modal:
+  path: '/noahs-admin/noahs-template/themes-list-modal'
+  defaults:
+    _title: 'Get Themes List'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsThemesController::modalThemes'
+  requirements:
+    _permission: 'administer noahs_page_builder'
+
+noahs_page_builder.themes_get_default:
+  path: '/noahs-admin/noahs-template/get-default'
+  defaults:
+    _title: 'Get Theme from Id'
+    _controller: '\Drupal\noahs_page_builder\Controller\NoahsThemesController::getTheme'
+  requirements:
+    _permission: 'administer noahs_page_builder'

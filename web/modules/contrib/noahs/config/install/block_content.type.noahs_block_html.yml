@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_content
+id: noahs_block_html
+label: 'Noahs HTML Block'
+revision: false
+description: 'Custom reusable HTML block for Noahs Page Builder.'
+third_party_settings: { }

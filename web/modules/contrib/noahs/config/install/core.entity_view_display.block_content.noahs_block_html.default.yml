@@ -1,0 +1,26 @@
+uuid: 43928f0f-a397-4902-a10a-cd307452be84
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.noahs_block_html
+    - field.field.block_content.noahs_block_html.body
+  module:
+    - text
+id: block_content.noahs_block_html.default
+targetEntityType: block_content
+bundle: noahs_block_html
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  entity_print_view_epub: true
+  entity_print_view_pdf: true
+  entity_print_view_word_docx: true
+  langcode: true

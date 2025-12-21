@@ -1,0 +1,7 @@
+entity.noahs_gallery_type.settings:
+  path: 'admin/structure/noahs/noahs-gallery-type'
+  defaults:
+    _form: '\Drupal\noahs_gallery\Form\NoahSGallerySettingsForm'
+    _title: 'Noahs Gallery'
+  requirements:
+    _permission: 'administer noahs_gallery_type'

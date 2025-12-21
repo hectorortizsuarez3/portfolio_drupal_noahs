@@ -1,0 +1,28 @@
+uuid: a19d5a9b-a592-4b3b-82a4-c05b0a3f6208
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.media.media_library
+    - field.field.media.noahs_video_file.field_media_video_file_1
+    - media.type.noahs_video_file
+id: media.noahs_video_file.media_library
+targetEntityType: media
+bundle: noahs_video_file
+mode: media_library
+content:
+  name:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_media_video_file_1: true
+  langcode: true
+  path: true
+  status: true
+  uid: true

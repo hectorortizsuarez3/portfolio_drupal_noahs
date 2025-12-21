@@ -1,0 +1,17 @@
+uuid: 56f2e9a6-ba9e-4d4c-8359-bfab18a16ea9
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_page_builder
+name: 'noahs_800_600'
+label: 'Noahs 800x600'
+effects:
+  011118b5-f810-4878-b359-64d7abb7ed32:
+    uuid: 011118b5-f810-4878-b359-64d7abb7ed32
+    id: image_scale
+    weight: 0
+    data:
+      width: 800
+      height: 600
+      upscale: false

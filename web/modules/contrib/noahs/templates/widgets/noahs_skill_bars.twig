@@ -1,0 +1,24 @@
+{#
+/**
+ * Available variables:
+ *
+ * settings
+#}
+
+
+
+<div class="skill-bars multipart-items on-viewport">
+
+
+  {% for key, item in elements %}
+  <div class="bar multipart-item_{{key}}">
+    <div class="info">
+      <span>{{item.skill_title.text}}</span>
+    </div>
+    <div class="progress-line">
+      <span data-width="{{item.attribute.skill_width}}"></span>
+    </div>
+  </div>
+{% endfor %} 
+
+</div>

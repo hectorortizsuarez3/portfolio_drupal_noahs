@@ -1,0 +1,36 @@
+<div{{ attributes.addClass('noahs-cart-block') }}>
+    <div class="cart-block--summary">
+        <a class="cart-block--link__expand" href="{{ url }}">
+            <i class=""></i>
+            <span class="cart-block--summary__count">
+                {{ count }}</span>
+        </a>
+    </div>
+    {% if content %}
+        <div class="cart-block--contents">
+            <button type="button" class="cart-block--contents__close js-cart-block-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="cart-block--contents__inner">
+                <div class="cart-block--contents__items">
+                    {{ content }}
+                </div>
+                <div class="cart-block--contents__links cart-block-link">
+                    <a href="{{ path('commerce_cart.page') }}" class="btn cart-block--link__view">{{ 'View cart'|t }}</a>
+                    {% if checkout_url %}
+                        <a href="{{ checkout_url }}" class="btn cart-block--link__checkout">{{ 'Checkout'|t }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="cart-block--contents text-center cart-block-empty">
+            <button type="button" class="cart-block--contents__close js-cart-block-close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="cart-block--contents__inner">
+                <div class="cart-block--contents__empty-message">{{ 'Cart is empty.'|t }}</div>
+            </div>
+        </div>
+    {% endif %}
+</div>

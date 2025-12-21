@@ -1,0 +1,16 @@
+{#
+/**
+ * Available variables:
+ *
+ * settings
+ * content
+#}
+{% set class = settings.element.class.section_container is defined ? settings.element.class.section_container : 'container-xxl' %}
+
+<div class="noahs_page_builder-row-wrapper">
+  <div class="noahs_page_builder-row-container {{ class }}">
+    <div class="row row-elements">
+      {{ content|raw }}
+    </div>
+  </div>
+</div>

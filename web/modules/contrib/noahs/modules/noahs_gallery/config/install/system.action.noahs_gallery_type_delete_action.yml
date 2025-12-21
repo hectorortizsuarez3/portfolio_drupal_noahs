@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_gallery
+id: noahs_gallery_type_delete_action
+label: 'Delete noahs galleries'
+type: noahs_gallery_type
+plugin: entity:delete_action:noahs_gallery_type
+configuration: {  }

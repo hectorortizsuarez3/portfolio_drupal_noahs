@@ -1,0 +1,32 @@
+<div class="row m-0 noahs-settings-styles-page">
+    <div class="col-4 p-0 modal-right-settings">
+        {{content | raw}}
+    </div>
+    <div class="col-8 p-0 iframe-left-settings">
+        <div id="top-panel">
+          <button id="btn-desktop" class="area_tooltip btn-top-panel active btn-admin" data-query="desktop" title="Desktop">
+            <i class="las la-desktop"></i> 
+          </button>
+          <button id="btn-tablet" class="area_tooltip btn-top-panel btn-admin" data-query="tablet" title="Tablet">
+            <i class="las la-tablet-alt"></i>
+          </button>
+          <button id="btn-mobile" class="area_tooltip btn-top-panel btn-admin" data-query="mobile" title="Mobile">
+            <i class="las la-mobile-alt"></i>
+          </button>
+
+          <div id="noahs-window-size"></div>
+        </div>
+
+        <div class="noahs_page_builder_preview-wrapper">
+            <div id="pageMessages"></div>
+            <div class="noahs_page_builder_preview-content">
+                <iframe
+                    src="{{iframe_url}}"
+                    id="noahs_page_builder_preview"
+                    class="h-100"
+                    name="noahs_page_builder_preview"></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>

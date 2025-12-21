@@ -1,0 +1,18 @@
+# DDEV
+.ddev/
+
+# Composer
+/vendor/
+
+# Drupal files
+/web/sites/*/files
+/web/sites/*/private
+
+# Settings local
+/web/sites/*/settings.local.php
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,27 @@
+uuid: 059435e7-1fb2-40f2-a4d3-4056f079d9f0
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - sub_noahs_theme
+_core:
+  default_config_hash: t6o_Jf34rjip5ZZwdFV8xZN7pFb3Ldx_bZxJO3jtKvw
+id: sub_noahs_theme_footer_menu
+theme: sub_noahs_theme
+region: footer
+weight: -6
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

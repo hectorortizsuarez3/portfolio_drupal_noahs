@@ -1,0 +1,23 @@
+uuid: 8c23d7ba-8edf-46f7-9dd8-ec35d344ce13
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - noahs_theme
+id: noahs_theme_sitebranding_2
+theme: noahs_theme
+region: footer_1
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

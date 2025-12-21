@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+/package.json
+/package-lock.json
+/modules/noahs_ai/package.json
+/modules/noahs_ai/package-lock.json
+/modules/noahs_ai/gulpfile.js
+/gulpfile.js
+/modules/noahs_ai/sources
+/sources

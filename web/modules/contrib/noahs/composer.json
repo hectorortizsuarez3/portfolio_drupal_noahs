@@ -1,0 +1,16 @@
+{
+    "name": "drupal/noahs",
+    "description": "Page Creator",
+    "type": "drupal-module",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/noahs",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/noahs",
+        "documentation": "https://noahs-creator.com/",
+        "source": "https://cgit.drupalcode.org/noahs"
+    },
+    "require": {
+        "drupal/token": "*",
+        "drupal/noahs_builder_theme": "*"
+    }
+}

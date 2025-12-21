@@ -1,0 +1,17 @@
+global:
+  version: VERSION
+  css:
+    base:
+      dist/css/animate.css: {}
+      dist/css/style.css: {}
+  js:
+    dist/js/header.js: {}
+    dist/js/script.js: {}
+  dependencies:
+     - core/drupal
+     - core/jquery
+
+  # Uncomment the code above to load scripts.js file on all pages. This file also requires JQuery to be
+  # loaded on all pages. Consider implimenting your scripts through theme libraries if you wish to
+  # avoid this. https://www.drupal.org/developing/api/8/assets
+

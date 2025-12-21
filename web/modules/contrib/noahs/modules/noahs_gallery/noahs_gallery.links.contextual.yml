@@ -1,0 +1,10 @@
+entity.noahs_gallery_type.edit_form:
+  route_name: entity.noahs_gallery_type.edit_form
+  group: noahs_gallery_type
+  title: 'Edit'
+
+entity.noahs_gallery_type.delete_form:
+  route_name: entity.noahs_gallery_type.delete_form
+  group: noahs_gallery_type
+  title: 'Delete'
+  weight: 10

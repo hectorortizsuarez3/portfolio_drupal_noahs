@@ -1,0 +1,25 @@
+<div class="noahs_page_builder-media-modal modal-type-{{type}}" data-source="{{source}}">
+   <div class="noahs_page_builder-modal_container">
+      <div class="noahs-new-media-element row"></div>
+      {{ view_render }}
+   </div>
+   <div class="noahs-media-modal-actions">
+      <div class="modal-messages"></div>
+      <div class="upload-image">
+         <form id="noahs_page_builderUploadImageForm" enctype="multipart/form-data">
+               <label>{{'Upload Media' | t}}</label>
+               <input type="file" id="noahs_page_builder_upload_image" name="noahs_page_builder_upload_image" {{type}} title="Upload Media" accept="image/png, image/gif, image/jpeg, video/mp4, video/webm" class="form-control">
+         </form>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
+         <button
+            type="button"
+            class="btn btn-success btn-labeled insert-media-modal"
+            data-wid="{{wid}}"
+            data-element-id="{{element_id}}"
+            data-thumbnail="">
+            <span class="btn-label"><i class="fa-solid fa-check"></i></span>{{'Insert selected' | t }}
+         </button>
+      </div>
+   </div>
+</div>

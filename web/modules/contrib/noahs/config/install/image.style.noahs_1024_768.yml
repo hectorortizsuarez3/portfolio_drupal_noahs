@@ -1,0 +1,17 @@
+uuid: 0190e092-fd6d-4e92-8b3f-14df48e66db6
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_page_builder
+name: 'noahs_1024_768'
+label: 'Noahs 1024x768'
+effects:
+  f1e5502e-38c2-470f-98ed-17937a80a433:
+    uuid: f1e5502e-38c2-470f-98ed-17937a80a433
+    id: image_scale
+    weight: 0
+    data:
+      width: 1024
+      height: 768
+      upscale: false

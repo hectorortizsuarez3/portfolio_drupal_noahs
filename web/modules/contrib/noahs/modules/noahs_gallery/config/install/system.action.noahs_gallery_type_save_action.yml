@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_gallery
+id: noahs_gallery_type_save_action
+label: 'Save noahs galleries'
+type: noahs_gallery_type
+plugin: entity:save_action:noahs_gallery_type
+configuration: {  }

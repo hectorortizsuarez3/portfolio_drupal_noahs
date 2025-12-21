@@ -1,0 +1,31 @@
+uuid: 7d3e556b-e43b-4d58-8a4e-e7729f082c16
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_page_builder
+  theme:
+    - noahs_theme
+id: noahs_theme_noahssocialnetworks
+theme: noahs_theme
+region: header_top_right
+weight: 0
+provider: null
+plugin: noahs_social_networks_block
+settings:
+  id: noahs_social_networks_block
+  label: 'Noahs Social Networks'
+  label_display: '0'
+  provider: noahs_page_builder
+  icon_text: 'Follow us'
+  socials:
+    -
+      icon: '<i class="fa-brands fa-facebook"></i>'
+      url: 'https://www.facebook.com/noahspagebuilder/'
+    -
+      icon: '<i class="fa-brands fa-square-instagram"></i>'
+      url: 'https://www.instagram.com/noahs_page_builder/'
+    -
+      icon: '<i class="fa-brands fa-linkedin"></i>'
+      url: 'https://www.linkedin.com/showcase/noahs-page-builder/'
+visibility: {  }

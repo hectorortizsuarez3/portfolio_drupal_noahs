@@ -1,0 +1,19 @@
+name: 'Noahs Page Builder'
+type: module
+description: 'Fast page builder on drupal'
+package: Noahs Page Builder
+# version: 1.1.x
+core_version_requirement: '^10 || ^11'
+dependencies:
+  - drupal:block_content
+  - drupal:image
+  - drupal:media
+  - drupal:media_library
+  - drupal:views
+  - drupal:editor
+  - drupal:filter
+
+# Information added by Drupal.org packaging script on 2025-12-18
+version: '2.8.8'
+project: 'noahs'
+datestamp: 1766061090

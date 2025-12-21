@@ -1,0 +1,30 @@
+uuid: 69848ceb-646d-4e94-95b6-067a60debeb8
+langcode: en
+status: true
+dependencies:
+  module:
+    - noahs_page_builder
+    - user
+  theme:
+    - noahs_theme
+id: noahs_theme_noahstabs
+theme: noahs_theme
+region: tabs
+weight: -4
+provider: null
+plugin: noahs_local_tasks_block
+settings:
+  id: noahs_local_tasks_block
+  label: 'Noahs Tabs'
+  label_display: '0'
+  provider: noahs_page_builder
+  primary: 1
+  secondary: 0
+visibility:
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator

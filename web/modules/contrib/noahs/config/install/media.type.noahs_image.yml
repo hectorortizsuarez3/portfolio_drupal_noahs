@@ -1,0 +1,13 @@
+uuid: 738e87da-0020-41d1-8052-0244cccecf9c
+langcode: en
+status: true
+dependencies: {  }
+id: noahs_image
+label: 'Noahs Image'
+description: ''
+source: image
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_image
+field_map: {  }

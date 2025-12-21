@@ -1,0 +1,15 @@
+<div class="noahs-social-networks-block">
+  {% if icon_text %} <div class="noahs-social-networks-block__icon-text">{{ icon_text }}</div>{% endif %}
+  <ul class="noahs-social-networks-block__socials">
+    {% for s in socials %}
+      {% if s.url %}
+        <li>
+          <a href="{{ s.url }}" target="_blank" rel="noopener">
+            {% if s.icon %} {{ s.icon | raw}} {% endif %}
+            {% if not hide_icon_text and s.name %}<span>{{ s.name }}</span>{% endif %}
+          </a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

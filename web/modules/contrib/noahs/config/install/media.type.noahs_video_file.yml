@@ -1,0 +1,13 @@
+uuid: d3aca268-c3ce-4a62-a252-6e88b9bfb5e7
+langcode: en
+status: true
+dependencies: {  }
+id: noahs_video_file
+label: 'Noahs Video File'
+description: ''
+source: video_file
+queue_thumbnail_downloads: false
+new_revision: false
+source_configuration:
+  source_field: field_media_video_file_1
+field_map: {  }

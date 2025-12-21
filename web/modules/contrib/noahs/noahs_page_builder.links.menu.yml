@@ -1,0 +1,30 @@
+noahs_page_builder.admin:
+  title: 'Noahs'
+  description: 'Noah''s menu'
+  parent: system.admin
+  route_name: noahs_page_builder.admin
+  weight: -9
+
+noahs_page_builder.settings:
+  title: 'Settings'
+  description: 'Settings required for the module'
+  parent: noahs_page_builder.admin
+  route_name: noahs_page_builder.settings
+
+noahs_page_builder.noahs_settings_styles:
+  title: 'Style Settings'
+  description: 'Styles settings'
+  parent: noahs_page_builder.admin
+  route_name: noahs_page_builder.noahs_settings_styles
+  route_parameters:
+    entity_type: 'noahs_setting_style'
+# noahs_page_builder.regenerate_styels:
+#   title: 'Migrate Noahs'
+#   description: 'Description'
+#   parent: noahs_page_builder.admin
+#   route_name: noahs_page_builder.regenerate_styels
+noahs_page_builder.get_icons_list:
+  title: 'Icons list'
+  description: 'Icons list and custom icons'
+  parent: noahs_page_builder.admin
+  route_name: noahs_page_builder.get_icons_list

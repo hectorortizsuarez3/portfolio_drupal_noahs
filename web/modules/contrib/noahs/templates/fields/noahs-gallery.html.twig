@@ -1,0 +1,11 @@
+<div{{ attributes }}>
+  <div class="field-noahs-gallery__grid">
+    {% for item in items %}
+      <figure class="field-noahs-gallery__item">
+        <a href="{{ item.full_src }}" data-fancybox="field-noahs-gallery">
+          <img src="{{ item.thumb_src }}" alt="{{ item.alt|e }}" title="{{ item.title|e }}" />
+        </a>
+      </figure>
+    {% endfor %}
+  </div>
+</div>

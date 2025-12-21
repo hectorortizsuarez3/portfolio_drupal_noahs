@@ -1,0 +1,15 @@
+<div class="noahs_page_builder-media-swiper w-100">
+  <div{{ attributes }}>
+    <div class="swiper-wrapper">
+      {% for slide in slides %}
+        <div class="swiper-slide">
+          <img src="{{ slide.src }}" alt="{{ slide.alt|e }}" title="{{ slide.title|e }}" class="{{ slide.classes|join(' ') }}" />
+        </div>
+      {% endfor %}
+    </div>
+    {# Optional: pagination/navigation hooks if you want #}
+    <div class="swiper-pagination"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
