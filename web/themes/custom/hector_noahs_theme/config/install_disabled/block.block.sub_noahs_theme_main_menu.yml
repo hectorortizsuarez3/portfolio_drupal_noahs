@@ -1,0 +1,27 @@
+uuid: 6ad74866-d7fc-47cc-8073-d83de7ef1f53
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - sub_noahs_theme
+_core:
+  default_config_hash: JuPhaMsKI7hr0BaXUJE7SI8lHSBV0ly95D8ka-ZoYmE
+id: sub_noahs_theme_main_menu
+theme: sub_noahs_theme
+region: header
+weight: -6
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Main navigation'
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: 2
+  expand_all_items: true
+visibility: {  }

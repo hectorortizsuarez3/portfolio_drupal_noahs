@@ -1,0 +1,26 @@
+name: Hector Noahs Theme
+type: theme
+description: 'Subtema de trabajo basado en Noahs Builder Theme'
+package: Custom
+core_version_requirement: ^10 || ^11
+base theme: noahs_theme
+
+libraries:
+  - hector_noahs_theme/global
+
+regions:
+  header_top_left: Header top left
+  header_top_right: Header top right
+  header_left: Header left
+  header_center: Header center
+  header_right: Header right
+  tabs: Tabs
+  content: Content
+  footer_top: Footer top
+  footer_1: Footer 1
+  footer_2: Footer 2
+  footer_3: Footer 3
+  footer_4: Footer 4
+  footer_5: Footer 5
+  footer_6: Footer 6
+  noahs_cookies: Cookies

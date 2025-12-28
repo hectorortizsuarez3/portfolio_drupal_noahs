@@ -1,0 +1,22 @@
+uuid: cbab0e50-1097-4cd1-a7fc-2fdc24b69dad
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sub_noahs_theme
+_core:
+  default_config_hash: cvEazfnEnzzVNaF3nznR4q71O8wQHRYWYsG5YTW_HeU
+id: sub_noahs_theme_content
+theme: sub_noahs_theme
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

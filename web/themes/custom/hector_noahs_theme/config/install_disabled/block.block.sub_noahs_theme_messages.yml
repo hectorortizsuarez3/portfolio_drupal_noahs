@@ -1,0 +1,22 @@
+uuid: 7a3a0895-81ac-419c-98e5-e40efa4e2eca
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sub_noahs_theme
+_core:
+  default_config_hash: pqyxu4b4_peJC25fOuVS0MmAy-mIIVaT9U7JlVKieKQ
+id: sub_noahs_theme_messages
+theme: sub_noahs_theme
+region: tabs
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }
