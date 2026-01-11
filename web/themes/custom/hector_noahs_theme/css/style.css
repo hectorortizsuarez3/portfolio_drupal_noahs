@@ -1,1 +1,15 @@
 /* Hector Noahs Theme - global styles */
+
+header.noahs-theme--header{
+    position: static !important;
+}
+
+.noahs-header-empty {
+  height: auto !important;
+}
+
+.menu__label {
+    font-size: 20px !important;
+    font-weight: 600;
+    margin-right: 15px;
+}
