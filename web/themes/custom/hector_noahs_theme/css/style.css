@@ -13,3 +13,21 @@ header.noahs-theme--header{
     font-weight: 600;
     margin-right: 15px;
 }
+
+/* Proyecto: meta en una sola línea */
+.project-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Los campos de Drupal suelen traer wrappers <div class="field ..."> que rompen línea */
+.project-meta .field {
+  display: inline;
+  margin: 0;
+}
+
+.project-meta .field-item {
+  display: inline;
+}

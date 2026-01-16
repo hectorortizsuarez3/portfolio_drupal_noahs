@@ -1,0 +1,69 @@
+{#
+  Template para el detalle de un nodo tipo "Proyecto".
+  Campos:
+  - Año: content.field_ano
+  - Imagen: content.field_cargar_imagen
+  - Cliente: content.field_cliente
+  - Descripción corta: content.field_descripcion_corta
+  - Tecnologías: content.field_tecnologias
+  - URL del proyecto: content.field_url_del_proyecto
+#}
+
+<article class="project">
+
+  {# Meta: cliente + año #}
+  <div class="project-meta">
+    {% if content.field_cliente %}
+      <span class="project-meta-item meta-cliente">
+        <strong>Cliente: </strong> {{ content.field_cliente }}
+      </span>
+    {% endif %}
+
+    {% if content.field_cliente and content.field_ano %}
+    <span class="meta-sep">·</span>
+    {% endif %}
+
+    {% if content.field_ano %}
+      <span class="project-meta-item meta-ano">
+        <strong>Año: </strong> {{ content.field_ano }}
+      </span>
+    {% endif %}
+  </div>
+
+  {# Tecnologías (taxonomía) #}
+  {% if content.field_tecnologias %}
+    <div class="project-tech">
+      {{ content.field_tecnologias }}
+    </div>
+  {% endif %}
+
+  {# Imagen principal #}
+  {% if content.field_cargar_imagen %}
+    <div class="project-media">
+      {{ content.field_cargar_imagen }}
+    </div>
+  {% endif %}
+
+  {# Descripción corta #}
+  {% if content.field_descripcion_corta %}
+    <div class="project-summary">
+      {{ content.field_descripcion_corta }}
+    </div>
+  {% endif %}
+
+  {# Enlace al proyecto #}
+  {% if content.field_url_del_proyecto %}
+    <div class="project-links">
+      {{ content.field_url_del_proyecto }}
+    </div>
+  {% endif %}
+
+</article>
+
+{#   
+    Qué falta?
+    1. dejar Cliente + Año en una línea limpia
+    2. convertir “Ver proyecto” en un botón real
+    3. y luego ya sí, CSS con sentido
+#}
+
