@@ -2,3 +2,9 @@ global:
   css:
     theme:
       css/style.css: {}
+
+scroll_header:
+  js:
+    js/scroll-header.js: {}
+  dependencies:
+    - core/drupal
