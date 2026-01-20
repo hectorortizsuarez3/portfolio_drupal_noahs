@@ -31,3 +31,14 @@ header.noahs-theme--header{
 .project-meta .field-item {
   display: inline;
 }
+
+/*Efecto en el header al hacer scroll*/
+.noahs-theme--header {
+  transition: background-color 0.35s ease, transform 0.35s ease;
+}
+
+body.is-scrolled .noahs-theme--header {
+  /*box-shadow: 0 4px 12px rgba(0,0,0,0.15);*/
+  background-color:whitesmoke;
+  transform: scale(0.94);
+}

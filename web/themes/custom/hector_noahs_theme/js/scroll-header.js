@@ -1,4 +1,11 @@
-//Test de que js carga
+//Añado la clase is-scrolled cuando se scrolea hacia abajo en inicio
+
 (function () {
-  console.log("[hector_noahs_theme] scroll-header.js cargado ✅");
+  window.addEventListener("scroll", function() {
+    if (window.scrollY > 0) {
+        document.body.classList.add("is-scrolled");
+    } else {
+        document.body.classList.remove("is-scrolled");
+    }
+  });
 })();
