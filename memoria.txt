@@ -1,0 +1,222 @@
+Resumen inicial del Contexto: estoy trabajando en un proyecto de crear un portafolio personal usando drupal, Docker, ddev y el módulo noahs.Tras muchos problemas intentando instalar el módulo noahs, y al estar mi jefe de vacaciones y no responder los emails, me pongo a avanzar en el proyecto del portfolio usando layout builder,hasta ue recibo un email de mi jefe en el que dice que desinstale layout builder e instale noahs de nuevo, y decido crear un clon del proyecto Noahs para probar a hacer lo que dice mi jefe (y el nuevo proyecto lo llamo Noahs_sin_layout_builder)
+----------------------------------------------------------------------------
+mail que mandé a mi jefe: Buenas Julián,
+ 
+Te escribo por aquí en vez de al whatsapp para no interrumpir tus vacaciones.
+ 
+Estaba ya en la fase 5 del manual (crear la página de inicio con Noah). Al crear una Basic page, no aparecía ninguna opción para activar Noah’s.
+ 
+Revisando la configuración, vi que para poder usar un page builder por página era necesario tener activos los módulos core Layout Builder y Layout Discovery. Tras activarlos, en Structure → Content types → Basic page → Manage display habilité:
+ 
+"Use Layout Builder"
+ 
+"Allow each content item to have its layout customized"
+ 
+En ese momento, al guardar la página de inicio, el sitio empezó a fallar con el error:
+ 
+AssertionError: Cannot load the "block" entity with NULL ID
+ 
+El error hacía que el sitio completo quedara inaccesible. Para recuperarlo, desinstalé Noahs Page Builder, pero entonces apareció un segundo error fatal:
+ 
+Call to undefined function is_module_installed() in noahs_theme_preprocess_menu()
+ 
+Ese error venía del theme de Noahs y volvía a dejar el sitio inaccesible, por lo que fue necesario desinstalar tanto el theme como mi subtema para poder recuperar el acceso a Drupal.
+ 
+Ahora mismo el sitio vuelve a ser estable. No sé si prefieres que continúe el portfolio usando solo Drupal de momento, o si ves mejor alguna otra forma de integrar Noahs.
+ 
+Saludos,
+Héctor", me respondió esto: "Buenas Héctor, no tienes que instalar nada más que noahs, no instales nada más. Desinstala layaout builder.
+
+Si sigues el tutorial de noahs que te mandé por WhatsApp, es tan fácil como entrar en noahs settings o configuraciones en el menú de noahs y añadir en que tipo de contenido quieres usar noahs.
+
+Mañana estoy de viaje, pero el martes puedo sacar un ratito si estas para verlo que ya vuelvo a casa. Un abrazo y felices fiestas!"
+-------------------------------------------------------------------------------
+
+Basado en eso quiero probar a hacerlo haciendo un clon experimental, para probarlo ahí sin arriesgar mi avance en noahs. Una vez tengo un snapshot hecho en noahs y nada faltante por commitear, mi dispongo con lo siguiente:
+-hago clon de noahs (en la carpeta Esimaginacion-proyectos ejecuto: copy-Item -Recurse -Force noahs noahs_sin_layout_builder)
+Siguiente paso (para que ddev no piense que ambos proyectos son el mismo): cambio el name de "noahs" a "noahs_sin_layout_builder" en el archivo C:\Esimaginacion-proyectos\noahs_sin_layout_builder\.ddev\config.yaml
+Siguiente paso: arrancar el proyecto clonado
+El proyecto arrancó ya. Ahora queremos desinstalar los dos módulos de loyout, pero no nos deja porque hay elementos usándolos.
+El sitio Drupal es accesible en:
+
+https://noahs-sin-layout-builder.ddev.site
+
+
+La base de datos se restauró correctamente desde snapshot.
+
+El contenido, menús, bloques, logo y home aparecen correctamente.
+
+Objetivo actual
+
+Desinstalar Layout Builder y Layout Discovery en el proyecto clonado.
+
+Esto es necesario para seguir el tutorial de Noahs tal y como indicó el jefe (sin usar Layout Builder).
+
+Problema actual
+
+Drupal no permite desinstalar Layout Builder desde Extend → Uninstall.
+
+Aunque:
+
+Ningún content type (Basic page, Article, Proyecto) tiene Layout Builder activado.
+
+Ningún block type lo usa.
+
+No existen tablas layout_builder en la base de datos.
+
+Drupal sigue detectando una dependencia residual del campo técnico:
+
+node.layout_builder__layout
+
+Layout Builder no se podía desinstalar inicialmente aunque no estuviera activo en ningún content type.
+El bloqueo venía de configuración residual interna (entity_view_display + validadores de campos) y de cachés de Drupal, no de uso real.
+Fue necesario:
+
+limpiar dependencias de core.entity_view_display.node.page.default
+
+reconstruir cachés (drush cr)
+
+y forzar a Drupal a recalcular los validadores
+hasta que la UI permitió la desinstalación.
+Una vez hecho esto al final la interfaz permitió desinstalar layout builder y layout Discovery, con drupal estable (frontend y admin ok, sin warnings). Entonces se hizo un snapshot para guardar el progreso hasta aquí (noahs-sin-layout-builder_20260101183325), y mañana continuaremos con la instalación de Noahs.
+----------------------------------------------------------
+noahs page builder instalado (primero descargo con ddev composer require 'drupal/noahs:^2.8' y luego instalo en la interfaz.
+en los settings de noahs, habilito editar las basic page con noahs.
+hago snapshot: noahs-sin-layout-builder_20260102170032
+Problema con el que nos hemos encontrado: Cuando edito una página con Noahs, el contenido no se refleja en la vista pública del node. Es decir, por fin nos aparece el icono de Noahs en la admin´s toolbar. Y en la home me sale la etiqueta "edit with noahs", a parte de la etiqueta viw, edit, revisions y delete. Si el contenido de la home lo edito con la pestaña "edit", se cambia la vista, pero si lo edito con la pestaña "edit with noahs" no se cambia nada. 
+----------------------------------------------------------------------
+Objetivo: preparar el tema y subtema de drupal:
+1) instalo el tema: ddev composer require 'drupal/noahs_builder_theme:^1.1'
+2) activo el tema: ddev drush theme:enable noahs_theme
+3) lo pongo como tema por defecto: ddev drush cset system.theme default noahs_theme -y
+4) limpio cachés: ddev drush cr
+Después de esto veo que la home ya s\noahs_sin_layout_builder> ddev drush cr [success] Cache rebuild complete." Y vi que la home ahora sí que intenta renderizar lo que había editado con "noahs page builder", pero por ejempo ahora no me sale el menu ese que dice "editar, edit with noahs, delete, etc..."
+1)instalamos tema noahs, lo activamos, y lo ponemos por defecto, y ya se renderiza la vista en el frontend
+2) hago snapshot: ddev snapshot --name noahs-theme-renders-frontend
+-----------------------------------------------------------------------
+Objetivo: activar subtema
+Como ya tengo la carpeta custom > hector_noahs_theme en el proyecto, heredada del clon, pues nos ahorramos el crear otro subtema.
+-comprobamos en el archivo info.yaml que hector_noahs_theme hereda de noahs_theme.
+Y ahora activamos y ponemos por defecto el hector_noahs_theme en la terminal: 
+ddev drush theme:enable hector_noahs_theme
+ddev drush cset system.theme default hector_noahs_theme -y
+pur último limpiamos caché: ddev drush cr
+ya tengo hector_noahs_theme activo pero no se ven las tabs en la home
+hago snapshot: ddev snapshot --name hector_noahs_theme_as_default_theme
+-----------------------------------------------------------------------------
+paso siguiente: conseguir ver las tabs en la home
+Atención a esto por si causa problemas en el futuro: Creamos la carpeta layout en hector_noahs_theme/templates y copiamos ahí el archivo page.html.twig de noahs_builder_theme/themplates/layout. Con esto hemos sobreescrito el template global de página del theme base. Es decir, drupal ya no usa el page.html.twig del theme contrib, sino el mio, en mi subtema, lo cual es la forma correcta de trabajar en drupal cuando usas un theme contrib o necesitas integrar noahs.Esto hubo que hacerlo para que el contenido editado con noahs se viera. Es decir, al copiar ese page.html.twig hemos fijado el renderizado. Esto explica por qué antes no se veía lo editado con noahs y después si. Lo importante ahora (esto sí es clave)
+🔴 Qué NO debes hacer ahora mismo
+
+NO vuelvas a tocar ese page.html.twig
+
+NO empieces a modificar HTML ahí
+
+NO añadas CSS “para probar”
+
+Ese archivo ahora mismo debe considerarse:
+
+infraestructura estable
+
+No diseño.
+
+*Como ya se puede editar la home con noahs, haré snapshot y commit.
+ddev snapshot --name subtema-activo-y-ya-puedo-editar-con-noahs
+git commit -m "todo ok para empezar a editar con noahs"
+--------------------------------------------------------------------
+me he dado cuenta de que cuando hice el clon cloné también el git, y entonces ambos git apuntaban al mismo repo externo, y con los mismos nombres de ramas, commits, etc. Para no liarla desconecté el repo externo del proyecto noahs_sin_layout_builder y lo conecté a un nuevo repo en GitHub: portfolio_drupal_noahs.
+---------------------------------------------------------------------------------------------------
+Resumen del estado actual:
+-todo commiteado y subido al repositorio de GitHub
+-Terminado hasta el punto 4.2 del manual.
+-Pendiente punto 5: Crear página de inicio con noahs
+
+Aquí al intentar avanzar nos hemos encontrado con un problema:
+lo que editaba con noahs no se renderizaba en la home. Hice lo siguiente:
+-Abrir el archivo: "C:\Esimaginacion-proyectos\noahs_sin_layout_builder\web\themes\custom\hector_noahs_theme\templates\layout\page.html.twig"
+
+cambiar el bloque "{% if noahs_entity_html %}
+  {{noahs_entity_html | raw}}
+{% else %}" por esto: "{% if noahs_node_html %}
+  {{ noahs_node_html | raw }}
+{% else %}" y se solucionó!
+---------------------------------------------------------
+dia 10/1/2026
+creo la taxonomía para los lenguajes de programación y tecnologías usadas y añado los principales términos
+añado al contenido de tipo proyecto los campos para los lenguajes de programación, año del proyecto y cliente
+Añado a cada uno de los 2 proyectos la info relativa a los lengaujes, año y cliente (para los campos de cliente y año uso la opción de rewrite content y sobreescribo el texto para que muestren "año: " y "cliente: " en la misma línea antes del dato).
+Edito la estructura de la vista proyecto para que se muestren en la vista estos nuevos campos y sus datos.
+
+
+También creo la home con 3 secciones: 
+	-Hero (título + subtítulo): simplemente con un widget de título con mi nombre y un widget de texto que dice "desarrollador web"
+	-Sección “Sobre mí” con texto sencillo de descripción sobre mi
+	-Sección “Últimos proyectos” (estructura): que renderiza una view de Proyectos de tipo block.
+
+Hago snapshot de lo avanzado: taxonomiaTecnologias-year-cliente
+-----------------------------------------------------------------------
+aplico unos cambios de estilo en la cabecera editando el css del archivo "C:\Esimaginacion-proyectos\noahs_sin_layout_builder\web\themes\custom\hector_noahs_theme\css\style.css"
+y hago commit "cambios de estilo en la cabecera".
+------------------------------------------------------------------------------
+Ahora vamos con la fase 7.2 del manual: añado un filtro por tecnologías a cada proyecto (solo en la página Proyectos, en la home no)
+Hago snapshot: filtro-tecnologias-implantado
+-----------------------------------------------------------------------------------------
+14/01/2026
+Creo "C:\Esimaginacion-proyectos\noahs_sin_layout_builder\web\themes\custom\hector_noahs_theme\templates\node\node--proyecto.html.twig"
+hago snapshot: add-node-template-proyecto
+
+metemos código en web\themes\custom\hector_noahs_theme\templates\node\node--proyecto.html.twig para verificar que Drupal está usando ese template para renderizar el detalle de los proyectos (es decir, la vista individual si pinchas a abrir
+y commit: "add node template proyecto"
+------------------------------------------------------------
+Siguiente paso: 
+
+quitar marcador rojo, desplegar los campos uno a uno y empezar la maquetación con control absoluto.
+
+Descubro cuales son los nombres máquina de cada campo en los content types de tipo proyecto. Son estos:
+	Año: field_ano 
+	cargar imagen: field_cargar_imagen 
+	cliente: field_cliente 
+	descripción corta: field_descripcion_corta 
+	Lenguajes de programación y otras tecnologías: field_tecnologias 
+	url del proyecto: field_url_del_proyecto
+--------------------------------------------------------------------
+16/1/26
+Edito templates\layout\page.html.twig" y themes\custom\hector_noahs_theme\css\style.css" para modificar personalmente la interfac de la web sin que sea la que usa Drupal por defecto.
+Hago commit: edición del article proyecto 1.
+
+
+Edito archivos web/sites/development.services.yml y web/sites/default/settings.php para activar un modo debug, que hace lo siguiente:
+-al abrir inspeccionar página en una web te muestra el código junto a comentarios que te dicen qué template se está usando en cada punto.
+-además no guarda caché para que los cambios en twig/css se reflejen mucho más rápido.
+-y activa headers de caché.
+Después de esto hago commit (Enable development services (theme debug, null cache))
+--------------------------------------------------------------------------
+17/1/26
+Fase 9. Objetivos fase 9:
+-Tener un Webform reutilizable...…………………………………………………………………………………….Hecho!
+-Integrarlo en una página real (/contacto)…………………………………………………………..Hecho!
+-Renderizarlo con Noah’s, no como Drupal clásico...………………………………...Hecho!
+-Dejarlo listo para un cliente real (email + confirmación): programo que el mensaje del cliente me llega a mi email, y le aparezca en pantalla un mensaje de éxito tras enviar el formulario. El mensaje del usuario no me llega a Gmail, pero sí que me llega a mailpit, lo cual puedo ver poniendo "ddev mailpit", y se me abre automáticamente.
+Hago snapshot: webform-structure-ok
+--------------------------------------------------------------------
+18/1/26
+-Defino la librería scholl-header en web/themes/custom/hector_noahs_theme/hector_noahs_theme.info.yml
+-Carga global de la librería creada desde web\themes\custom\hector_noahs_theme\hector_noahs_theme.info.yml
+-Incluyo un código muy sencillo a modo de test en el archivo js/scroll_header.js y abro la consola del navegador para comprobar que se imprime el console.log (he demostrado que Drupal carga js propio del theme)
+
+Hago commit: "Add JS library and verify loading in theme"
+----------------------------------------------------------------------------------------------------------------------
+20/1/26
+Fase 10:
+Decido no usar gulp porque y gestionar css y js directamente desde el subtema. He optado por hacerlo así porque:
+	-No estoy usando scss ni typescript, y no necesito transformar ningún código, pues el navegador puede ejecutar directamente mis archivos. Por tanto introducir un pipeline añadiría complejidad sin beneficio.
+
+Fase 11:
+Creo animación con código js añadiendo la clase is-scrolled cuando se detecta evento scroll en el window, y le añado una animación con css.
+Hago commit.
+------------------------------------------------------------------------------------------
+21/1/26
+
+
+
+
