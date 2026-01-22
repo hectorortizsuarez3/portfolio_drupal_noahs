@@ -1,44 +1,161 @@
-/* Hector Noahs Theme - global styles */
+:root{
+  --hos-primary: #1f3a5f;
+  --hos-text: #1a1a1a;
+  --hos-muted: #6b7280;
+  --hos-border: #d1d5db;
+  --hos-bg: #ffffff;
+  --hos-link: #050D69;
 
-header.noahs-theme--header{
-    position: static !important;
+  --hos-radius: 6px;
+  --hos-container: 1100px;
 }
 
-.noahs-header-empty {
-  height: auto !important;
+html { scroll-behavior: smooth; }
+
+body{
+  color: var(--hos-text);
+  background: var(--hos-bg);
+  line-height: 1.65;
+  font-size: 16px;
 }
 
-.menu__label {
-    font-size: 20px !important;
-    font-weight: 600;
-    margin-right: 15px;
+/*Enlaces*/
+.page-content a,
+.node a {
+  color: var(--hos-link);
+  text-decoration: none;
 }
 
+body a:hover {
+  text-decoration: underline;
+}
+
+/*Taxonomías como etiquetas, no como links*/
+.field--name-field-tecnologias a {
+  color: var(--hos-muted);
+  font-style: italic;
+  text-decoration: none;
+  pointer-events: none;
+  cursor: default;
+}
+
+
+
+h1,h2,h3{
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.75rem 0;
+}
+h1{ font-size: 2.4rem; }
+h2{ font-size: 1.8rem; margin-top: 2.2rem; }
+h3{ font-size: 1.35rem; margin-top: 1.6rem; }
+
+p{
+  margin: 0 0 1rem 0;
+  max-width: 70ch;
+}
+
+ul,ol{ max-width: 70ch; }
+
+/* Container prudente (sin tocar main directamente) */
+.page__content,
+.region-content,
+.layout-content{
+  max-width: var(--hos-container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Buttons */
+button,
+input[type="submit"],
+input[type="button"],
+a.button{
+  background: var(--hos-primary);
+  color: #fff;
+  border: 0;
+  border-radius: var(--hos-radius);
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+a.button:hover{
+  filter: brightness(0.95);
+  text-decoration: none;
+}
+
+/* Forms */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select{
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid var(--hos-border);
+  border-radius: var(--hos-radius);
+  padding: 0.6rem 0.7rem;
+  background: #fff;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+textarea:focus,
+select:focus{
+  outline: none;
+  border-color: var(--hos-primary);
+}
+
+small, .description, .form-item--description{
+  color: var(--hos-muted);
+}
+
+/* Ajustes en header*/
+  header.noahs-theme--header{
+      position: static !important;
+  }
+
+  .noahs-header-empty {
+    height: auto !important;
+  }
+
+  .menu__label {
+      font-size: 20px !important;
+      font-weight: 600;
+      margin-right: 15px;
+  }
+
+/*Edición de la vista de cada proyecto individual al abrirlo en inicio*/
 /* Proyecto: meta en una sola línea */
-.project-meta {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
+  .project-meta {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
 
-/* Los campos de Drupal suelen traer wrappers <div class="field ..."> que rompen línea */
-.project-meta .field {
-  display: inline;
-  margin: 0;
-}
+  /* Los campos de Drupal suelen traer wrappers <div class="field ..."> que rompen línea */
+    .project-meta .field {
+      display: inline;
+      margin: 0;
+    }
 
-.project-meta .field-item {
-  display: inline;
-}
+    .project-meta .field-item {
+      display: inline;
+    }
 
 /*Efecto en el header al hacer scroll*/
-.noahs-theme--header {
-  transition: background-color 0.35s ease, transform 0.35s ease;
-}
+  .noahs-theme--header {
+    transition: background-color 0.35s ease, transform 0.35s ease;
+  }
 
-body.is-scrolled .noahs-theme--header {
-  /*box-shadow: 0 4px 12px rgba(0,0,0,0.15);*/
-  background-color:whitesmoke;
-  transform: scale(0.94);
-}
+  body.is-scrolled .noahs-theme--header {
+    /*box-shadow: 0 4px 12px rgba(0,0,0,0.15);*/
+    background-color:whitesmoke;
+    transform: scale(0.94);
+  }

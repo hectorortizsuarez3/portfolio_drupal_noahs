@@ -217,6 +217,21 @@ Hago commit.
 ------------------------------------------------------------------------------------------
 21/1/26
 
+Creo los roles Editor y Cliente y les añado permisos.
+Creo el user Editor1, con rol Editor, y con contraseña Abc12345678.
+Compruebo que puede editar contenido de tipo Content y de tipo Basic Page y que puede Editar con Noahs.
+Hago snapshot: Roles-editor-and-client-created
+---------------------------------------------------
+22/6/26
+Sección Sobre Mi creada:
+Creo el content type de tipo Basic page "sobre mi", añado un "noahs image", y edito la sección con noahs añadiendo una foto, y dos párrafos sobre mi. Finalmente conecto la sección al Footer menú Sobre mi.
+Hago snapshot:  AboutMe-section-created-without-styles
+
+Con esto, la estructura básica del portfolio está terminado
+----------------------------------------------------------------------------------------------------
+Mejoras maquetación:
+-que los lenguajes de programación no se resalten como un link
+-corregir lo del botón submit de la sección contacto
 
 
 
