@@ -5,6 +5,7 @@
   --hos-border: #d1d5db;
   --hos-bg: #ffffff;
   --hos-link: #050D69;
+  --hos-buttons:#279CF5;
 
   --hos-radius: 6px;
   --hos-container: 1100px;
@@ -30,10 +31,10 @@ body a:hover {
   text-decoration: underline;
 }
 
-/*Taxonomías como etiquetas, no como links*/
-.field--name-field-tecnologias a {
+/*Lenguajes de programación*/
+.views-field-field-tecnologias .field-content a {
   color: var(--hos-muted);
-  font-style: italic;
+  font-weight: 700;
   text-decoration: none;
   pointer-events: none;
   cursor: default;
@@ -71,22 +72,25 @@ button,
 input[type="submit"],
 input[type="button"],
 a.button{
-  background: var(--hos-primary);
-  color: #fff;
-  border: 0;
-  border-radius: var(--hos-radius);
-  padding: 0.6rem 1rem;
-  cursor: pointer;
-  text-decoration: none;
+  padding: 0.4em 1.2em;
+  border: 1px solid var(--hos-text);
+  border-radius: 6px; 
+}
+
+.form-actions input.webform-button--submit {
+  background-color: var(--hos-buttons);
+  color: white;
+  font-weight: 600;
 }
 
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 a.button:hover{
-  filter: brightness(0.95);
-  text-decoration: none;
+  /*Meter algún efecto*/
 }
+
+webform-button--submit button button--primary js-form-submit form-submit btn btn-theme
 
 /* Forms */
 input[type="text"],

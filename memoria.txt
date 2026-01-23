@@ -229,7 +229,8 @@ Hago snapshot:  AboutMe-section-created-without-styles
 
 Con esto, la estructura básica del portfolio está terminado
 ----------------------------------------------------------------------------------------------------
-Mejoras maquetación:
+22/1/26
+Hago mejoras en maquetación provisionales, pero quedan cosas por mejorar:
 -que los lenguajes de programación no se resalten como un link
 -corregir lo del botón submit de la sección contacto
 
