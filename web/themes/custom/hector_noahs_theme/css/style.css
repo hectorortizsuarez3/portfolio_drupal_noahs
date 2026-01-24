@@ -82,15 +82,15 @@ a.button{
   color: white;
   font-weight: 600;
 }
-
+/*
 button:hover,
 input[type="submit"]:hover,
 input[type="button"]:hover,
 a.button:hover{
-  /*Meter algún efecto*/
+ 
 }
+*/
 
-webform-button--submit button button--primary js-form-submit form-submit btn btn-theme
 
 /* Forms */
 input[type="text"],
@@ -162,4 +162,25 @@ small, .description, .form-item--description{
     /*box-shadow: 0 4px 12px rgba(0,0,0,0.15);*/
     background-color:whitesmoke;
     transform: scale(0.94);
+  }
+
+  /*Estilos específicos para vista tablet*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+
+  /* Grid de Views: solo añade separación */
+  .views-view-responsive-grid,
+  .views-view-responsive-grid--horizontal {
+    gap: 48px;
+    
+  }
+
+div.views-field.views-field-field-cargar-imagen img{
+  min-width: 650px;
+  height: auto;
+}
+
+div.views-field.views-field-field-descripcion-corta {
+  max-width: 70%;
+}
+
   }

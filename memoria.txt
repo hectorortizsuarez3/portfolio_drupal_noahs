@@ -216,7 +216,6 @@ Creo animación con código js añadiendo la clase is-scrolled cuando se detecta
 Hago commit.
 ------------------------------------------------------------------------------------------
 21/1/26
-
 Creo los roles Editor y Cliente y les añado permisos.
 Creo el user Editor1, con rol Editor, y con contraseña Abc12345678.
 Compruebo que puede editar contenido de tipo Content y de tipo Basic Page y que puede Editar con Noahs.
@@ -229,10 +228,15 @@ Hago snapshot:  AboutMe-section-created-without-styles
 
 Con esto, la estructura básica del portfolio está terminado
 ----------------------------------------------------------------------------------------------------
-22/1/26
-Hago mejoras en maquetación provisionales, pero quedan cosas por mejorar:
--que los lenguajes de programación no se resalten como un link
--corregir lo del botón submit de la sección contacto
+23/1/26
+
+Resuelvo bug botón del formulario: no se veía y ya se ve, y con forma de botón.
+Resuelvo bug en tarjetas de últimos proyectos: ya no se ven las tecnologías como links.
+
+-------------------------------------------------------
+24/1/26
+Resuelvo bug en vista Tablet: ya no se ven las imágenes de los proyectos pisándose entre si
+y corrijo anchura de texto e imágenes.
 
 
 
