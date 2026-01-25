@@ -234,9 +234,22 @@ Resuelvo bug botón del formulario: no se veía y ya se ve, y con forma de botó
 Resuelvo bug en tarjetas de últimos proyectos: ya no se ven las tecnologías como links.
 
 -------------------------------------------------------
+
 24/1/26
 Resuelvo bug en vista Tablet: ya no se ven las imágenes de los proyectos pisándose entre si
 y corrijo anchura de texto e imágenes.
+
+----------------------------------------------------
+25/1/26
+Cambios en display para móvil:
+-ajusto anchura de imágenes de los proyectos y texto para dispositivo móvil (se pasaban del ancho de pantalla).
+-Los links del header se salían del ancho de pantalla (cambio el display del header de inline a flex y con flex-direction: column).
+-Corrijo el texto de la foto en la sección Sobre mi.
+
+Cambios en display Tablet:
+-ajusto tamaño de texto e imagen en la sección sobre mi
+
+-Meto una transición al botón submit para que se active al pasar el ratón  y cambio su texto de Submit a Enviar.
 
 
 
