@@ -164,7 +164,7 @@ small, .description, .form-item--description{
     transform: scale(0.94);
   }
 
-  /*Estilos específicos para vista tablet*/
+  /*----------------------------------Estilos específicos para vista tablet------------------------------*/
   @media (min-width: 768px) and (max-width: 1024px) {
 
   /* Grid de Views: solo añade separación */
@@ -183,4 +183,27 @@ div.views-field.views-field-field-descripcion-corta {
   max-width: 70%;
 }
 
+/*Ajustamos márgenes en texto de sección Sobre mi*/
+div.widget-content p {
+  margin: auto;
+  padding: 11px 0 30px 0;
+}
+
   }
+
+/*--------------------------------------Estilos para vista móvil---------------------------------*/
+@media (max-width: 767px){
+/*Ajustamos ancho máximo de las imágenes*/
+  div.views-field.views-field-field-cargar-imagen img{
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  padding: 0% 4%;
+}
+div.noahs-bottom-header{
+  display: flex;
+  flex-direction: column;
+}
+
+}
