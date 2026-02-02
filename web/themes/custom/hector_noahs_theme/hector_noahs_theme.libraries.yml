@@ -1,10 +1,11 @@
 global:
   css:
     theme:
-      css/style.css: {}
+      dist/css/style.css: {}
 
 scroll_header:
   js:
-    js/scroll-header.js: {}
+    dist/js/script.js: {}
+    dist/js/scroll-header.js: {}
   dependencies:
     - core/drupal

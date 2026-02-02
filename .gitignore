@@ -16,3 +16,7 @@
 Thumbs.db
 .vscode/
 .idea/
+/web/themes/custom/hector_noahs_theme/package.json
+/web/themes/custom/hector_noahs_theme/package-lock.json
+/web/themes/custom/hector_noahs_theme/node_modules
+/web/sites/default/default.services.yml

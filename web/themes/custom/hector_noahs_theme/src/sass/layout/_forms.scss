@@ -1,0 +1,42 @@
+/* Buttons */
+button,
+input[type="submit"],
+input[type="button"],
+a.button {
+  padding: 0.4em 1.2em;
+  border: 1px solid var(--hos-text);
+  border-radius: 6px;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 8px rgba(0,0,0,0.2);
+  }
+}
+
+.form-actions {
+  input.webform-button--submit {
+    background-color: var(--hos-buttons);
+    color: white;
+    font-weight: 600;
+    transition: transform 0.2s linear, box-shadow 0.2s linear;
+  }
+}
+
+/* Forms */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  max-width: 700px;
+  border: 1px solid var(--hos-border);
+  border-radius: var(--hos-radius);
+  padding: 0.6rem 0.7rem;
+  background: #fff;
+
+  &:focus {
+    outline: none;
+    border-color: var(--hos-primary);
+  }
+}

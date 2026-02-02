@@ -1,0 +1,15 @@
+/* Header */
+header.noahs-theme--header {
+  position: static !important;
+  transition: background-color 0.35s ease, transform 0.35s ease;
+}
+
+.noahs-header-empty {
+  height: auto !important;
+}
+
+.menu__label {
+  font-size: 20px !important;
+  font-weight: 600;
+  margin-right: 15px;
+}

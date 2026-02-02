@@ -1,0 +1,11 @@
+
+(function($, drupalSettings) {
+
+  console.log('Este es tu fichero a comprirmir de tu tema personalizado');
+  
+})(jQuery, drupalSettings);
+  
+
+
+ 
+ 

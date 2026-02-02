@@ -1,0 +1,29 @@
+:root {
+  --hos-primary: #1f3a5f;
+  --hos-text: #1a1a1a;
+  --hos-muted: #6b7280;
+  --hos-border: #d1d5db;
+  --hos-bg: #ffffff;
+  --hos-link: #050D69;
+  --hos-buttons: #279CF5;
+
+  --hos-radius: 6px;
+  --hos-container: 1100px;
+}
+
+// Estas son variables SASS
+
+$hos-primary: #1f3a5f;
+$hos-text: #1a1a1a;
+$hos-muted: #6b7280;
+$hos-border: #d1d5db;
+$hos-bg: #ffffff;
+$hos-link: #050D69;
+$hos-buttons: #279CF5;  
+
+// y se usan así:
+
+/*body {
+  color: $hos-text;
+  background-color: $hos-bg;
+}*/
