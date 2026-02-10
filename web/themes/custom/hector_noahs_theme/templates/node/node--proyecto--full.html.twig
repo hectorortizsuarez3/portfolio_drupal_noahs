@@ -1,0 +1,63 @@
+<article class="project my-4">
+  <div class="bg-light py-4">
+    <div class="container">
+
+      <div class="card shadow-lg border-0">
+        <div class="card-body">
+
+          <h1 class="h2 text-center mb-4">{{ label }}</h1>
+
+          <div class="row g-4 align-items-start">
+
+            <div class="col-12 col-lg-6">
+              {% if content.field_cargar_imagen %}
+                <div class="project-media">
+                  {{ content.field_cargar_imagen }}
+                </div>
+              {% endif %}
+            </div>
+
+            <div class="col-12 col-lg-6">
+
+              <div class="project-meta mb-3">
+                {% if content.field_cliente %}
+                  <span class="me-3"><strong>Cliente:</strong> {{ content.field_cliente }}</span>
+                {% endif %}
+                {% if content.field_ano %}
+                  <span><strong>Año:</strong> {{ content.field_ano }}</span>
+                {% endif %}
+              </div>
+
+              {% if content.field_tecnologias %}
+                <div class="project-tech mb-3">
+                  <div class="fw-bold mb-1">Tecnologías</div>
+                  {{ content.field_tecnologias }}
+                </div>
+              {% endif %}
+
+              {% if content.field_descripcion_corta %}
+                <div class="project-summary mb-3">
+                  {{ content.field_descripcion_corta }}
+                </div>
+              {% endif %}
+
+              {% if content.field_url_del_proyecto %}
+                <div class="project-links mt-3">
+                  <div class="fw-bold mb-2">URL del proyecto</div>
+                  <a class="btn btn-primary" href="{{ content.field_url_del_proyecto['#items'].0.uri|replace({'internal:': ''}) }}" target="_blank" rel="noopener">
+                    <span class="text-white text-decoration-none">Ver proyecto</span>
+                  </a>
+                </div>
+              {% endif %}
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</article>
+
+
