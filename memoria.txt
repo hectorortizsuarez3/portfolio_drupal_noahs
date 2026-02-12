@@ -250,6 +250,50 @@ Cambios en display Tablet:
 -ajusto tamaño de texto e imagen en la sección sobre mi
 
 -Meto una transición al botón submit para que se active al pasar el ratón  y cambio su texto de Submit a Enviar.
+------------------------------------------------------------------------------------------------
+-------------------------------------------------------
+26/1/26
+
+Añado Readme.md
+-----------------------------------------------------
+2/2/26
+
+Julián añade commit: estructura sass. En ese commit editó los siguientes archivos:
+.gitignore web/themes/custom/hector_noahs_theme/css/style.css web/themes/custom/hector_noahs_theme/dist/css/style.css web/themes/custom/hector_noahs_theme/dist/js/script.js web/themes/custom/hector_noahs_theme/dist/js/scroll-header.js web/themes/custom/hector_noahs_theme/gulpfile.js web/themes/custom/hector_noahs_theme/hector_noahs_theme.libraries.yml web/themes/custom/hector_noahs_theme/src/img/blue.png web/themes/custom/hector_noahs_theme/src/img/icons/arrow-down.png web/themes/custom/hector_noahs_theme/src/img/preloader.gif web/themes/custom/hector_noahs_theme/src/js/script.js web/themes/custom/hector_noahs_theme/src/js/scroll-header.js web/themes/custom/hector_noahs_theme/src/sass/footer/_base.scss web/themes/custom/hector_noahs_theme/src/sass/footer/_footer.scss web/themes/custom/hector_noahs_theme/src/sass/header/_base.scss web/themes/custom/hector_noahs_theme/src/sass/header/_brand.scss web/themes/custom/hector_noahs_theme/src/sass/header/_burger_menu.scss web/themes/custom/hector_noahs_theme/src/sass/header/_header.scss web/themes/custom/hector_noahs_theme/src/sass/header/_lang_block.scss web/themes/custom/hector_noahs_theme/src/sass/header/_menu.scss web/themes/custom/hector_noahs_theme/src/sass/layout/_base.scss web/themes/custom/hector_noahs_theme/src/sass/layout/_forms.scss web/themes/custom/hector_noahs_theme/src/sass/layout/_layout.scss
+--------------------------------------------------------
+6/2/26
+Se deja operativo el compilado automático de estilos:
+Se ha configurado el entorno de trabajo para compilar automáticamente los estilos mediante Gulp y npm.
+A partir de ahora, los estilos se editan en src/ y se generan automáticamente en dist/, que es lo que utiliza Drupal.
+Se ha dejado preparado el flujo de trabajo para:
+editar SASS de forma modular
+compilar estilos, scripts e imágenes automáticamente
+mantener un entorno reproducible mediante configuración npm
+Este cambio establece la base para continuar con la maquetación y mejora visual del portfolio de forma más organizada y escalable.
+Todo esto se ha creado en una rama nueva (frontwork) y se ha realizado un commit al acabar: npm tooling for gulp sass pipeline added
+-------------------------------------------------------------------------------------------------------------------------------------------
+7/2/26
+Cargo Bootstrap en el theme global y hago commit. Bootstrp se ha declarado como una librería en el theme, concretamente en el archivo hector_noahs_theme.ibraries.yml.
+Importante: se ha cargado primero Bootstrap para que mi dist/css/style.css se cargue después y gane en caso de conflicto.
+hago tb snapshot por si al tocar configuración no se volver a la actual
+
+Intenté empezar a mejorar estilos de las vistas de proyectos aplicando clases Bootstrap a través de la configuración de la view en drupal (cambiando el format a unformatted list y añadiendo una css class). No quedaba bien, quedaba una ventana encima de la otra. Aunque deshice todos los cambios esto no se corregía y no me quedó más remedio que volver a un snapshot anterior. Conclusión: siempre que vaya a tocar configuración drupal asegurarme con un snapshot al que pueda volver.
+---------------------------------------------------------------------------------------------------------------------
+9/2/26
+De nuevo hago intento de modificar la UI para empezar a aplicar estilos Bootstrap. Cambio en structure>views>proyectos el formato de ambas vistas (block y page) de responsive grid a "unformatted list". Y cuando lo hago, no se ve ningún proyecto ni en la home ni en la página de proyectos... Deshíce loos cambios y ya se ven de nuevo.
+
+Aprendizaje: en la carpeta web/themes/custom/hector_noahs_theme/templates van los overrides de la carpeta "\web\core\modules\views\templates", es decir, la plantilla que vaya allí y tenga el mismo nombre que una en \web\core\modules\views\templates, drupal usará esta plantilla en vez de la original.
+
+Creamos \web\themes\custom\hector_noahs_theme\templates\views\views-view-grid-responsive--proyectos.html.twig, que será el archivo que haga override a ese mismo archivo en la carpeta \web\core\modules\views\templates. Incluímos dos líneas en ese archivo (class="card h-100 shadow-sm por un lado, y class="card-body por otro) sin tocar el resto de la plantilla para no romper la view, y funciona!!
+-------------------------------------------------------------------------------------------------------------
+10/2/26
+Creo node--proyecto--full.html.twig en \web\themes\custom\hector_noahs_theme\templates\node y me aseguro de que es la plantilla que controla la vista del detalle de cada proyecto.
+
+Meto clases Bootstrap para mejorar la apariencia de la vista de cada proyecto. Pero me dan varios problemas de estilos que no se quedan del todo bien.
+Desactivo el css (sin commit) para ver cómo se ve el proyecto solo con Bootstrap y lo que le tenga metido drupal.
+------------------------------------------------------------------------------------------------------------------------
+11/2/26
+Averiguo la plantilla twig que controla cada vista y me lo apunto en "que plantillas twig controlan cada vista.tx"
 
 
 
