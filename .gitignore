@@ -18,3 +18,6 @@ Thumbs.db
 .idea/
 /web/themes/custom/hector_noahs_theme/node_modules
 /web/sites/default/default.services.yml
+/web/sites/default/settings.php
+/web/modules/contrib/*
+/web/libraries/*

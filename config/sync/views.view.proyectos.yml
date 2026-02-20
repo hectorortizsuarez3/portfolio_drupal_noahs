@@ -556,9 +556,9 @@ display:
       style:
         type: noahs_swiper
         options:
-          grouping: {  }
+          uses_fields: false
           slides_per_view:
-            desktop: '2'
+            desktop: '3'
             tablet: '2'
             mobile: '1'
       row:

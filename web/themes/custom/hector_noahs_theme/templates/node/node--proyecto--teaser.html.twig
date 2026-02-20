@@ -52,7 +52,9 @@
     {# Descripción corta #}
     {% if content.field_descripcion_corta is not empty %}
       <div class="card-text mb-3">
-        {{ content.field_descripcion_corta }}
+       {# recortar texto a 100 caracteres truncate es undefined #}
+        {# {{dump(content.field_descripcion_corta)}} #}
+        {{ content.field_descripcion_corta.0['#context']['value'] | slice(0, 100) ~ '...' }}
       </div>
     {% endif %}
 

@@ -21,15 +21,6 @@ targetEntityType: node
 bundle: proyecto
 mode: teaser
 content:
-  field_ano:
-    type: number_integer
-    label: hidden
-    settings:
-      thousand_separator: ''
-      prefix_suffix: true
-    third_party_settings: {  }
-    weight: 5
-    region: content
   field_cargar_imagen:
     type: image
     label: hidden
@@ -41,14 +32,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  field_cliente:
-    type: string
-    label: hidden
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 6
-    region: content
   field_descripcion_corta:
     type: string
     label: hidden
@@ -57,14 +40,6 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
-  field_tecnologias:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_url_del_proyecto:
     type: link
     label: hidden
@@ -72,8 +47,8 @@ content:
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: '0'
-      target: _blank
+      rel: ''
+      target: ''
     third_party_settings: {  }
     weight: 3
     region: content
@@ -82,4 +57,7 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-hidden: {  }
+hidden:
+  field_ano: true
+  field_cliente: true
+  field_tecnologias: true

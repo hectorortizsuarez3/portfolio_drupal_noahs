@@ -1,0 +1,19 @@
+features:
+  node_user_picture: 1
+  comment_user_picture: 1
+  comment_user_verification: 1
+  favicon: 1
+logo:
+  use_default: 0
+  path: 'public://logo_2.png'
+favicon:
+  use_default: 1
+noahs_header:
+  container: 0
+  general_header_sticky: 1
+  general_hide_top_header_sticky: 0
+noahs_general:
+  animate_on_load: 0
+noahs_footer:
+  container: 0
+  footer_columns: cols-4
