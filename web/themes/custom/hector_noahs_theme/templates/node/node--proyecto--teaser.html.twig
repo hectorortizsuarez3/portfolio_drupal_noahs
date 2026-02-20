@@ -1,0 +1,96 @@
+<article{{ attributes.addClass('card', 'h-100', 'shadow-sm') }}>
+
+  {# Imagen 
+  {% if content.field_cargar_imagen is not empty %}
+    <div class="card-img-top">
+      {{ content.field_cargar_imagen.0 }}
+    </div>
+  {% endif %} #}
+
+    {# Carrusel de imágenes #}
+    {% if content.field_cargar_imagen is not empty %}
+    {% set carousel_id = 'carousel-proyecto-' ~ node.id %}
+
+    <div id="{{ carousel_id }}" class="carousel slide" data-bs-ride="false">
+    <div class="carousel-inner">
+
+      {% set first = true %}
+      {% for item in content.field_cargar_imagen %}
+        {# Filtramos elementos "raros" del render array y nos quedamos con los items de imagen #}
+        {% if item['#theme'] is defined %}
+          <div class="carousel-item {% if first %}active{% endif %}">
+            {{ item }}
+          </div>
+          {% set first = false %}
+        {% endif %}
+      {% endfor %}
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ carousel_id }}" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ carousel_id }}" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+  </div>
+    {% endif %}
+
+
+  <div class="card-body d-flex flex-column">
+
+    {# Título (label) enlazado al node #}
+    <h5 class="card-title mb-2">
+      <a href="{{ url }}" class="text-decoration-none">
+        {{ label }}
+      </a>
+    </h5>
+
+    {# Descripción corta #}
+    {% if content.field_descripcion_corta is not empty %}
+      <div class="card-text mb-3">
+        {{ content.field_descripcion_corta }}
+      </div>
+    {% endif %}
+
+    {# Meta: cliente + año #}
+    {% if content.field_cliente is not empty or content.field_ano is not empty %}
+      <div class="small text-muted mb-3">
+        {% if content.field_cliente is not empty %}
+          <span class="me-3">{{ content.field_cliente }}</span>
+        {% endif %}
+        {% if content.field_ano is not empty %}
+          <span>{{ content.field_ano }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {# Tecnologías (taxonomía) #}
+    {% if content.field_tecnologias is not empty %}
+      <div class="mt-auto mb-3">
+        {{ content.field_tecnologias }}
+      </div>
+    {% else %}
+      <div class="mt-auto"></div>
+    {% endif %}
+
+    {# Botones: ver detalle + (si existe) ir a URL del proyecto #}
+    <div class="d-flex gap-2">
+      <a href="{{ url }}" class="btn btn-primary btn-sm">Ver proyecto ampliado</a>
+
+      {% if content.field_url_del_proyecto is not empty %}
+        {# {{ content.field_url_del_proyecto }} #}
+        {% set project_url = content.field_url_del_proyecto.0['#url'] %}
+            <a href="{{ project_url }}" class="btn btn-primary btn-sm" 
+            target="_blank" rel="noopener">
+            URL del proyecto
+            </a>
+        {% endif %}
+    </div>
+
+  </div>
+</article>
+

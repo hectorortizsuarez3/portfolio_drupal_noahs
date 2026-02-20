@@ -1,0 +1,10 @@
+uuid: bd9da661-4555-4f21-be21-917f6dbdac66
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: DejgZ8PjiEEKdL71azoMLNmMnaynb_psmG0WMsOigak
+id: noahs_block_html
+label: 'Noahs HTML Block'
+revision: false
+description: 'Custom reusable HTML block for Noahs Page Builder.'

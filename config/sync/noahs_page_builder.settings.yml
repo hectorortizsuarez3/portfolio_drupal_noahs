@@ -1,0 +1,66 @@
+develop_mode: 0
+use_editor: basic_html
+use_in_ctype:
+  page: page
+  article: 0
+  proyecto: 0
+use_in_vtype:
+  tags: 0
+  tecnologias: 0
+container_width: ''
+container_small: '720'
+container_large: '960'
+container_extra_large: '1140'
+viewport_tablet: '959'
+viewport_mobile: '767'
+available_fonts:
+  '': 0
+  'Droid Sans': 0
+  'Exo 2': 0
+  Inter: 0
+  Jost: 0
+  Lato: 0
+  Lora: 0
+  Merriweather: 0
+  Montserrat: 0
+  'Noto Sans': 0
+  Nunito: 0
+  'Open Sans': 0
+  Oswald: 0
+  Outfit: 0
+  'Playfair Display': 'Playfair Display'
+  Poppins: 0
+  'PT Sans': 0
+  Raleway: 0
+  Roboto: 0
+  'Roboto Condensed': 0
+  'Roboto Mono': 0
+  'Roboto Slab': 0
+  Rubik: 0
+  Sora: 0
+  'Titillium Web': 0
+  Tomorrow: 0
+  Ubuntu: 0
+  'Ubuntu Condensed': 0
+  'Work Sans': 0
+heading_font: 'Playfair Display'
+general_font: 'Playfair Display'
+principal_color: '#2389ab'
+secondary_color: '#4a4a4a'
+noahs_page_builder_custom_css: ''
+noahs_page_builder_custom_js: ''
+logo_width: ''
+logo_mobile_width: ''
+header_top_bg_color: ''
+header_bg_color: ''
+header_text_color: ''
+header_gap: '16'
+header_justify_content: space-between
+header_align_items: center
+footer_top_bg_color: ''
+footer_bg_color: ''
+footer_text_color: ''
+footer_column_gap: '16'
+footer_justify_content: space-between
+footer_align_items: center
+custom_fonts: {  }

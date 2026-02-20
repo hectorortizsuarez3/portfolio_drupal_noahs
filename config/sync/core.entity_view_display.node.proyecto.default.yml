@@ -1,0 +1,83 @@
+uuid: b8b7ec7a-f9f1-4912-b4e0-49ad14e73e5b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.proyecto.field_ano
+    - field.field.node.proyecto.field_cargar_imagen
+    - field.field.node.proyecto.field_cliente
+    - field.field.node.proyecto.field_descripcion_corta
+    - field.field.node.proyecto.field_tecnologias
+    - field.field.node.proyecto.field_url_del_proyecto
+    - node.type.proyecto
+  module:
+    - image
+    - link
+    - user
+id: node.proyecto.default
+targetEntityType: node
+bundle: proyecto
+mode: default
+content:
+  field_ano:
+    type: number_integer
+    label: hidden
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_cargar_imagen:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_cliente:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  field_descripcion_corta:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  field_tecnologias:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  field_url_del_proyecto:
+    type: link
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: '0'
+      target: _blank
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

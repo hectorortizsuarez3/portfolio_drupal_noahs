@@ -1,0 +1,29 @@
+uuid: 3e711c49-1ae5-44a0-94ba-b861153aa44c
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+  module:
+    - block_content
+    - noahs_page_builder
+  theme:
+    - hector_noahs_theme
+third_party_settings:
+  noahs_page_builder:
+    title_tag: ''
+    block_title_classes: ''
+    block_classes: ''
+id: hector_noahs_theme_copyrightfooter
+theme: hector_noahs_theme
+region: footer_6
+weight: 0
+provider: null
+plugin: 'block_content:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+settings:
+  id: 'block_content:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+  label: 'copyright footer'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }

@@ -1,0 +1,14 @@
+uuid: 8c31fd15-1cd1-4643-b7d9-66923a214313
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.cliente
+  module:
+    - user
+id: user_remove_role_action.cliente
+label: 'Remove the Cliente role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: cliente

@@ -1,0 +1,74 @@
+uuid: 61d3cff5-ec27-49c2-ba88-1e0a1c8eb701
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.noahs_block_html
+    - filter.format.noahs_html
+    - filter.format.restricted_html
+    - media.type.document
+    - media.type.image
+    - media.type.noahs_image
+    - node.type.page
+    - node.type.proyecto
+    - taxonomy.vocabulary.tecnologias
+  module:
+    - announcements_feed
+    - block_content
+    - contextual
+    - filter
+    - help
+    - media
+    - noahs_page_builder
+    - node
+    - path
+    - system
+    - taxonomy
+    - toolbar
+    - webform
+id: editor
+label: Editor
+weight: 4
+is_admin: false
+permissions:
+  - 'access administration pages'
+  - 'access announcements'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access help pages'
+  - 'access media overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'access webform help'
+  - 'access webform overview'
+  - 'administer noahs_page_builder'
+  - 'cancel account'
+  - 'change own username'
+  - 'create document media'
+  - 'create image media'
+  - 'create media'
+  - 'create noahs_block_html block content'
+  - 'create page content'
+  - 'create proyecto content'
+  - 'create terms in tecnologias'
+  - 'create url aliases'
+  - 'delete own document media'
+  - 'delete own image media'
+  - 'delete own noahs_image media'
+  - 'delete own page content'
+  - 'delete own proyecto content'
+  - 'edit any noahs_block_html block content'
+  - 'edit any page content'
+  - 'edit any proyecto content'
+  - 'edit own document media'
+  - 'edit own image media'
+  - 'edit own noahs_image media'
+  - 'edit own page content'
+  - 'edit own proyecto content'
+  - 'update media'
+  - 'use text format noahs_html'
+  - 'use text format restricted_html'
+  - 'view own unpublished content'
+  - 'view own unpublished media'
+  - 'view the administration theme'
+  - 'view vocabulary labels'

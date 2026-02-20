@@ -1,0 +1,23 @@
+uuid: 22137038-2404-470b-9c50-7dbc1394a79e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+  module:
+    - block_content
+  theme:
+    - olivero
+id: olivero_copyrightfooter
+theme: olivero
+region: footer_bottom
+weight: 0
+provider: null
+plugin: 'block_content:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+settings:
+  id: 'block_content:f11bd9b4-d15a-4c9f-a1d3-63ebffd19a3d'
+  label: 'copyright footer'
+  label_display: '0'
+  provider: block_content
+  view_mode: full
+visibility: {  }

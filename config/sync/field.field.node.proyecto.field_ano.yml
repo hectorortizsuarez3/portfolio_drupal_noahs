@@ -1,0 +1,23 @@
+uuid: c437ecc7-0794-4db1-8db2-b42942e64e2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ano
+    - node.type.proyecto
+id: node.proyecto.field_ano
+field_name: field_ano
+entity_type: node
+bundle: proyecto
+label: Año
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 2025
+  max: 2100
+  prefix: ''
+  suffix: ''
+field_type: integer

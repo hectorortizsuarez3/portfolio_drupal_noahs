@@ -1,0 +1,22 @@
+uuid: 2d9dab47-da29-4215-893e-4dc77a2b5ef3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - hector_noahs_theme
+_core:
+  default_config_hash: PxqseqJFnPKE9V9UnS8eP_GUK7VMwmXPnyEeCdVfBm4
+id: hector_noahs_theme_content
+theme: hector_noahs_theme
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }

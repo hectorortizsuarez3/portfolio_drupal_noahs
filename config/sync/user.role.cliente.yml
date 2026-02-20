@@ -1,0 +1,14 @@
+uuid: cd7c342b-76a0-4850-9952-82d90543ba31
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+id: cliente
+label: Cliente
+weight: 5
+is_admin: false
+permissions:
+  - 'access user profiles'
+  - 'cancel account'
+  - 'view own unpublished content'

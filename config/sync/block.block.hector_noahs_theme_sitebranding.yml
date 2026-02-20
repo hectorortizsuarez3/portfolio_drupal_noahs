@@ -1,0 +1,25 @@
+uuid: 8e93de65-a722-4a80-94e3-9f4ab6b0ff16
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - hector_noahs_theme
+_core:
+  default_config_hash: rjWmyTSzIV78-h_U4rWGNU781H_j9ZImnFpl5L_2rcE
+id: hector_noahs_theme_sitebranding
+theme: hector_noahs_theme
+region: header_left
+weight: -6
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Site branding'
+  label_display: '0'
+  provider: system
+  use_site_logo: true
+  use_site_name: false
+  use_site_slogan: false
+visibility: {  }

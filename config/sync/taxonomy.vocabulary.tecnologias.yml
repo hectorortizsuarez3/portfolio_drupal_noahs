@@ -1,0 +1,9 @@
+uuid: 1dfdcf51-6263-4ef4-bea2-050a06d3585a
+langcode: en
+status: true
+dependencies: {  }
+name: Tecnologías
+vid: tecnologias
+description: 'Tecnologías y lenguajes de programación usados en los proyectos'
+weight: 0
+new_revision: false

@@ -1,0 +1,38 @@
+uuid: 91491768-c831-4c16-a25d-b831dd1fb453
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 5qBW9CYyCmey_vyHBx_Hy8dvZ-odPcz8xKxyiEqUJts
+name: 'Noahs HTML'
+format: noahs_html
+weight: 0
+filters:
+  filter_autop:
+    id: filter_autop
+    provider: filter
+    status: true
+    weight: 0
+    settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: true
+    weight: -10
+    settings:
+      allowed_html: '<a href class target rel> <p> <br> <strong> <em> <ul> <ol> <li> <span class> <div class> <h1> <h2> <h3> <h4> <h5> <h6> <img src alt class> <blockquote> <code> <pre> <table class> <thead> <tbody> <tr> <th> <td>'
+      filter_html_help: false
+      filter_html_nofollow: false
+  filter_htmlcorrector:
+    id: filter_htmlcorrector
+    provider: filter
+    status: true
+    weight: 10
+    settings: {  }
+  filter_url:
+    id: filter_url
+    provider: filter
+    status: true
+    weight: 0
+    settings:
+      filter_url_length: 72

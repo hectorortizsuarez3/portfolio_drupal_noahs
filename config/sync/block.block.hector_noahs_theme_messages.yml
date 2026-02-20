@@ -1,0 +1,22 @@
+uuid: a9e3195a-02ec-4e91-9c56-a69d6d7214fb
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - hector_noahs_theme
+_core:
+  default_config_hash: EGH3RnPgIiEAdCvtgbq0CyJCmQseFEdUg7vLelzzyKI
+id: hector_noahs_theme_messages
+theme: hector_noahs_theme
+region: tabs
+weight: -3
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

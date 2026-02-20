@@ -1,0 +1,31 @@
+uuid: 6178eafe-0394-4b03-9a93-2318796d9332
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - noahs_page_builder
+    - system
+  theme:
+    - hector_noahs_theme
+third_party_settings:
+  noahs_page_builder:
+    title_tag: ''
+    block_title_classes: ''
+    block_classes: ''
+id: hector_noahs_theme_footer
+theme: hector_noahs_theme
+region: footer_top
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: Footer
+  label_display: '0'
+  provider: system
+  level: 1
+  depth: null
+  expand_all_items: false
+visibility: {  }
