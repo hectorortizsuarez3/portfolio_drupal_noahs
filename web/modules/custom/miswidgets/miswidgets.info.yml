@@ -1,0 +1,7 @@
+name: Mis Widgets
+type: module
+description: Widgets personalizados para Noahs
+core_version_requirement: ^10 || ^11
+package: Custom
+dependencies:
+  - noahs_page_builder
