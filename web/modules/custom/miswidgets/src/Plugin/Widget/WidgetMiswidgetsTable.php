@@ -36,48 +36,88 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'title' => t('Content'),
     ];
 
-    $form['table_data'] = [
-      'type'      => 'textarea',
-      'title'     => t('table_data'),
-      'default_value' => "Producto|Precio|Stock\nPan|1.20|24\nLeche|0.90|18",
+    //Panel multifield
+    $form['table'] = [
+      'type'    => 'noahs_multiple_elements',
+      'title'   => t('Table Items'),
       'tab'     => 'section_content',
-      'rows' => 8,
+      'open'    => TRUE,
       'update_selector' => '.widget-content',
-      //'noahs_ai' => TRUE,
-      'wrapper' => FALSE,
-      //'translate_ai' => TRUE,
-        // 'translate' => true,
+
+      //datos por defecto en la tabla
+      'default_value' => [ 
+        [
+          'header_text' => ["text" => 'Header 1'],
+          'cell_text'   => ["text" => 'Cell 1'],
+        ],
+        [
+          'header_text' => ["text" => 'Header 2'],
+          'cell_text'   => ["text" => 'Cell 2'], // Añadido para que haya coherencia
+        ],
+        [
+          'header_text' => ["text" => 'Header 3'],
+          'cell_text'   => ["text" => 'Cell 3'], // Añadido para que haya coherencia
+        ],
+      ],
+
+      //campos para cada columna
+      'fields' => [
+        'table_content' => [
+          'type'  => 'tab',
+          'title' => t('Table Content'),
+        ],
+        'header_text' => [
+          'type'            => 'text',
+          'title'           => t('Header'),
+          'tab'             => 'table_content',
+          'update_selector' => '.noahs--table--header table thead th.head--[index]',
+        ],
+        'cell_text' => [
+          'title'           => t('Cell text'), 
+          'type'            => 'text', 
+          'tab'             => 'table_content', // Faltaba asignarlo a la pestaña en el código original de Julián
+          'default_value'   => '', 
+          'wrapper'         => FALSE, 
+          'translate_ai'    => TRUE, 
+          'update_selector' => '.noahs--table--body table tbody td.cell--[index]', // Importante para la previsualización [cite: 239]
+        ],
+      ],
     ];
 
+    //pestaña de estilos
     $form['section_styles'] = [
       'type' => 'tab',
       'title' => t('Style'),
     ];
 
-    $form['font'] = [
-      'type'        => 'noahs_font',
-      'title'       => t('Font'),
-      'tab'     => 'section_styles',
-      'style_type' => 'style',
-      'style_selector' => '.widget-content',
-      'wrapper' => FALSE,
-      'responsive' => TRUE,
-      'open' => TRUE,
-    ];
-
+     //Agrupador visual dentro de la pestaña style
     $form['box_group'] = [
       'type' => 'group',
       'title' => t('Box styles'),
       'tab' => 'section_styles',
     ];
+    
+    /*  de momento suprimimos noahs_font, si la agregamos luego, debería apuntar a ty y td por separado
+    $form['font'] = [
+      'type'        => 'noahs_font',
+      'title'       => t('Font'),
+      'tab'     => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.widget-content',  //dejarlo así o cambiarlo a widget-content table ??
+      'wrapper' => FALSE,
+      'responsive' => TRUE,
+      'open' => TRUE,
+    ];
+  */
 
+    //car o card??
     $form['car_background_color'] = [
       'type' => 'noahs_color',
       'title' => t('Background Color'),
       'tab' => 'section_styles',
       'group' => 'box_group',
       'style_type' => 'style',
-      'style_selector' => '.widget-content',
+      'style_selector' => '.widget-content table',
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
@@ -88,12 +128,13 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'tab' => 'section_styles',
       'group' => 'box_group',
       'style_type' => 'style',
-      'style_selector' => '.widget-content',
+      'style_selector' => '.widget-content table',
       'style_css' => 'border',
       'responsive' => TRUE,
       'style_hover' => TRUE,
     ];
 
+    //no modificar
     $form['card_margin'] = [
       'type' => 'noahs_margin',
       'title' => t('Margin'),
@@ -112,7 +153,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'tab' => 'section_styles',
       'group' => 'box_group',
       'style_type' => 'style',
-      'style_selector' => '.widget-content',
+      'style_selector' => '.widget-content td, .widget-content th',
       'style_css' => 'padding',
       'responsive' => TRUE,
       'style_hover' => TRUE,
@@ -144,54 +185,49 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
   /**
    * {@inheritdoc}
    */
+  public function template($settings) {
+    // 1. Obtenemos los datos tal cual vienen (pueden ser array u objeto stdClass)
+    $raw_table_items = $settings->element->table ?? [];
 
-  /*Función que genera el html interno del widget*/
-public function template($settings) {
-  $output = '<div class="widget-content">';
-  if (!empty($settings->element->table_data)) {
-    $data = (string) ($settings->element->table_data ?? '');
+    // 2. LA MAGIA: Convertimos recursivamente todo a un array asociativo.
+    // Así nos aseguramos de que el código de abajo NUNCA falle, venga como venga el dato.
+    $table_items = json_decode(json_encode($raw_table_items), TRUE);
 
-// Convertir <p>...</p> en saltos de línea
-$data = preg_replace('#</p>\s*<p>#i', "\n", $data);
-$data = preg_replace('#<br\s*/?>#i', "\n", $data);
+    $output = '';
 
-// Quitar etiquetas HTML
-$data = strip_tags($data);
+    // Solo dibujamos la tabla si hay elementos
+    if (!empty($table_items)) {
+      $output .= '<div class="noahs--table--container">'; 
+      $output .= '<table class="table">'; 
 
-// Convertir NBSP a espacio normal
-$data = str_replace("\xC2\xA0", ' ', $data);
-
-// Normalizar saltos de línea
-$data = str_replace(["\r\n", "\r"], "\n", $data);
-
-// Crear array de filas limpias
-$rows = array_values(
-    array_filter(
-        array_map('trim', explode("\n", $data)),
-        'strlen'
-    )
-);
-
-$output .= '<table>';
-
-foreach ($rows as $row) {
-
-  $columns = array_map('trim', explode('|', $row));
-
+      // --- PARTE 1: ENCABEZADOS (thead) ---
+      $output .= '<thead>';
       $output .= '<tr>';
-
-      foreach ($columns as $column) {
-        $output .= '<td>' . trim($column) . '</td>';
+      foreach ($table_items as $key => $value) {
+        $header_text = !empty($value['header_text']['text']) ? $value['header_text']['text'] : '';
+        $output .= '<th class="head--' . $key . '">' . $header_text . '</th>';
       }
       $output .= '</tr>';
+      $output .= '</thead>';
+
+      // --- PARTE 2: CELDAS DE CONTENIDO (tbody) ---
+      $output .= '<tbody>';
+      $output .= '<tr>';
+      foreach ($table_items as $key => $value) {
+        $cell_text = !empty($value['cell_text']['text']) ? $value['cell_text']['text'] : '';
+        $output .= '<td class="cell--' . $key . '">' . $cell_text . '</td>';
+      }
+      $output .= '</tr>';
+      $output .= '</tbody>';
+
+      $output .= '</table>';
+      $output .= '</div>';
+    } else {
+      $output = '<div class="noahs-placeholder">' . t('Add items to the table to see the content.') . '</div>';
     }
-    $output .= '</table>';
-  } else {
-    $output .= '<p>Edita el contenido de tu tabla...</p>';
+
+    return $output;
   }
-  $output .= '</div>';
-  return $output;
-}
 
   /**
    * {@inheritdoc}
