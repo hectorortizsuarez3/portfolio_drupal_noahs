@@ -21,7 +21,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
 
   /**
    * Normaliza cualquier valor (string/array/stdClass) a string de texto.
-   * Noahs/Drupal a veces guarda campos como stdClass con ->text.
    */
   private function normalizeText($raw): string {
     if ($raw === NULL) {
@@ -54,9 +53,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
     return $val;
   }
 
-  /**
-   * Define editor controls.
-   */
+  //Definimos controles de la tabla
   public function buildWidgetForm(array $form) {
 
     // --- Content tab
@@ -94,7 +91,8 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
         'default_value' => '',
         'wrapper' => FALSE,
         'translate_ai' => TRUE,
-        'update_selector' => '.widget-content',
+        // ojo: head--0 corresponde a header_1
+        'update_selector' => '.head--' . ($i - 1),
       ];
     }
 
@@ -134,7 +132,8 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
         'default_value' => '',
         'wrapper' => FALSE,
         'translate_ai' => TRUE,
-        'update_selector' => '.widget-content',
+        // [index] lo sustituye Noahs por 0,1,2... según la fila editada
+        'update_selector' => '.row--[index] .cell--' . ($i - 1),
       ];
     }
 
