@@ -187,12 +187,17 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
    */
   public function template($settings) {
     // 1. Obtenemos los datos tal cual vienen (pueden ser array u objeto stdClass)
-    $raw_table_items = $settings->element->table ?? [];
+    if (isset($settings->element->table)) {
+      $raw_table_items = $settings->element->table;
+    } else {
+      $raw_table_items = [];
+    }
 
-    // 2. LA MAGIA: Convertimos recursivamente todo a un array asociativo.
-    // Así nos aseguramos de que el código de abajo NUNCA falle, venga como venga el dato.
+    /* Garantizamos que todo será un array: json_encode convierte a json, 
+    y json_decode de nuevo a php, y el true indica que sea array asociativo en vez de objeto*/
     $table_items = json_decode(json_encode($raw_table_items), TRUE);
 
+    //inicializamos la variable que acumulará el html
     $output = '';
 
     // Solo dibujamos la tabla si hay elementos
