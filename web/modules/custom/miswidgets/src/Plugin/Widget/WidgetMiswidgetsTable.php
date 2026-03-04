@@ -62,7 +62,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'title' => t('Content'),
     ];
 
-    // How many columns to render (1..10)
+    // Select number of columns
     $form['columns_count'] = [
       'type' => 'select',
       'title' => t('Number of columns'),
@@ -83,12 +83,18 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
     ];
 
     for ($i = 1; $i <= 10; $i++) {
+      $default_headers = [
+        1 => 'Producto',
+        2 => 'Precio',
+        3 => 'Stock',
+      ];
+    
       $form['header_' . $i] = [
         'type' => 'text',
         'title' => t('Header @n', ['@n' => $i]),
         'tab' => 'section_content',
         'group' => 'headers_group',
-        'default_value' => '',
+        'default_value' => $default_headers[$i] ?? ' ',
         'wrapper' => FALSE,
         'translate_ai' => TRUE,
         // ojo: head--0 corresponde a header_1
@@ -101,7 +107,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_multiple_elements',
       'title' => t('Rows'),
       'tab' => 'section_content',
-      'open' => TRUE,
       'update_selector' => '.widget-content',
       'default_value' => [
         [
@@ -129,7 +134,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
         'type' => 'text',
         'title' => t('Cell @n', ['@n' => $i]),
         'tab' => 'row_tab',
-        'default_value' => '',
+        'default_value' => ' ',
         'wrapper' => FALSE,
         'translate_ai' => TRUE,
         // [index] lo sustituye Noahs por 0,1,2... según la fila editada
