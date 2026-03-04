@@ -69,7 +69,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'tab' => 'section_content',
       'options' => [
         1 => '1', 2 => '2', 3 => '3', 4 => '4', 5 => '5',
-        6 => '6', 7 => '7', 8 => '8', 9 => '9', 10 => '10',
+        6 => '6',
       ],
       'default_value' => 3,
       'update_selector' => '.widget-content',
@@ -82,7 +82,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'tab' => 'section_content',
     ];
 
-    for ($i = 1; $i <= 10; $i++) {
+    for ($i = 1; $i <= 6; $i++) {
       $default_headers = [
         1 => 'Producto',
         2 => 'Precio',
@@ -102,7 +102,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       ];
     }
 
-    // Rows repeater (each item is a row with up to 10 cells)
+    // Rows repeater (each item is a row with up to 6 cells)
     $form['rows'] = [
       'type' => 'noahs_multiple_elements',
       'title' => t('Rows'),
@@ -128,8 +128,8 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       ],
     ];
 
-    // Add 10 cell fields inside the row editor (fixed max 10)
-    for ($i = 1; $i <= 10; $i++) {
+    // Add cells fields inside the row editor (fixed max 6)
+    for ($i = 1; $i <= 6; $i++) {
       $form['rows']['fields']['c' . $i] = [
         'type' => 'text',
         'title' => t('Cell @n', ['@n' => $i]),
