@@ -148,19 +148,30 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'title' => t('Style'),
     ];
 
-    $form['box_group'] = [
+    $form['background_group'] = [
       'type' => 'group',
-      'title' => t('Box styles'),
+      'title' => t('Background color'),
       'tab' => 'section_styles',
     ];
 
-    $form['car_background_color'] = [
+    $form['car_background_color_theader'] = [
       'type' => 'noahs_color',
-      'title' => t('Background Color'),
+      'title' => t('Header Background Color'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
+      'group' => 'background_group',
       'style_type' => 'style',
-      'style_selector' => '.widget-content table',
+      'style_selector' => '.noahs--table--container thead th',
+      'style_css' => 'background-color',
+      'style_hover' => TRUE,
+    ];
+
+    $form['car_background_color_tbody'] = [
+      'type' => 'noahs_color',
+      'title' => t('Table Body Background Color'),
+      'tab' => 'section_styles',
+      'group' => 'background_group',
+      'style_type' => 'style',
+      'style_selector' => '.noahs--table--container tbody td',
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
@@ -169,7 +180,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_border',
       'title' => t('Border'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content table',
       'style_css' => 'border',
@@ -181,7 +191,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_margin',
       'title' => t('Margin'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content',
       'style_css' => 'margin',
@@ -193,7 +202,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_padding',
       'title' => t('Padding'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content td, .widget-content th',
       'style_css' => 'padding',
@@ -205,7 +213,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_shadows',
       'title' => t('Shadow'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content',
       'responsive' => TRUE,
@@ -216,7 +223,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'type' => 'noahs_radius',
       'title' => t('Border Radius'),
       'tab' => 'section_styles',
-      'group' => 'box_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content',
       'responsive' => TRUE,
