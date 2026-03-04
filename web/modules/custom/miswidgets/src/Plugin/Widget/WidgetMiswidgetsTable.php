@@ -142,18 +142,38 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       ];
     }
 
-    // --- Style tab (reuse your existing ones)
+    // --- Style tab
     $form['section_styles'] = [
       'type' => 'tab',
       'title' => t('Style'),
     ];
 
+  //Text horizontal align
+  $form['cell_text_align'] = [
+  'type' => 'select',
+  'title' => t('Text alignment'),
+  'tab' => 'section_styles',
+  'style_type' => 'style',
+  'style_selector' => '.noahs--table--container th, .noahs--table--container td',
+  'style_css' => 'text-align',
+  'options' => [
+    'left' => 'Left',
+    'center' => 'Center',
+    'right' => 'Right',
+  ],
+  'default_value' => 'left',
+  'responsive' => TRUE,
+  'style_hover' => FALSE,
+  'update_selector' => '.widget-content',
+];
+
+    //Grupo background_color
     $form['background_group'] = [
       'type' => 'group',
       'title' => t('Background color'),
       'tab' => 'section_styles',
     ];
-
+  
     $form['car_background_color_theader'] = [
       'type' => 'noahs_color',
       'title' => t('Header Background Color'),
@@ -175,27 +195,81 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
+  
+    //Borders group
+    $form['borders_group'] = [
+      'type' => 'group',
+      'title' => t('Borders'),
+      'tab' => 'section_styles',
+    ];
 
+
+    //Bordes exteriores
     $form['car_border'] = [
       'type' => 'noahs_border',
-      'title' => t('Border'),
+      'title' => t('Exterior border'),
       'tab' => 'section_styles',
+      'group' => 'borders_group',
       'style_type' => 'style',
-      'style_selector' => '.widget-content table',
+      'style_selector' => '.noahs--table--container table',
       'style_css' => 'border',
       'responsive' => TRUE,
       'style_hover' => TRUE,
     ];
+
+    //Interior borders
+    $form['car_cell_border'] = [
+  'type' => 'noahs_border',
+  'title' => t('Interior borders'),
+  'tab' => 'section_styles',
+  'group' => 'borders_group',
+  'style_type' => 'style',
+  'style_selector' => '.noahs--table--container th, .noahs--table--container td',
+  'style_css' => 'border',
+  'responsive' => TRUE,
+  'style_hover' => TRUE,
+];
+
+// Border collapse vs separate
+$form['car_border_collapse'] = [
+  'type' => 'select',
+  'title' => t('Border collapse'),
+  'tab' => 'section_styles',
+  'group' => 'borders_group',
+  'style_type' => 'style',
+  'style_selector' => '.noahs--table--container table',
+  'style_css' => 'border-collapse',
+  'options' => [
+    'collapse' => 'collapse',
+    'separate' => 'separate',
+  ],
+  'default_value' => 'collapse',
+  'update_selector' => '.widget-content',
+];
+
+//Dejamos border-radius fuera: no funciona bien
+/*
+$form['card_radius'] = [
+      'type' => 'noahs_radius',
+      'title' => t('Border Radius'),
+      'tab' => 'section_styles',
+      'group' => 'borders_group',
+      'style_type' => 'style',
+      'style_selector' => '.noahs--table--container table',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+    */
 
     $form['card_margin'] = [
       'type' => 'noahs_margin',
       'title' => t('Margin'),
       'tab' => 'section_styles',
       'style_type' => 'style',
-      'style_selector' => '.widget-content',
+      'style_selector' => '.noahs--table--container',
       'style_css' => 'margin',
       'responsive' => TRUE,
-      'style_hover' => TRUE,
+      'style_hover' => FALSE,
     ];
 
     $form['card_padding'] = [
@@ -203,10 +277,10 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'title' => t('Padding'),
       'tab' => 'section_styles',
       'style_type' => 'style',
-      'style_selector' => '.widget-content td, .widget-content th',
+      'style_selector' => '.noahs--table--container th, .noahs--table--container td',
       'style_css' => 'padding',
       'responsive' => TRUE,
-      'style_hover' => TRUE,
+      'style_hover' => FALSE,
     ];
 
     $form['card_shadows'] = [
@@ -214,17 +288,7 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'title' => t('Shadow'),
       'tab' => 'section_styles',
       'style_type' => 'style',
-      'style_selector' => '.widget-content',
-      'responsive' => TRUE,
-      'style_hover' => TRUE,
-    ];
-
-    $form['card_radius'] = [
-      'type' => 'noahs_radius',
-      'title' => t('Border Radius'),
-      'tab' => 'section_styles',
-      'style_type' => 'style',
-      'style_selector' => '.widget-content',
+      'style_selector' => '.noahs--table--container table',
       'responsive' => TRUE,
       'style_hover' => TRUE,
     ];
