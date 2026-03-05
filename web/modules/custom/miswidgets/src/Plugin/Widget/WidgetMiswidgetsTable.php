@@ -296,24 +296,22 @@ $form['card_radius'] = [
     return $form;
   }
 
-  /**
-   * Render output.
-   */
+  //Function template: 1º) Prepare data, 2º) Process rows, 3º) Render HTML
   public function template($settings) {
-
+  
     $element = $settings->element ?? new \stdClass();
 
-    // columns_count (default 3)
-    $columns_count = 3;
+    $columns_count = 3;  //3 columns as default value
+
     if (isset($element->columns_count)) {
       // Puede venir como stdClass/array/string; normalizamos.
       $columns_count_raw = $element->columns_count;
       $columns_count_txt = $this->normalizeText($columns_count_raw);
       $columns_count = (int) $columns_count_txt;
     }
-    $columns_count = max(1, min(10, $columns_count));
+    $columns_count = max(1, min(6, $columns_count));
 
-    // Headers array (size = columns_count)
+    // Save header texts into array $headers[]
     $headers = [];
     for ($i = 1; $i <= $columns_count; $i++) {
       $prop = 'header_' . $i;
@@ -330,20 +328,22 @@ $form['card_radius'] = [
     // Convert stdClass -> array
     $rows_array = json_decode(json_encode($raw_rows), TRUE);
 
-    // Reindex items (element_0, element_1...)
+
+//--------------------------2º:process rows---------------------------------------------------------
+    // Reindex items (element_0, element_1...) to 0, 1, etc. It is more convenient to process table rows
     $rows_items = [];
     foreach ($rows_array as $k => $item) {
       $rows_items[] = $item;
     }
 
-    // Parse rows and filter empty
+    // $parsed_rows created: array of arrays: each row is an array which contains another array (all values of that row)
     $parsed_rows = [];
     foreach ($rows_items as $row) {
       $cells = [];
       $has_content = FALSE;
 
       for ($i = 1; $i <= $columns_count; $i++) {
-        $key = 'c' . $i;
+        $key = 'c' . $i;  //build name of row (c1, c2, ...)
         $raw = $row[$key] ?? '';
         $val = $this->normalizeText($raw);
 
@@ -362,7 +362,7 @@ $form['card_radius'] = [
       return '<div class="noahs-placeholder">' . t('Fill at least one cell to display the table.') . '</div>';
     }
 
-    // Render HTML
+//-------------------3º: Render HTML-----------------------------------------------------
     $output  = '<div class="noahs--table--container">';
     $output .= '<table class="table">';
 
@@ -381,16 +381,7 @@ $form['card_radius'] = [
 
     // TBODY
     $output .= '<tbody>';
-    foreach ($parsed_rows as $r_index => $cells) {
-      $output .= '<tr class="row--' . $r_index . '">';
-      for ($c = 0; $c < $columns_count; $c++) {
-        $cell = $cells[$c] ?? '';
-        $output .= '<td class="cell--' . $c . '">'
-          . htmlspecialchars($cell, ENT_QUOTES, 'UTF-8')
-          . '</td>';
-      }
-      $output .= '</tr>';
-    }
+     
     $output .= '</tbody>';
 
     $output .= '</table></div>';
