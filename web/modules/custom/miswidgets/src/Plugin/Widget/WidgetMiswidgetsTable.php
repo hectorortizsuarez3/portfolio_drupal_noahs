@@ -2,6 +2,8 @@
 
 namespace Drupal\miswidgets\Plugin\Widget;
 
+use Drupal\miswidgets\Traits\TextNormalizationTrait;
+
 /**
  * @WidgetPlugin(
  *   id = "miswidgets_table",
@@ -9,6 +11,7 @@ namespace Drupal\miswidgets\Plugin\Widget;
  * )
  */
 class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\WidgetBase {
+  use TextNormalizationTrait; //Normaliza cualquier valor (string/array/stdClass) a string de texto.
 
   public function data() {
     return [
@@ -17,40 +20,6 @@ class WidgetMiswidgetsTable extends \Drupal\noahs_page_builder\Plugin\Widget\Wid
       'description' => 'Create tables with styles to show data, prices, etc',
       'group' => 'General',
     ];
-  }
-
-  /**
-   * Normaliza cualquier valor (string/array/stdClass) a string de texto.
-   */
-  private function normalizeText($raw): string {
-    if ($raw === NULL) {
-      return '';
-    }
-
-    // Array tipo ['text' => '...']
-    if (is_array($raw)) {
-      $raw = $raw['text'] ?? '';
-    }
-
-    // Objeto tipo stdClass con ->text
-    if (is_object($raw)) {
-      if (isset($raw->text)) {
-        $raw = $raw->text;
-      }
-      else {
-        // Si no sabemos qué es, lo dejamos vacío para evitar 500.
-        $raw = '';
-      }
-    }
-
-    // Si sigue sin ser escalar, fuera.
-    if (!is_scalar($raw)) {
-      return '';
-    }
-
-    $val = (string) $raw;
-    $val = trim(strip_tags($val));
-    return $val;
   }
 
   //Definimos controles de la tabla
