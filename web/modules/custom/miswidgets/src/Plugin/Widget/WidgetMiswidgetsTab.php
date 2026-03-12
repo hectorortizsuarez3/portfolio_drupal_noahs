@@ -1,0 +1,460 @@
+<?php
+
+namespace Drupal\miswidgets\Plugin\Widget;
+
+/**
+ * @WidgetPlugin(
+ *   id = "miswidgets_tab",
+ *   label = @Translation("Tabs")
+ * )
+ */
+class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\WidgetBase {
+
+  /**
+   * Widget data.
+   */
+  public function data() {
+    return [
+      'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2" /><path d="M4 9h16" /><path d="M10 16l2 -2l2 2" /></svg>',
+      'title' => 'Tabs',
+      'description' => 'Create as many tabs as you need.',
+      'group' => 'General',
+    ];
+  }
+
+  /**
+   * Normalizes plain text values (for titles).
+   */
+  private function normalizeText($raw): string {
+    if ($raw === NULL) {
+      return '';
+    }
+
+    if (is_array($raw)) {
+      $raw = $raw['text'] ?? '';
+    }
+
+    if (is_object($raw)) {
+      if (isset($raw->text)) {
+        $raw = $raw->text;
+      }
+      else {
+        $raw = '';
+      }
+    }
+
+    if (!is_scalar($raw)) {
+      return '';
+    }
+
+    $value = trim((string) $raw);
+    $value = strip_tags($value);
+
+    return $value;
+  }
+
+  /**
+   * Normalizes HTML/text values (for tab content).
+   * We do NOT strip tags here, because tab content may contain HTML.
+   */
+  private function normalizeHtml($raw): string {
+    if ($raw === NULL) {
+      return '';
+    }
+
+    if (is_array($raw)) {
+      $raw = $raw['text'] ?? '';
+    }
+
+    if (is_object($raw)) {
+      if (isset($raw->text)) {
+        $raw = $raw->text;
+      }
+      else {
+        $raw = '';
+      }
+    }
+
+    if (!is_scalar($raw)) {
+      return '';
+    }
+
+    return trim((string) $raw);
+  }
+
+  /**
+   * Build widget form.
+   */
+  public function buildWidgetForm(array $form) {
+
+    // -------------------- Content tab --------------------
+    $form['section_content'] = [
+      'type' => 'tab',
+      'title' => t('Content'),
+    ];
+
+    $form['tabs'] = [
+      'type' => 'noahs_multiple_elements',
+      'title' => t('Tabs'),
+      'tab' => 'section_content',
+      'update_selector' => '.widget-content',
+      'default_value' => [
+        [
+          'tab_title' => ['text' => 'Tab 1'],
+          'tab_content' => ['text' => '<p>Content of tab 1</p>'],
+        ],
+        [
+          'tab_title' => ['text' => 'Tab 2'],
+          'tab_content' => ['text' => '<p>Content of tab 2</p>'],
+        ],
+      ],
+      'fields' => [
+        'tab_item' => [
+          'type' => 'tab',
+          'title' => t('Tab item'),
+        ],
+      ],
+    ];
+
+    $form['tabs']['fields']['tab_title'] = [
+      'type' => 'text',
+      'title' => t('Tab title'),
+      'tab' => 'tab_item',
+      'default_value' => 'Tab title',
+      'wrapper' => FALSE,
+      'translate_ai' => TRUE,
+      'update_selector' => '.miswidgets-tab-nav .nav-item-[index] .nav-link',
+    ];
+
+    $form['tabs']['fields']['tab_content'] = [
+      'type' => 'textarea',
+      'title' => t('Tab content'),
+      'tab' => 'tab_item',
+      'default_value' => '<p>Your content here</p>',
+      'wrapper' => FALSE,
+      'translate_ai' => TRUE,
+      'noahs_ai' => TRUE,
+      'update_selector' => '.miswidgets-tab-content .tab-pane-[index]',
+    ];
+
+    // -------------------- Style tab --------------------
+    $form['section_styles'] = [
+      'type' => 'tab',
+      'title' => t('Style'),
+    ];
+
+    $form['font'] = [
+      'type' => 'noahs_font',
+      'title' => t('Font'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.widget-content',
+      'wrapper' => FALSE,
+      'responsive' => TRUE,
+      'open' => TRUE,
+    ];
+
+    // General box styles.
+    $form['box_group'] = [
+      'type' => 'group',
+      'title' => t('Box styles'),
+      'tab' => 'section_styles',
+    ];
+
+    $form['car_background_color'] = [
+      'type' => 'noahs_color',
+      'title' => t('Background Color'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'style_css' => 'background-color',
+      'style_hover' => TRUE,
+    ];
+
+    $form['car_border'] = [
+      'type' => 'noahs_border',
+      'title' => t('Border'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'style_css' => 'border',
+      'responsive' => TRUE,
+      'style_hover' => TRUE,
+    ];
+
+    $form['card_margin'] = [
+      'type' => 'noahs_margin',
+      'title' => t('Margin'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'style_css' => 'margin',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    $form['card_padding'] = [
+      'type' => 'noahs_padding',
+      'title' => t('Padding'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'style_css' => 'padding',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    $form['card_shadows'] = [
+      'type' => 'noahs_shadows',
+      'title' => t('Shadow'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'responsive' => TRUE,
+      'style_hover' => TRUE,
+    ];
+
+    $form['card_radius'] = [
+      'type' => 'noahs_radius',
+      'title' => t('Border Radius'),
+      'tab' => 'section_styles',
+      'group' => 'box_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tabs',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    // Tabs nav styles.
+    $form['tabs_nav_group'] = [
+      'type' => 'group',
+      'title' => t('Tabs navigation'),
+      'tab' => 'section_styles',
+    ];
+
+    $form['tabs_nav_align'] = [
+      'type' => 'select',
+      'title' => t('Tabs alignment'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_nav_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav',
+      'style_css' => 'justify-content',
+      'options' => [
+        'flex-start' => 'Left',
+        'center' => 'Center',
+        'flex-end' => 'Right',
+      ],
+      'default_value' => 'flex-start',
+      'update_selector' => '.widget-content',
+    ];
+
+    $form['tabs_nav_background'] = [
+      'type' => 'noahs_color',
+      'title' => t('Tabs Background Color'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_nav_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'style_css' => 'background-color',
+      'style_hover' => TRUE,
+    ];
+
+    $form['tabs_nav_text_color'] = [
+      'type' => 'noahs_color',
+      'title' => t('Tabs Text Color'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_nav_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'style_css' => 'color',
+      'style_hover' => TRUE,
+    ];
+
+    $form['tabs_nav_active_background'] = [
+      'type' => 'noahs_color',
+      'title' => t('Active Tab Background'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_nav_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link.active',
+      'style_css' => 'background-color',
+      'style_hover' => FALSE,
+    ];
+
+    $form['tabs_nav_active_text_color'] = [
+      'type' => 'noahs_color',
+      'title' => t('Active Tab Text Color'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_nav_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link.active',
+      'style_css' => 'color',
+      'style_hover' => FALSE,
+    ];
+
+    // Content area styles.
+    $form['tabs_content_group'] = [
+      'type' => 'group',
+      'title' => t('Tabs content'),
+      'tab' => 'section_styles',
+    ];
+
+    $form['tabs_content_background'] = [
+      'type' => 'noahs_color',
+      'title' => t('Content Background Color'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_content_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-content .tab-pane',
+      'style_css' => 'background-color',
+      'style_hover' => FALSE,
+    ];
+
+    $form['tabs_content_padding'] = [
+      'type' => 'noahs_padding',
+      'title' => t('Content Padding'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_content_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-content .tab-pane',
+      'style_css' => 'padding',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    $form['tabs_content_border'] = [
+      'type' => 'noahs_border',
+      'title' => t('Content Border'),
+      'tab' => 'section_styles',
+      'group' => 'tabs_content_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-content .tab-pane',
+      'style_css' => 'border',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    return $form;
+  }
+
+  /**
+   * Template render.
+   */
+  public function template($settings) {
+
+    $element = $settings->element ?? new \stdClass();
+
+    $raw_tabs = $element->tabs ?? NULL;
+
+    if (empty($raw_tabs)) {
+      return '<div class="noahs-placeholder">' . t('Add tabs to display the content.') . '</div>';
+    }
+
+    // Convert stdClass to array.
+    $tabs_array = json_decode(json_encode($raw_tabs), TRUE);
+
+    // Reindex items.
+    $tabs_items = [];
+    foreach ($tabs_array as $key => $item) {
+      $tabs_items[] = $item;
+    }
+
+    // Parse tabs.
+    $parsed_tabs = [];
+    foreach ($tabs_items as $tab) {
+      $title = $this->normalizeText($tab['tab_title'] ?? '');
+      $content = $this->normalizeHtml($tab['tab_content'] ?? '');
+
+      // Skip totally empty tabs.
+      if ($title === '' && $content === '') {
+        continue;
+      }
+
+      if ($title === '') {
+        $title = t('Tab');
+      }
+
+      $parsed_tabs[] = [
+        'title' => $title,
+        'content' => $content,
+      ];
+    }
+
+    if (empty($parsed_tabs)) {
+      return '<div class="noahs-placeholder">' . t('Fill at least one tab title or content to display the widget.') . '</div>';
+    }
+
+    // Instance id to avoid collisions if several widgets are on same page.
+    $seed = $settings->wid
+      ?? $settings->noahs_id
+      ?? ($element->wid ?? NULL)
+      ?? uniqid('tabs_', TRUE);
+
+    $instance_id = 'miswidgets-tabs-' . preg_replace('/[^a-zA-Z0-9\-_]/', '-', (string) $seed);
+
+    $output = '<div class="widget-content miswidgets-tabs">';
+
+    // -------------------- First foreach: tabs navigation --------------------
+    $output .= '<ul class="nav nav-tabs miswidgets-tab-nav" id="' . $instance_id . '-nav" role="tablist">';
+
+    foreach ($parsed_tabs as $index => $tab) {
+      $is_active = ($index === 0);
+      $tab_btn_id = $instance_id . '-tab-' . $index;
+      $pane_id = $instance_id . '-pane-' . $index;
+
+      $output .= '<li class="nav-item nav-item-' . $index . '" role="presentation">';
+      $output .= '<button'
+        . ' class="nav-link' . ($is_active ? ' active' : '') . '"'
+        . ' id="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '"'
+        . ' data-bs-toggle="tab"'
+        . ' data-bs-target="#' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+        . ' type="button"'
+        . ' role="tab"'
+        . ' aria-controls="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+        . ' aria-selected="' . ($is_active ? 'true' : 'false') . '">'
+        . htmlspecialchars($tab['title'], ENT_QUOTES, 'UTF-8')
+        . '</button>';
+      $output .= '</li>';
+    }
+
+    $output .= '</ul>';
+
+    // -------------------- Second foreach: tab content --------------------
+    $output .= '<div class="tab-content miswidgets-tab-content" id="' . $instance_id . '-content">';
+
+    foreach ($parsed_tabs as $index => $tab) {
+      $is_active = ($index === 0);
+      $tab_btn_id = $instance_id . '-tab-' . $index;
+      $pane_id = $instance_id . '-pane-' . $index;
+
+      $output .= '<div'
+        . ' class="tab-pane fade tab-pane-' . $index . ($is_active ? ' show active' : '') . '"'
+        . ' id="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+        . ' role="tabpanel"'
+        . ' aria-labelledby="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '">';
+
+      $output .= ($tab['content'] !== '') ? $tab['content'] : '<p>' . t('Empty tab content.') . '</p>';
+
+      $output .= '</div>';
+    }
+
+    $output .= '</div>';
+    $output .= '</div>';
+
+    return $output;
+  }
+
+  /**
+   * Render content.
+   */
+  public function renderContent($element, $content = NULL) {
+    return $this->wrapper($element, $this->template($element->settings));
+  }
+
+}
