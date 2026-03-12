@@ -3,6 +3,7 @@
 namespace Drupal\miswidgets\Plugin\Widget;
 
 use Drupal\miswidgets\Traits\TextNormalizationTrait;
+use Drupal\miswidgets\Traits\HtmlNormalizationTrait;
 
 /**
  * @WidgetPlugin(
@@ -12,6 +13,7 @@ use Drupal\miswidgets\Traits\TextNormalizationTrait;
  */
 class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\WidgetBase {
   use TextNormalizationTrait; //export function to normalize plain text values (for titles)
+  use HtmlNormalizationTrait; //export function to normalize enriched text for tab content (allowing html)
 
   /**
    * Widget data.
@@ -23,35 +25,6 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'description' => 'Create as many tabs as you need.',
       'group' => 'General',
     ];
-  }
-
-  /**
-   * Normalizes HTML/text values (for tab content).
-   * We do NOT strip tags here, because tab content may contain HTML.
-   */
-  private function normalizeHtml($raw): string {
-    if ($raw === NULL) {
-      return '';
-    }
-
-    if (is_array($raw)) {
-      $raw = $raw['text'] ?? '';
-    }
-
-    if (is_object($raw)) {
-      if (isset($raw->text)) {
-        $raw = $raw->text;
-      }
-      else {
-        $raw = '';
-      }
-    }
-
-    if (!is_scalar($raw)) {
-      return '';
-    }
-
-    return trim((string) $raw);
   }
 
   /**

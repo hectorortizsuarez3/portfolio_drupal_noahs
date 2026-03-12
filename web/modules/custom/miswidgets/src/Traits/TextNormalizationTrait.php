@@ -2,6 +2,7 @@
 
 namespace Drupal\miswidgets\Traits;
 
+//Este trait se puede exportar cuando el campo representa texto plano (extraemos text, lo convertimos a string y no permitimos html)
 trait TextNormalizationTrait {
     /**
    * Normaliza cualquier valor (string/array/stdClass) a string de texto.
