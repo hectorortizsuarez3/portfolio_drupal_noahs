@@ -38,6 +38,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'title' => t('Content'),
     ];
 
+    //Creation of each tab, with 2 default tabs
     $form['tabs'] = [
       'type' => 'noahs_multiple_elements',
       'title' => t('Tabs'),
@@ -61,6 +62,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       ],
     ];
 
+    //define the text field to edit the title on each tab
     $form['tabs']['fields']['tab_title'] = [
       'type' => 'text',
       'title' => t('Tab title'),
@@ -99,10 +101,27 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'open' => TRUE,
     ];
 
+    //Alineación del contenido de cada tab
+    $form['content_align'] = [
+      'type' => 'select',
+      'title' => t('Content alignment'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-content',
+      'style_css' => 'text-align',
+      'options' => [
+        'left' => 'Left',
+        'center' => 'Center',
+        'right' => 'Right',
+      ],
+      'default_value' => 'left',
+      'update_selector' => '.widget-content',
+    ];
+
     // General box styles.
     $form['box_group'] = [
       'type' => 'group',
-      'title' => t('Box styles'),
+      'title' => t('Box styles for tab content'),
       'tab' => 'section_styles',
     ];
 
@@ -112,7 +131,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'tab' => 'section_styles',
       'group' => 'box_group',
       'style_type' => 'style',
-      'style_selector' => '.miswidgets-tabs',
+      'style_selector' => '.miswidgets-tab-content',
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
@@ -151,17 +170,6 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'style_css' => 'padding',
       'responsive' => TRUE,
       'style_hover' => FALSE,
-    ];
-
-    $form['card_shadows'] = [
-      'type' => 'noahs_shadows',
-      'title' => t('Shadow'),
-      'tab' => 'section_styles',
-      'group' => 'box_group',
-      'style_type' => 'style',
-      'style_selector' => '.miswidgets-tabs',
-      'responsive' => TRUE,
-      'style_hover' => TRUE,
     ];
 
     $form['card_radius'] = [
