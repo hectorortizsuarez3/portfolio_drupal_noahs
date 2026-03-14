@@ -83,38 +83,78 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'noahs_ai' => TRUE,
       'update_selector' => '.miswidgets-tab-content .tab-pane-[index]',
     ];
-
-    // -------------------- Style tab --------------------
+    //-----------------------------------------
+    // -------------------- Styles --------------------
+    //---------------------------------------------
     $form['section_styles'] = [
       'type' => 'tab',
       'title' => t('Style'),
+    ];
+
+    // Fonts
+    $form['fonts_group'] = [
+      'type' => 'group',
+      'title' => t('Font'),
+      'tab' => 'section_styles',
     ];
 
     $form['tabs_nav_font'] = [
       'type' => 'noahs_font',
       'title' => t('Tabs font'),
       'tab' => 'section_styles',
+      'group' => 'fonts_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-nav .nav-link',
       'wrapper' => FALSE,
       'responsive' => TRUE,
     ];
 
-    $form['font'] = [
+    $form['content_font'] = [
       'type' => 'noahs_font',
       'title' => t('Content font'),
       'tab' => 'section_styles',
+      'group' => 'fonts_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content .miswidgets-tab-content',
       'wrapper' => FALSE,
       'responsive' => TRUE,
     ];
 
-    //Alineación del contenido de cada tab
+    $form['tabs_nav_active_text_color'] = [
+      'type' => 'noahs_color',
+      'title' => t('Active tab text color'),
+      'tab' => 'section_styles',
+      'group' => 'fonts_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link.active',
+      'style_css' => 'color',
+      'style_hover' => FALSE,
+    ];
+
+    $form['tabs_nav_text_color'] = [
+      'type' => 'noahs_color',
+      'title' => t('Non-active tabs text color'),
+      'tab' => 'section_styles',
+      'group' => 'fonts_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'style_css' => 'color',
+      'style_hover' => TRUE,
+    ];
+
+    // Alignment
+    $form['alignment_group'] = [
+      'type' => 'group',
+      'title' => t('Alignment'),
+      'tab' => 'section_styles',
+    ];
+  
+
     $form['content_align'] = [
       'type' => 'select',
       'title' => t('Content alignment'),
       'tab' => 'section_styles',
+      'group' => 'alignment_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-content',
       'style_css' => 'text-align',
@@ -131,6 +171,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'type' => 'select',
       'title' => t('Tabs alignment'),
       'tab' => 'section_styles',
+      'group' => 'alignment_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-nav',
       'style_css' => 'justify-content',
@@ -143,10 +184,18 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'update_selector' => '.widget-content',
     ];
 
+    // Background color group
+    $form['background_group'] = [
+      'type' => 'group',
+      'title' => t('Background color'),
+      'tab' => 'section_styles',
+    ];
+
     $form['tabs_content_background'] = [
       'type' => 'noahs_color',
-      'title' => t('Content Background Color'),
+      'title' => t('Content background color'),
       'tab' => 'section_styles',
+      'group' => 'background_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-content .tab-pane',
       'style_css' => 'background-color',
@@ -155,8 +204,9 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
 
     $form['tabs_nav_active_background'] = [
       'type' => 'noahs_color',
-      'title' => t('Active Tab Background Color'),
+      'title' => t('Active tab background color'),
       'tab' => 'section_styles',
+      'group' => 'background_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-nav .nav-link.active',
       'style_css' => 'background-color',
@@ -165,8 +215,9 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
 
     $form['tabs_nav_background'] = [
       'type' => 'noahs_color',
-      'title' => t('Not-active Tabs Background Color'),
+      'title' => t('Non-active tabs background color'),
       'tab' => 'section_styles',
+      'group' => 'background_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-nav .nav-link',
       'style_css' => 'background-color',
@@ -175,18 +226,27 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
 
     $form['car_background_color'] = [
       'type' => 'noahs_color',
-      'title' => t('Box Background Color'),
+      'title' => t('Whole box background color'),
       'tab' => 'section_styles',
+      'group' => 'background_group',
       'style_type' => 'style',
       'style_selector' => '.widget-content',
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
 
-    $form['tabs_content_border'] = [
-      'type' => 'noahs_border',
-      'title' => t('Content Border'),
+    // Borders group
+    $form['borders_group'] = [
+      'type' => 'group',
+      'title' => t('Borders'),
       'tab' => 'section_styles',
+    ];
+
+    $form['content_border'] = [
+      'type' => 'noahs_border',
+      'title' => t('Content border'),
+      'tab' => 'section_styles',
+      'group' => 'borders_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-content .tab-pane',
       'style_css' => 'border',
@@ -196,8 +256,9 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
 
     $form['car_border'] = [
       'type' => 'noahs_border',
-      'title' => t('Box Border'),
+      'title' => t('Box border'),
       'tab' => 'section_styles',
+      'group' => 'borders_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tabs',
       'style_css' => 'border',
@@ -205,10 +266,18 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'style_hover' => TRUE,
     ];
 
+    // Radius group
+    $form['radius_group'] = [
+      'type' => 'group',
+      'title' => t('Border radius'),
+      'tab' => 'section_styles',
+    ];
+
     $form['card_radius'] = [
       'type' => 'noahs_radius',
-      'title' => t('Box border Radius'),
+      'title' => t('Box border radius'),
       'tab' => 'section_styles',
+      'group' => 'radius_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tabs',
       'responsive' => TRUE,
@@ -219,6 +288,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'type' => 'noahs_radius',
       'title' => t('Content border Radius'),
       'tab' => 'section_styles',
+      'group' => 'radius_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-content .tab-pane',
       'responsive' => TRUE,
@@ -236,10 +306,18 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'style_hover' => FALSE,
     ];
 
+    // Padding group
+    $form['padding_group'] = [
+      'type' => 'group',
+      'title' => t('Padding'),
+      'tab' => 'section_styles',
+    ];
+
     $form['card_padding'] = [
       'type' => 'noahs_padding',
       'title' => t('Box padding'),
       'tab' => 'section_styles',
+      'group' => 'padding_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tabs',
       'style_css' => 'padding',
@@ -249,33 +327,14 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
 
     $form['tabs_content_padding'] = [
       'type' => 'noahs_padding',
-      'title' => t('Content Padding'),
+      'title' => t('Content padding'),
       'tab' => 'section_styles',
+      'group' => 'padding_group',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-content .tab-pane',
       'style_css' => 'padding',
       'responsive' => TRUE,
       'style_hover' => FALSE,
-    ];
-
-    $form['tabs_nav_active_text_color'] = [
-      'type' => 'noahs_color',
-      'title' => t('Active Tab Text Color'),
-      'tab' => 'section_styles',
-      'style_type' => 'style',
-      'style_selector' => '.miswidgets-tab-nav .nav-link.active',
-      'style_css' => 'color',
-      'style_hover' => FALSE,
-    ];
-
-    $form['tabs_nav_text_color'] = [
-      'type' => 'noahs_color',
-      'title' => t('Not-active tabs Text Color'),
-      'tab' => 'section_styles',
-      'style_type' => 'style',
-      'style_selector' => '.miswidgets-tab-nav .nav-link',
-      'style_css' => 'color',
-      'style_hover' => TRUE,
     ];
 
     return $form;
