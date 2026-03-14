@@ -90,22 +90,22 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'title' => t('Style'),
     ];
 
-    $form['font'] = [
-      'type' => 'noahs_font',
-      'title' => t('Content font'),
-      'tab' => 'section_styles',
-      'style_type' => 'style',
-      'style_selector' => '.widget-content .miswidgets-tab-content',
-      'wrapper' => FALSE,
-      'responsive' => TRUE,
-    ];
-
     $form['tabs_nav_font'] = [
       'type' => 'noahs_font',
       'title' => t('Tabs font'),
       'tab' => 'section_styles',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'wrapper' => FALSE,
+      'responsive' => TRUE,
+    ];
+
+    $form['font'] = [
+      'type' => 'noahs_font',
+      'title' => t('Content font'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.widget-content .miswidgets-tab-content',
       'wrapper' => FALSE,
       'responsive' => TRUE,
     ];
@@ -211,6 +211,16 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'tab' => 'section_styles',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-tabs',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    $form['content_radius'] = [
+      'type' => 'noahs_radius',
+      'title' => t('Content border Radius'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-tab-content .tab-pane',
       'responsive' => TRUE,
       'style_hover' => FALSE,
     ];
