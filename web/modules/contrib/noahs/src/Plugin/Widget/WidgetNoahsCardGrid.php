@@ -349,6 +349,9 @@ class WidgetNoahsCardGrid extends WidgetBase {
         '9' => '9',
         '10' => '10',
       ],
+      'attributes' => [
+        'class' => 'noahs-regenerate-design',
+      ],
     ];
 
     $form['carousel_type_columns_tablet'] = [
@@ -1012,7 +1015,7 @@ class WidgetNoahsCardGrid extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function renderContent($element, $content = NULL) {
+  public function renderContent($element, $content = NULL, $entity = NULL) {
     return $this->wrapper($element, $this->template($element->settings));
   }
 

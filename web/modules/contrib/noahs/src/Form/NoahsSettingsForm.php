@@ -116,6 +116,15 @@ class NoahsSettingsForm extends ConfigFormBase {
         $commerce_options[$product_type->id()] = $product_type->label();
       }
     }
+
+    // Tipos de bloques de contenido (custom block types).
+    $block_types_options = [];
+    if (class_exists('\\Drupal\\block_content\\Entity\\BlockContentType')) {
+      $block_types = \Drupal\block_content\Entity\BlockContentType::loadMultiple();
+      foreach ($block_types as $block_type) {
+        $block_types_options[$block_type->id()] = $block_type->label();
+      }
+    }
     $editors = Editor::loadMultiple();
 
     $editors_options = [];
@@ -173,6 +182,14 @@ class NoahsSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Use in Products type'),
       '#options' => $commerce_options,
       '#default_value' => $settings->get('use_in_products') ?? [],
+    ];
+
+    $form['general']['use_in_btypes'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Use in Custom Block types'),
+      '#description' => $this->t('Select which custom block types (block_content) will use Noahs Builder.'),
+      '#options' => $block_types_options,
+      '#default_value' => $settings->get('use_in_btypes') ?? [],
     ];
 
     /* =========================   Container  ========================= */

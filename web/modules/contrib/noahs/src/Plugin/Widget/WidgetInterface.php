@@ -23,6 +23,6 @@ interface WidgetInterface {
   /**
    * {@inheritdoc}
    */
-  public function renderContent($element, $content = NULL);
+  public function renderContent($element, $content = NULL, $entity = NULL);
 
 }

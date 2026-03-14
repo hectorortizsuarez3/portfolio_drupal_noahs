@@ -106,6 +106,11 @@ class ControlNoahsDivider extends ControlBase implements ContainerFactoryPluginI
    *   The output.
    */
   protected function generateOptionBlock($name, $type, $value, $options, $optionsDirection, $optionsAlign, $items) {
+    // Ensure expected keys exist in $value to avoid undefined variable notices.
+    $currentDirection = $value['direction'] ?? '';
+    $currentAlign = $value['align'] ?? '';
+    $selected_value = $value['divider'] ?? '';
+
     $output = '<div class="media-preview-actions media-preview-actions--divider overflow-auto mb-3" style="height:200px">';
     $output .= '<div class="row g-3">';
     foreach ($items as $k => $item) {

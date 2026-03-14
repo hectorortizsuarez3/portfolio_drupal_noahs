@@ -11,15 +11,15 @@
 <div class="noahs_page_builder-wrapper" id="noahs_page_builder_wrapper">
 	<div id="noahs_page_builder" data-noahs-id="{{entity_id}}" data-langcode="{{langcode}}">
 		{% if type == 'header' %}
-      <header role="banner" class="noahs-theme--header noahs-theme--header--pro builder-wrapper noahs-theme-content-wrapper scrollme">
+      <header role="banner" class="noahs-theme--header noahs-theme--header--pro noahs-theme-content-wrapper builder-wrapper scrollme">
         {{ generated_html | raw }}
       </header>
 		{% elseif type == 'footer' %}
-      <footer role="banner" class="noash-pro-theme--footer builder-wrapper noahs-theme-content-wrapper scrollme">
+      <footer role="banner" class="noash-pro-theme--footer noahs-theme-content-wrapper  builder-wrapper scrollme">
         {{ generated_html | raw }}
       </footer>
 		{% else %}
-			<div class="builder-wrapper noahs-theme-content-wrapper scrollme">
+			<div class="noahs-theme-content-wrapper builder-wrapper scrollme">
 				{{ generated_html | raw }}
 			</div>
 		{% endif %}

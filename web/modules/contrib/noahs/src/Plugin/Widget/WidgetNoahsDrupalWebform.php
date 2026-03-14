@@ -100,7 +100,7 @@ use Drupal\webform\Entity\Webform;
       }
 
      
-      public function renderContent($element, $content = null) {
+      public function renderContent($element, $content = NULL, $entity = NULL) {
          return $this->wrapper($element, $this->template($element->settings));
       }
    }

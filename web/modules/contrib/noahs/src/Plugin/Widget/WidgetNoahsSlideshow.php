@@ -40,6 +40,27 @@ class WidgetNoahsSlideshow extends WidgetBase {
       'type'    => 'noahs_multiple_elements',
       'title'   => t('Slideshow Items'),
       'tab' => 'section_content',
+      'open' => TRUE,
+      'default_value' => [
+        [
+          'slideshow_title' => [
+            "text" => 'Slideshow 1',
+          ],
+          'slideshow_text' => 'In dignissim eget mauris ac consectetur. Fusce at auctor urna. Mauris in ex porta, blandit felis id, blandit diam.',
+        ],
+        [
+          'slideshow_title' => [
+            "text" => 'Slideshow 2',
+          ],
+          'slideshow_text' => 'In dignissim eget mauris ac consectetur. Fusce at auctor urna. Mauris in ex porta, blandit felis id, blandit diam.',
+        ],
+        [
+          'slideshow_title' => [
+            "text" => 'Slideshow 3',
+          ],
+          'slideshow_text' => 'In dignissim eget mauris ac consectetur. Fusce at auctor urna. Mauris in ex porta, blandit felis id, blandit diam.',
+        ],
+      ],
       'fields' => [
         'slideshow_content' => [
           'type' => 'tab',
@@ -60,6 +81,23 @@ class WidgetNoahsSlideshow extends WidgetBase {
           'update_selector' => '.multipart-item_element_[index] .noahs_page_builder-slideshow--title',
           'wrapper' => FALSE,
           'translate_ai' => TRUE,
+        ],
+        'heading_type' => [
+          'type'      => 'select',
+          'tab'     => 'section_content',
+          'title'     => t('Type'),
+          'options' => [
+            'h1' => 'H1',
+            'h2' => 'H2',
+            'h3' => 'H3',
+            'h4' => 'H4',
+            'h5' => 'H5',
+            'h6' => 'H6',
+            'div' => 'DIV',
+          ],
+          'default_value' => 'h2',
+          'update_selector_html' => '.widget-content > *',
+          'wrapper' => FALSE,
         ],
         'slideshow_text' => [
           'title' => 'Text',
@@ -447,7 +485,7 @@ class WidgetNoahsSlideshow extends WidgetBase {
             ]);
           }
         }
-
+        $heading_type = !empty($settings->element->heading_type) ? $settings->element->heading_type : 'h2';
         $html .= '<div class="swiper-slide swiper-slide_' . $k . ' multipart-item_' . $k . '">';
 
         if (!empty($bg_image)) {
@@ -462,7 +500,7 @@ class WidgetNoahsSlideshow extends WidgetBase {
           $html .= '<div class="noahs_page_builder-slideshow--image"><img src="' . $image . '"></div>';
         }
         if (!empty($element->slideshow_title->text)) {
-          $html .= '<h2 class="noahs_page_builder-slideshow--title">' . $element->slideshow_title->text . '</h2>';
+          $html .= '<' . $heading_type . ' class="noahs_page_builder-slideshow--title">' . $element->slideshow_title->text . '</' . $heading_type . '>';
         }
 
         if (!empty($element->slideshow_text)) {
@@ -496,7 +534,7 @@ class WidgetNoahsSlideshow extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function renderContent($element, $content = NULL) {
+  public function renderContent($element, $content = NULL, $entity = NULL) {
     return $this->wrapper($element, $this->template($element->settings));
   }
 

@@ -50,7 +50,7 @@ class ControlNoahsMultipleElements extends ControlBase {
 			<div id="colapse_replace" class="accordion-collapse collapse" aria-labelledby="header_replace" data-bs-parent="#' . $data['item_id'] . '">
 				<div class="accordion-body">';
     $newvalue['wid'] = $data['wid'];
-    // $default_form = $this->modalForm->renderSubFields($fields, $newvalue, 'replace_it', $parent);
+    $default_form = $this->modalForm->renderSubFields($fields, $newvalue, 'replace_it', $parent);
     $html .= $default_form;
     $html .= '
 				</div>

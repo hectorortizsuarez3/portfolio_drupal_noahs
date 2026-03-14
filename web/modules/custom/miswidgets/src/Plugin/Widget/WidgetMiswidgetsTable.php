@@ -365,7 +365,7 @@ $form['card_radius'] = [
     return $output;
   }
 
-  public function renderContent($element, $content = NULL) {
+  public function renderContent($element, $content = NULL, $entity = null) {
     return $this->wrapper($element, $this->template($element->settings));
   }
 

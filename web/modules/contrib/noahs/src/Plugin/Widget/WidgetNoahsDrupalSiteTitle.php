@@ -104,7 +104,7 @@ class WidgetNoahsDrupalSiteTitle extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function renderContent($settings = NULL, $content = NULL) {
+  public function renderContent($element, $content = NULL, $entity = NULL) {
     return $this->wrapper($element, $this->template(json_decode($element->settings, TRUE)));
 
   }

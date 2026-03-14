@@ -94,7 +94,7 @@ class WidgetNoahsPlainText extends WidgetBase {
   /**
    * {@inheritdoc}
    */
-  public function renderContent($element, $content = NULL) {
+  public function renderContent($element, $content = NULL, $entity = NULL) {
 
     return $this->wrapper($element, $this->template($element->settings));
   }

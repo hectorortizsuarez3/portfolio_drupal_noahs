@@ -429,7 +429,7 @@ class ControlServices {
       if ($k === 'desktop') {
         $icon = '<i class="las la-desktop"></i>';
       }
-      $responsive .= '<a href="#responsive_tab_' . $k . '" class="responsive_tabs-tab responsive_tabs_tab_' . $k . '" data-query="' . $k . '" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="' . $k . '">' . $icon . '</a>';
+      $responsive .= '<a href="#responsive_tab_' . $k . '" class="responsive_tabs-tab responsive_tabs_tab_' . $k . '" data-query="' . $k . '">' . $icon . '</a>';
     }
 
     $responsive .= '</div>';

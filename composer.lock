@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce832e3cdf7bbc286a50ccb0ec519399",
+    "content-hash": "9e37ce108598e0f5360e59f48a4d2bf5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1513,17 +1513,17 @@
         },
         {
             "name": "drupal/noahs",
-            "version": "2.8.8",
+            "version": "3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/noahs.git",
-                "reference": "2.8.8"
+                "reference": "3.0.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/noahs-2.8.8.zip",
-                "reference": "2.8.8",
-                "shasum": "62a29afc5d97c7cc7c915427b8935ee0c9bdbc9b"
+                "url": "https://ftp.drupal.org/files/projects/noahs-3.0.0.zip",
+                "reference": "3.0.0",
+                "shasum": "1d67a8c452e1fa12b197744835c893fe906f74f8"
             },
             "require": {
                 "drupal/core": "^10 || ^11",
@@ -1533,8 +1533,8 @@
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "2.8.8",
-                    "datestamp": "1766061086",
+                    "version": "3.0.0",
+                    "datestamp": "1771800085",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -6735,5 +6735,5 @@
     "prefer-lowest": false,
     "platform": {},
     "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.9.0"
 }
