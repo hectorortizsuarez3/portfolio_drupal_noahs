@@ -53,6 +53,10 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
           'tab_title' => ['text' => 'Tab 2'],
           'tab_content' => ['text' => '<p>Content of tab 2</p>'],
         ],
+        [
+          'tab_title' => ['text' => 'Tab 3'],
+          'tab_content' => ['text' => '<p>Content of tab 3</p>'],
+        ],
       ],
       'fields' => [
         'tab_item' => [
@@ -329,113 +333,127 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
     return $form;
   }
 
-  /**
-   * Template render.
-   */
+  /*
+  Template render
+  */
   public function template($settings) {
 
-    $element = $settings->element ?? new \stdClass();
+  $element = $settings->element ?? new \stdClass();
 
-    $raw_tabs = $element->tabs ?? NULL;
+  $raw_tabs = $element->tabs ?? NULL;
 
-    if (empty($raw_tabs)) {
-      return '<div class="noahs-placeholder">' . t('Add tabs to display the content.') . '</div>';
-    }
-
-    // Convert stdClass to array.
-    $tabs_array = json_decode(json_encode($raw_tabs), TRUE);
-
-    // Reindex items.
-    $tabs_items = [];
-    foreach ($tabs_array as $key => $item) {
-      $tabs_items[] = $item;
-    }
-
-    // Parse tabs.
-    $parsed_tabs = [];
-    foreach ($tabs_items as $tab) {
-      $title = $this->normalizeText($tab['tab_title'] ?? '');
-      $content = $this->normalizeHtml($tab['tab_content'] ?? '');
-
-      // Skip totally empty tabs.
-      if ($title === '' && $content === '') {
-        continue;
-      }
-
-      if ($title === '') {
-        $title = t('Tab');
-      }
-
-      $parsed_tabs[] = [
-        'title' => $title,
-        'content' => $content,
-      ];
-    }
-
-    if (empty($parsed_tabs)) {
-      return '<div class="noahs-placeholder">' . t('Fill at least one tab title or content to display the widget.') . '</div>';
-    }
-
-    // Instance id to avoid collisions if several widgets are on same page.
-    $seed = $settings->wid
-      ?? $settings->noahs_id
-      ?? ($element->wid ?? NULL)
-      ?? uniqid('tabs_', TRUE);
-
-    $instance_id = 'miswidgets-tabs-' . preg_replace('/[^a-zA-Z0-9\-_]/', '-', (string) $seed);
-
-    $output = '<div class="widget-content miswidgets-tabs">';
-
-    // -------------------- First foreach: tabs navigation --------------------
-    $output .= '<ul class="nav nav-tabs miswidgets-tab-nav" id="' . $instance_id . '-nav" role="tablist">';
-
-    foreach ($parsed_tabs as $index => $tab) {
-      $is_active = ($index === 0);
-      $tab_btn_id = $instance_id . '-tab-' . $index;
-      $pane_id = $instance_id . '-pane-' . $index;
-
-      $output .= '<li class="nav-item nav-item-' . $index . '" role="presentation">';
-      $output .= '<button'
-        . ' class="nav-link' . ($is_active ? ' active' : '') . '"'
-        . ' id="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '"'
-        . ' data-bs-toggle="tab"'
-        . ' data-bs-target="#' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
-        . ' type="button"'
-        . ' role="tab"'
-        . ' aria-controls="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
-        . ' aria-selected="' . ($is_active ? 'true' : 'false') . '">'
-        . htmlspecialchars($tab['title'], ENT_QUOTES, 'UTF-8')
-        . '</button>';
-      $output .= '</li>';
-    }
-
-    $output .= '</ul>';
-
-    // -------------------- Second foreach: tab content --------------------
-    $output .= '<div class="tab-content miswidgets-tab-content" id="' . $instance_id . '-content">';
-
-    foreach ($parsed_tabs as $index => $tab) {
-      $is_active = ($index === 0);
-      $tab_btn_id = $instance_id . '-tab-' . $index;
-      $pane_id = $instance_id . '-pane-' . $index;
-
-      $output .= '<div'
-        . ' class="tab-pane fade tab-pane-' . $index . ($is_active ? ' show active' : '') . '"'
-        . ' id="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
-        . ' role="tabpanel"'
-        . ' aria-labelledby="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '">';
-
-      $output .= ($tab['content'] !== '') ? $tab['content'] : '<p>' . t('Empty tab content.') . '</p>';
-
-      $output .= '</div>';
-    }
-
-    $output .= '</div>';
-    $output .= '</div>';
-
-    return $output;
+  if (empty($raw_tabs)) {
+    return '<div class="noahs-placeholder">' . t('Add tabs to display the content.') . '</div>';
   }
 
+  // Convert stdClass to array, preserving original keys like element_0, element_1...
+  $tabs_array = json_decode(json_encode($raw_tabs), TRUE);
+
+  // Normalize text/html, remove fully empty tabs, preserve real indexes.
+  $parsed_tabs = [];
+
+  foreach ($tabs_array as $key => $tab) {
+    $title = $this->normalizeText($tab['tab_title'] ?? '');
+    $content = $this->normalizeHtml($tab['tab_content'] ?? '');
+
+    // Skip totally empty tabs.
+    if ($title === '' && $content === '') {
+      continue;
+    }
+
+    if ($title === '') {
+      $title = t('Tab');
+    }
+
+    // Keep the real index used by Noahs multiple elements.
+    $real_index = is_string($key) ? str_replace('element_', '', $key) : $key;
+    $real_index = preg_replace('/[^0-9]/', '', (string) $real_index);
+
+    // Fallback in case key is not numeric after cleanup.
+    if ($real_index === '') {
+      $real_index = (string) count($parsed_tabs);
+    }
+
+    $parsed_tabs[] = [
+      'real_index' => $real_index,
+      'title' => $title,
+      'content' => $content,
+    ];
+  }
+
+  if (empty($parsed_tabs)) {
+    return '<div class="noahs-placeholder">' . t('Fill at least one tab title or content to display the widget.') . '</div>';
+  }
+
+  // Create a unique widget ID to avoid conflicts if more than one tab widget is on the same page.
+  $seed = $settings->wid
+    ?? $settings->noahs_id
+    ?? $element->wid
+    ?? uniqid('tabs_', TRUE);
+
+  $instance_id = 'miswidgets-tabs-' . preg_replace('/[^a-zA-Z0-9\-_]/', '-', (string) $seed);
+
+  $output = '<div class="widget-content miswidgets-tabs">';
+
+  // -------------------- Tabs navigation --------------------
+  $output .= '<ul class="nav nav-tabs miswidgets-tab-nav" id="' . htmlspecialchars($instance_id . '-nav', ENT_QUOTES, 'UTF-8') . '" role="tablist">';
+
+  $first_tab = TRUE;
+
+  foreach ($parsed_tabs as $tab) {
+    $real_index = $tab['real_index'];
+    $is_active = $first_tab;
+    $tab_btn_id = $instance_id . '-tab-' . $real_index;
+    $pane_id = $instance_id . '-pane-' . $real_index;
+
+    $output .= '<li class="nav-item nav-item-' . htmlspecialchars($real_index, ENT_QUOTES, 'UTF-8') . '" role="presentation">';
+    $output .= '<button'
+      . ' class="nav-link nav-link-' . htmlspecialchars($real_index, ENT_QUOTES, 'UTF-8') . ($is_active ? ' active' : '') . '"'
+      . ' id="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '"'
+      . ' data-bs-toggle="tab"'
+      . ' data-bs-target="#' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+      . ' type="button"'
+      . ' role="tab"'
+      . ' aria-controls="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+      . ' aria-selected="' . ($is_active ? 'true' : 'false') . '">'
+      . htmlspecialchars($tab['title'], ENT_QUOTES, 'UTF-8')
+      . '</button>';
+    $output .= '</li>';
+
+    $first_tab = FALSE;
+  }
+
+  $output .= '</ul>';
+
+  // -------------------- Tabs content --------------------
+  $output .= '<div class="tab-content miswidgets-tab-content" id="' . htmlspecialchars($instance_id . '-content', ENT_QUOTES, 'UTF-8') . '">';
+
+  $first_tab = TRUE;
+
+  foreach ($parsed_tabs as $tab) {
+    $real_index = $tab['real_index'];
+    $is_active = $first_tab;
+    $tab_btn_id = $instance_id . '-tab-' . $real_index;
+    $pane_id = $instance_id . '-pane-' . $real_index;
+
+    $output .= '<div'
+      . ' class="tab-pane fade tab-pane-' . htmlspecialchars($real_index, ENT_QUOTES, 'UTF-8') . ($is_active ? ' show active' : '') . '"'
+      . ' id="' . htmlspecialchars($pane_id, ENT_QUOTES, 'UTF-8') . '"'
+      . ' role="tabpanel"'
+      . ' aria-labelledby="' . htmlspecialchars($tab_btn_id, ENT_QUOTES, 'UTF-8') . '">';
+
+    $output .= ($tab['content'] !== '') ? $tab['content'] : '<p>' . t('Empty tab content.') . '</p>';
+
+    $output .= '</div>';
+
+    $first_tab = FALSE;
+  }
+
+  $output .= '</div>';
+  $output .= '</div>';
+
+  return $output;
+}
   /**
    * Render content.
    */
