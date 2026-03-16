@@ -119,7 +119,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'tab' => 'section_styles',
       'group' => 'fonts_group',
       'style_type' => 'style',
-      'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'style_selector' => '.miswidgets-tab-nav .nav-link:not(.active)',
       'wrapper' => FALSE,
       'responsive' => TRUE,
     ];
@@ -212,7 +212,7 @@ class WidgetMiswidgetsTab extends \Drupal\noahs_page_builder\Plugin\Widget\Widge
       'tab' => 'section_styles',
       'group' => 'background_group',
       'style_type' => 'style',
-      'style_selector' => '.miswidgets-tab-nav .nav-link',
+      'style_selector' => '.miswidgets-tab-nav .nav-link:not(.active)',
       'style_css' => 'background-color',
       'style_hover' => TRUE,
     ];
