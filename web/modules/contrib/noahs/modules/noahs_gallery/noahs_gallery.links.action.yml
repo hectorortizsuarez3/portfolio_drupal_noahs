@@ -1,5 +1,0 @@
-noahs_gallery_type.add_form:
-  title: 'Add noahs gallery'
-  route_name: entity.noahs_gallery_type.add_form
-  appears_on:
-    - entity.noahs_gallery_type.collection

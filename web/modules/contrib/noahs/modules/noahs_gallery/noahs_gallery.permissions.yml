@@ -1,3 +1,0 @@
-administer noahs_gallery_type:
-  title: 'Administer noahs galleries'
-  restrict access: true
