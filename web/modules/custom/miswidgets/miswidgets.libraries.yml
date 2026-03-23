@@ -1,0 +1,10 @@
+image_comparer:
+  version: 1.x
+  js:
+    js/widget-imageComparer.js: {}
+  css:
+    theme:
+      css/widget-imageComparer.css: {}
+  dependencies:
+    - core/drupal
+    - core/once
