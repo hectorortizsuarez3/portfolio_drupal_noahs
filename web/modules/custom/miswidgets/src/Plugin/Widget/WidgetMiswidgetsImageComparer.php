@@ -12,7 +12,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
 
   public function data() {
     return [
-      'icon' => '<svg xmlns="http://www.w3.org/2000/svg"...></svg>',
+      'icon' => '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 5a1 1 0 0 1 1 -1h14a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-14a1 1 0 0 1 -1 -1z" /><path d="M12 4v16" /><path d="M4 14l4 -4a3 5 0 0 1 3 0l5 5" /><path d="M14 15l1 -1a2 3 0 0 1 3 0l2 2" /></svg>',
       'title' => 'Image Comparer',
       'description' => 'Compare two images with a draggable divider.',
       'group' => 'General',
