@@ -52,24 +52,11 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'default_value' => 'After',
     ];
 
-    $form['start_position'] = [
-      'type' => 'number',
-      'title' => t('Initial divider position (%)'),
-      'tab' => 'section_content',
-      'default_value' => 50,
-    ];
-
     return $form;
   }
 
   public function template($settings) {
     $element = $settings->element ?? new \stdClass();
-
-    $start_position = isset($element->start_position->text)
-      ? (int) $element->start_position->text
-      : 50;
-
-    $start_position = max(0, min(100, $start_position));
 
     $seed = $settings->wid
       ?? $settings->noahs_id
@@ -89,8 +76,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
 
     $output = '<div class="widget-content miswidgets-image-comparer"'
       . ' id="' . htmlspecialchars($instance_id) . '"'
-      . ' data-start-position="' . $start_position . '"'
-      . ' style="--miswidgets-compare-position:' . $start_position . '%;">';
+      . ' style="--miswidgets-compare-position:50%;">';
 
     $output .= '<div class="miswidgets-image-comparer__inner">';
 

@@ -14,8 +14,6 @@
 
         let isDragging = false;
 
-        let startPosition = parseFloat(comparer.dataset.startPosition) || 50;
-
         function clamp(v, min, max) {
           return Math.min(Math.max(v, min), max);
         }
@@ -30,7 +28,7 @@
           return ((x - rect.left) / rect.width) * 100;
         }
 
-        update(startPosition);
+        update(50);
 
         divider.addEventListener('mousedown', () => {
           isDragging = true;
