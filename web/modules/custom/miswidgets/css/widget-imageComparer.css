@@ -1,0 +1,84 @@
+.miswidgets-image-comparer {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+  overflow: hidden;
+
+  --miswidgets-compare-position: 50%;
+}
+
+.miswidgets-image-comparer__inner {
+  position: relative;
+  width: 100%;
+  height: 400px;
+}
+
+.miswidgets-image-comparer__image,
+.miswidgets-image-comparer__overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.miswidgets-image-comparer__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* AFTER */
+.miswidgets-image-comparer__image--after {
+  z-index: 1;
+}
+
+/* BEFORE (clip real, no resize) */
+.miswidgets-image-comparer__overlay {
+  z-index: 2;
+  clip-path: inset(0 calc(100% - var(--miswidgets-compare-position)) 0 0);
+}
+
+/* DIVIDER */
+.miswidgets-image-comparer__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--miswidgets-compare-position);
+  width: 2px;
+  background: white;
+  transform: translateX(-50%);
+  z-index: 3;
+  cursor: ew-resize;
+}
+
+/* HANDLE */
+.miswidgets-image-comparer__handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #ccc;
+}
+
+/* LABELS */
+.miswidgets-image-comparer__label {
+  position: absolute;
+  top: 20px;
+  padding: 6px 12px;
+  background: rgba(0,0,0,0.5);
+  color: white;
+  font-size: 14px;
+}
+
+.miswidgets-image-comparer__label--before {
+  left: 20px;
+}
+
+.miswidgets-image-comparer__label--after {
+  right: 20px;
+}

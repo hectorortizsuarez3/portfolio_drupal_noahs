@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Hooks for the miswidgets module.
+ */
+
+/**
+ * Implements hook_page_attachments().
+ */
+function miswidgets_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'miswidgets/image_comparer';
+}
