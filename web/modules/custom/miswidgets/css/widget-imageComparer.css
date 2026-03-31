@@ -1,19 +1,19 @@
+/*Contenedor ppal del widget*/
 .miswidgets-image-comparer {
   position: relative;
   width: 100%;
-  max-width: 800px;
   margin: auto;
   overflow: hidden;
-
   --miswidgets-compare-position: 50%;
 }
 
 .miswidgets-image-comparer__inner {
   position: relative;
   width: 100%;
-  height: 400px;
+  aspect-ratio: 16/9;  /*Añade altura automática*/
 }
 
+/*Consigue que las dos imágenes y el overlay ocupen el 100% del contenedor padre y se superpongan*/
 .miswidgets-image-comparer__image,
 .miswidgets-image-comparer__overlay {
   position: absolute;
@@ -23,6 +23,8 @@
   background: #f3f3f3;
 }
 
+/*Ajusta las 2 imágenes al tamaños del contenedor, pero sin deformarlas gracias a "object-fit: contain"
+Consecuencia: aparecerán zonas vacías si la imágen no encaja perfecta*/
 .miswidgets-image-comparer__image img {
   width: 100%;
   height: 100%;
@@ -34,7 +36,8 @@
   z-index: 1;
 }
 
-/* BEFORE (clip real, no resize) */
+/* BEFORE queda encima de imagen After (z-index:2) y recortamos con clip-path
+de manera que sale a flote la imagen AFTER */
 .miswidgets-image-comparer__overlay {
   z-index: 2;
   clip-path: inset(0 calc(100% - var(--miswidgets-compare-position)) 0 0);
@@ -53,7 +56,7 @@
   cursor: ew-resize;
 }
 
-/* HANDLE */
+/* Circulito en medio del divider */
 .miswidgets-image-comparer__handle {
   position: absolute;
   top: 50%;
@@ -64,6 +67,10 @@
   border-radius: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid #ccc;
+}
+
+.miswidgets-image-comparer__handle:hover {
+  transform: translate(-50%, -50%) scale(0.6);
 }
 
 /* LABELS */

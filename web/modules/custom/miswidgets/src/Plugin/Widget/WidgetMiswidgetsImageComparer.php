@@ -52,31 +52,58 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'default_value' => 'After',
     ];
 
+    $form['section_styles'] = [
+      'type' => 'tab',
+      'title' => t('Style'),
+    ];
+
+    $form['image_width'] = [
+      'type'    => 'text',
+      'title'   => t('Image Width'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_css' => 'width',
+      'style_selector' => '.miswidgets-image-comparer',
+      'responsive' => TRUE,
+    ];
+
+    
+
     return $form;
   }
 
   public function template($settings) {
     $element = $settings->element ?? new \stdClass();
 
+    /*
+    ------1º: Generación de ids únicos y variables
+    */
+
+    //Creamos ID HTML único para usar con JS
     $seed = $settings->wid
       ?? $settings->noahs_id
       ?? $element->wid
       ?? uniqid('image_comparer_', TRUE);
 
+      //generamos un id HTML válido y seguro, añadiendo el prefijo propio del widget
     $instance_id = 'miswidgets-image-comparer-' . preg_replace('/[^a-zA-Z0-9\-_]/', '-', (string) $seed);
 
+    //extraemos el id interno de cada archivo (fid - file id)
     $before_mid = $element->before_image->fid ?? NULL;
     $after_mid = $element->after_image->fid ?? NULL;
 
+    //Si hay imagen, conviertela a html, sino, deja vacío
     $before_html = $before_mid ? $this->getMediaImage($before_mid) : '';
     $after_html = $after_mid ? $this->getMediaImage($after_mid) : '';
 
     $before_label = $element->before_label->text ?? 'Before';
     $after_label = $element->after_label->text ?? 'After';
 
+    /*
+    ------2º: Construcción del html
+    */
     $output = '<div class="widget-content miswidgets-image-comparer"'
-      . ' id="' . htmlspecialchars($instance_id) . '"'
-      . ' style="--miswidgets-compare-position:50%;">';
+      . ' id="' . htmlspecialchars($instance_id) . '">';
 
     $output .= '<div class="miswidgets-image-comparer__inner">';
 
@@ -95,8 +122,8 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       . htmlspecialchars($before_label) . '</span>';
     $output .= '</div></div>';
 
-    // DIVIDER
-    $output .= '<div class="miswidgets-image-comparer__divider" tabindex="0">';
+    // Separador que el usuario arrastra
+    $output .= '<div class="miswidgets-image-comparer__divider">';
     $output .= '<span class="miswidgets-image-comparer__handle"></span>';
     $output .= '</div>';
 
