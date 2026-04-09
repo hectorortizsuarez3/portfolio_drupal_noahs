@@ -52,6 +52,18 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'default_value' => 'After',
     ];
 
+    $form['comparer_alt'] = [
+      'type'    => 'text',
+      'title'   => t('Comparer alt text'),
+      'tab' => 'section_content',
+    ];
+    
+    $form['comparer_title'] = [
+      'type'    => 'text',
+      'title'   => t('Comparer title'),
+      'tab' => 'section_content',
+    ];
+
     //Sección Estilos
     $form['section_styles'] = [
       'type' => 'tab',
@@ -147,7 +159,10 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
     ------2º: Construcción del html
     */
     $output = '<div class="widget-content miswidgets-image-comparer"'
-      . ' id="' . htmlspecialchars($instance_id) . '">';
+      . ' id="' . htmlspecialchars($instance_id) . '"'
+      . (!empty($element->comparer_alt->text) ? ' aria-label="' . htmlspecialchars($element->comparer_alt->text) . '"' : '')
+      . (!empty($element->comparer_title->text) ? ' title="' . htmlspecialchars($element->comparer_title->text) . '"' : '')
+      . '>';
 
     $output .= '<div class="miswidgets-image-comparer__inner">';
 
