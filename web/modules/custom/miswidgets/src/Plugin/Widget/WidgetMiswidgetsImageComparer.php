@@ -52,6 +52,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'default_value' => 'After',
     ];
 
+    //Sección Estilos
     $form['section_styles'] = [
       'type' => 'tab',
       'title' => t('Style'),
@@ -67,7 +68,50 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'responsive' => TRUE,
     ];
 
-    
+    $form['horizontal_align'] = [
+      'type'    => 'select',
+      'title'   => t('Horizontal Align'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.widget-wrapper',
+      'style_css' => 'justify-content',
+      'responsive' => TRUE,
+      'options' => [
+        '' => t('Por defecto'),
+        'flex-start' => t('Left'),
+        'center' => t('Center'),
+        'flex-end' => t('Right'),
+      ],
+    ];
+
+    $form['box_shadows'] = [
+      'type'    => 'noahs_shadows',
+      'title'   => t('Image Shadow'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer',
+      'responsive' => TRUE,
+      'style_hover' => TRUE,
+    ];
+    $form['image_border'] = [
+      'type' => 'noahs_border',
+      'title' => t('Border'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer',
+      'style_css' => 'border',
+      'responsive' => TRUE,
+      'style_hover' => TRUE,
+    ];
+    $form['border-radius'] = [
+      'type'    => 'noahs_radius',
+      'title'   => t('Border Radius'),
+      'tab' => 'section_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer',
+      'responsive' => TRUE,
+      'style_hover' => TRUE,
+    ];
 
     return $form;
   }

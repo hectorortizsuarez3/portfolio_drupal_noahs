@@ -2,7 +2,6 @@
 .miswidgets-image-comparer {
   position: relative;
   width: 100%;
-  margin: auto;
   overflow: hidden;
   --miswidgets-compare-position: 50%;
 }
@@ -11,6 +10,7 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16/9;  /*Añade altura automática*/
+  overflow: hidden;
 }
 
 /*Consigue que las dos imágenes y el overlay ocupen el 100% del contenedor padre y se superpongan*/
