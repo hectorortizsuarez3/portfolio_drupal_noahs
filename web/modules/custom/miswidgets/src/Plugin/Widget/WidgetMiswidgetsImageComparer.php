@@ -27,13 +27,13 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
     ];
 
     $form['before_image'] = [
-      'type' => 'noahs_image',
+      'type' => 'image_comparer',
       'title' => t('Before image'),
       'tab' => 'section_content',
     ];
 
     $form['after_image'] = [
-      'type' => 'noahs_image',
+      'type' => 'image_comparer',
       'title' => t('After image'),
       'tab' => 'section_content',
     ];
