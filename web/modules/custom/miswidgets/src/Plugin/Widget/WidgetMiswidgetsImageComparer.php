@@ -64,16 +64,24 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'tab' => 'section_content',
     ];
 
-    //Sección Estilos
+    //---------------Sección Estilos------------------
+
     $form['section_styles'] = [
       'type' => 'tab',
       'title' => t('Style'),
+    ];
+
+    $form['image_style'] = [
+      'type' => 'group',
+      'title' => t('Image styles'),
+      'tab' => 'section_styles',
     ];
 
     $form['image_width'] = [
       'type'    => 'text',
       'title'   => t('Image Width'),
       'tab' => 'section_styles',
+      'group' => 'image_style',
       'style_type' => 'style',
       'style_css' => 'width',
       'style_selector' => '.miswidgets-image-comparer',
@@ -84,6 +92,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'type'    => 'select',
       'title'   => t('Horizontal Align'),
       'tab' => 'section_styles',
+      'group' => 'image_style',
       'style_type' => 'style',
       'style_selector' => '.widget-wrapper',
       'style_css' => 'justify-content',
@@ -100,6 +109,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'type'    => 'noahs_shadows',
       'title'   => t('Image Shadow'),
       'tab' => 'section_styles',
+      'group' => 'image_style',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-image-comparer',
       'responsive' => TRUE,
@@ -109,6 +119,7 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'type' => 'noahs_border',
       'title' => t('Border'),
       'tab' => 'section_styles',
+      'group' => 'image_style',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-image-comparer',
       'style_css' => 'border',
@@ -119,10 +130,110 @@ class WidgetMiswidgetsImageComparer extends \Drupal\noahs_page_builder\Plugin\Wi
       'type'    => 'noahs_radius',
       'title'   => t('Border Radius'),
       'tab' => 'section_styles',
+      'group' => 'image_style',
       'style_type' => 'style',
       'style_selector' => '.miswidgets-image-comparer',
       'responsive' => TRUE,
       'style_hover' => TRUE,
+    ];
+
+/*--------------LABEL STYLES-------------------------------*/
+
+    $form['label_styles'] = [
+      'type' => 'group',
+      'title' => t('Labels styles'),
+      'tab' => 'section_styles',
+    ];
+
+    $form['labels_font'] = [
+      'type' => 'noahs_font',
+      'title' => t('Labels font'),
+      'tab' => 'section_styles',
+      'group' => 'label_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label',
+      'wrapper' => FALSE,
+      'responsive' => TRUE,
+    ];
+
+    // color de fondo
+    $form['labels_background'] = [
+      'type' => 'noahs_color',
+      'title' => t('Labels background'),
+      'tab' => 'section_styles',
+      'group' => 'label_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label',
+      'style_css' => 'background-color',
+      'style_hover' => FALSE,
+    ];
+
+    $form['label_padding'] = [
+      'type' => 'noahs_padding',
+      'title' => t('Labels padding'),
+      'tab' => 'section_styles',
+      'group' => 'label_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label',
+      'style_css' => 'padding',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    $form['label_border_radius'] = [
+      'type' => 'noahs_radius',
+      'title' => t('Labels border radius'),
+      'tab' => 'section_styles',
+      'group' => 'label_styles',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label',
+      'responsive' => TRUE,
+      'style_hover' => FALSE,
+    ];
+
+    // Label position
+
+    $form['labels_position_group'] = [
+      'type' => 'group',
+      'title' => t('Labels position'),
+      'tab' => 'section_styles',
+    ];
+
+    $form['label_top_margin'] = [
+      'type' => 'text',
+      'title' => t('Labels top margin'),
+      'tab' => 'section_styles',
+      'group' => 'labels_position_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label',
+      'style_css' => 'top',
+      'responsive' => TRUE,
+      'placeholder' => '20px',
+    ];
+
+    $form['before_label_left'] = [
+      'type' => 'text',
+      'title' => t('Before-label left margin'),
+      'tab' => 'section_styles',
+      'group' => 'labels_position_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label--before',
+      'style_css' => 'left',
+      'responsive' => TRUE,
+      'placeholder' => '20px',
+    ];
+
+
+    $form['after_label_right'] = [
+      'type' => 'text',
+      'title' => t('After-label right margin'),
+      'tab' => 'section_styles',
+      'group' => 'labels_position_group',
+      'style_type' => 'style',
+      'style_selector' => '.miswidgets-image-comparer__label--after',
+      'style_css' => 'right',
+      'responsive' => TRUE,
+      'placeholder' => '20px',
     ];
 
     return $form;

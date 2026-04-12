@@ -8,10 +8,11 @@
    */
   Drupal.behaviors.miswidgetsImageComparer = {
     attach(context) {
+      const root = context instanceof Element ? context : context.documentElement;
       const comparers = once(
         'miswidgets-image-comparer',
         '.miswidgets-image-comparer',
-        context
+        root
       );
 
       //Este bloque se ejecuta una vez para cada comparador de imágenes en la página
